@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NbaPlayoffPool</title>
+    <title>NBA Playoff Pool</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,10 @@
   </head>
 
   <body>
+    <ul class="hmenu">
+      <%= render 'devise/menu/registration_items' %>
+      <%= render 'devise/menu/login_items' %>
+    </ul>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
