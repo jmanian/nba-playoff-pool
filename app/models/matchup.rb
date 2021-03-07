@@ -27,7 +27,8 @@ class Matchup < ApplicationRecord
   validates :favorite_wins, :underdog_wins, numericality: {
     greater_than_or_equal_to: 0, less_than_or_equal_to: 4
   }
-  validates :games_played, numericality: {less_than_or_equal_to: 7}
+  validates :games_played, numericality: {less_than_or_equal_to: 7},
+                           if: ->(m) { m.favorite_wins && m.underdog_wins }
 
   enum conference: {east: 0, west: 1}
 
