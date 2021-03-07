@@ -1,4 +1,6 @@
 AllCops:
+  TargetRubyVersion: 2.7
+  TargetRailsVersion: 6.1
   Exclude:
     - 'Gemfile'
     - 'Rakefile'
@@ -6,6 +8,9 @@ AllCops:
     - 'bin/*'
     - 'config/**/*'
     - 'node_modules/**/*'
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space # default is space
 
 Style/FrozenStringLiteralComment:
   Enabled: false
