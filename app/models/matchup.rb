@@ -29,7 +29,7 @@ class Matchup < ApplicationRecord
   }
   validates :games_played, numericality: {less_than_or_equal_to: 7}
 
-  enum conference: %i[east west]
+  enum conference: {east: 0, west: 1}
 
   def favorite
     Team[favorite_tricode]
