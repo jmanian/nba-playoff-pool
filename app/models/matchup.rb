@@ -16,13 +16,19 @@
 #  updated_at       :datetime         not null
 #
 class Matchup < ApplicationRecord
-  validates :year, :round, :number, :favorite_tricode, :underdog_tricode,
-            :favorite_wins, :underdog_wins, presence: true
+  validates :year, :round, :conference, :number, :favorite_tricode, :underdog_tricode,
+            :favorite_wins, :underdog_wins, :starts_at, presence: true
   validates :year, numericality: {equal_to: 2021}
   validates :round, numericality: {
     greater_than_or_equal_to: 1, less_than_or_equal_to: 4
   }
-  validates :conference, presence: true, unless: -> { round == 4 }
+  validates :conference, inclusion: {in: %w[east west], if: -> { round < 4 }},
+                         exclusion: {in: %w[east west], if: -> { round == 4 }}
+  validates :number, uniqueness: {scope: %i[year round conference]},
+                     numericality: {greater_than_or_equal_to: 1}
+  validate do
+    errors.add(:number, "must be at most #{num_matchups_for_round}") if number > num_matchups_for_round
+  end
   validates :favorite_wins, :underdog_wins, numericality: {
     greater_than_or_equal_to: 0, less_than_or_equal_to: 4
   }
@@ -37,7 +43,7 @@ class Matchup < ApplicationRecord
 
   has_many :picks, dependent: :restrict_with_exception
 
-  enum conference: {east: 0, west: 1}
+  enum conference: {east: 0, west: 1, finals: 2}
   enum favorite_tricode: Team.tricodes_for_enum, _prefix: :favorite
   enum underdog_tricode: Team.tricodes_for_enum, _prefix: :underdog
 
@@ -61,5 +67,16 @@ class Matchup < ApplicationRecord
 
   def title
     [favorite_tricode&.upcase, underdog_tricode&.upcase].join(' v ')
+  end
+
+  def num_matchups_for_round
+    case round
+    when 1
+      4
+    when 2
+      2
+    else
+      1
+    end
   end
 end
