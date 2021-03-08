@@ -22,6 +22,10 @@ class Team
       TEAMS.keys
     end
 
+    def tricodes_for_enum
+      tricodes.map { |tc| [tc, tc] }.to_h
+    end
+
     def [](tricode)
       TEAMS[tricode]
     end

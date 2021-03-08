@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2021_03_07_192455) do
     t.text "underdog_tricode", null: false
     t.integer "favorite_wins", default: 0, null: false
     t.integer "underdog_wins", default: 0, null: false
+    t.datetime "starts_at", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["year", "round", "conference", "number"], name: "index_matchups_on_year_and_round_and_conference_and_number", unique: true

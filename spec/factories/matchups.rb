@@ -6,5 +6,6 @@ FactoryBot.define do
     number { 0 }
     favorite_tricode { :nyk }
     underdog_tricode { :chi }
+    starts_at { 1.week.from_now }
   end
 end

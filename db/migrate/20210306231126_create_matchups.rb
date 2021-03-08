@@ -9,6 +9,7 @@ class CreateMatchups < ActiveRecord::Migration[6.1]
       t.text :underdog_tricode, null: false
       t.integer :favorite_wins, null: false, default: 0
       t.integer :underdog_wins, null: false, default: 0
+      t.datetime :starts_at, null: false
       t.timestamps
       t.index %i[year round conference number], unique: true
     end
