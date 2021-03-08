@@ -1,0 +1,26 @@
+<h1>My Picks</h1>
+<h2>Unpicked Series</h2>
+<ul>
+  <% @other_matchups.each do |matchup| %>
+    <li>
+      <%= matchup.favorite.name %>
+      v.
+      <%= matchup.underdog.name %>
+    </li>
+  <% end %>
+</ul>
+<h2>Picked Series</h2>
+<% @picks.each do |round, picks| %>
+  <h3><%= "Round #{round}" %></h3>
+  <ul>
+    <% picks.each do |pick| %>
+      <li>
+        <%= pick.winner.name %>
+        beats
+        <%= pick.loser.name %>
+        in
+        <%= pick.num_games %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

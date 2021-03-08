@@ -46,6 +46,6 @@ class Pick < ApplicationRecord
   end
 
   def title
-    "#{winner.name} in #{num_games} (#{user.title})"
+    "#{winner.name} in #{num_games} (#{user.title})" if persisted?
   end
 end
