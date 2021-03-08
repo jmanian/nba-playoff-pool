@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_07_192455) do
+ActiveRecord::Schema.define(version: 2021_03_08_015529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 2021_03_07_192455) do
     t.index ["year", "round", "conference", "number"], name: "index_matchups_on_year_and_round_and_conference_and_number", unique: true
   end
 
+  create_table "picks", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "matchup_id"
+    t.integer "result"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["matchup_id"], name: "index_picks_on_matchup_id"
+    t.index ["user_id", "matchup_id"], name: "index_picks_on_user_id_and_matchup_id", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -44,4 +54,6 @@ ActiveRecord::Schema.define(version: 2021_03_07_192455) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "picks", "matchups"
+  add_foreign_key "picks", "users"
 end

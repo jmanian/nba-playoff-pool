@@ -35,6 +35,8 @@ class Matchup < ApplicationRecord
     end
   end
 
+  has_many :picks, dependent: :restrict_with_exception
+
   enum conference: {east: 0, west: 1}
   enum favorite_tricode: Team.tricodes_for_enum, _prefix: :favorite
   enum underdog_tricode: Team.tricodes_for_enum, _prefix: :underdog
@@ -55,5 +57,9 @@ class Matchup < ApplicationRecord
 
   def games_played
     favorite_wins + underdog_wins
+  end
+
+  def title
+    [favorite_tricode&.upcase, underdog_tricode&.upcase].join(' v ')
   end
 end
