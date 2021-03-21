@@ -13,6 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-top: 50px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 ul.hmenu {
   list-style: none;
   margin: 0 0 2em;
