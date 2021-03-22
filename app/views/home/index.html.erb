@@ -1,2 +1,3 @@
-<h1>Home</h1>
-<p><%= current_user&.email || 'no user' %></p>
+<% if current_user %>
+  <p><%= link_to 'My Picks', {controller: :picks, action: :index}, method: :get %></p>
+<% end %>
