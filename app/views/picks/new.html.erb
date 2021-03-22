@@ -1,6 +1,25 @@
 <h1>Submit Picks</h1>
 <%= form_with model: Pick.new do |form| %>
+  <% @matchups.each do |matchup| %>
+    <% pick = @picks[matchup.id] %>
+    <h3><%= "#{matchup.favorite.full_name} vs. #{matchup.underdog.full_name}" %></h3>
+    <p>
+      <ul>
+        <%= form.fields_for :matchup, index: matchup.id do |matchup_form| %>
+          <% Pick.results.keys.each do |result| %>
+            <% team = result.start_with?('f') ? matchup.favorite : matchup.underdog %>
+            <% games = result.last %>
+            <li>
+              <%= matchup_form.radio_button :result, result, checked: pick&.result == result %>
+              <%= matchup_form.label :"result_#{result}", "#{team.name} in #{games}" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </p>
+  <% end %>
+  <br>
   <div>
-    <%= form.submit %>
+    <%= form.submit "Submit Picks" %>
   </div>
 <% end %>

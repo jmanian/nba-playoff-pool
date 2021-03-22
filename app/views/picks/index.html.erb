@@ -1,25 +1,30 @@
 <h1>My Picks</h1>
-<h2>Unpicked Series</h2>
-<ul>
-  <% @other_matchups.each do |matchup| %>
-    <li>
-      <%= matchup.favorite.name %>
-      v.
-      <%= matchup.underdog.name %>
-    </li>
-  <% end %>
-</ul>
+<% if @other_matchups.any? %>
+  <h2>Unpicked Series</h2>
+  <p><%= button_to 'Submit Picks', {action: :new}, method: :get %></p>
+  <ul>
+    <% @other_matchups.each do |matchup| %>
+      <li>
+        <%= matchup.favorite.name %>
+        v.
+        <%= matchup.underdog.name %>
+      </li>
+    <% end %>
+  </ul>
+<% elsif @accepting_picks %>
+  <p><%= button_to 'Edit Picks', {action: :new}, method: :get %></p>
+<% end %>
 <h2>Picked Series</h2>
 <% @picks.each do |round, picks| %>
   <h3><%= "Round #{round}" %></h3>
   <ul>
     <% picks.each do |pick| %>
       <li>
-        <%= pick.winner.name %>
-        beats
-        <%= pick.loser.name %>
+        <strong><%= pick.winner.name %></strong>
+        beat
+        <em><%= pick.loser.name %></em>
         in
-        <%= pick.num_games %>
+        <strong><%= pick.num_games %></strong>
       </li>
     <% end %>
   </ul>
