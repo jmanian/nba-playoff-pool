@@ -36,10 +36,26 @@ class Matchup < ApplicationRecord
   }
   validates :games_played, numericality: {less_than_or_equal_to: 7},
                            if: ->(m) { m.favorite_wins && m.underdog_wins }
+
   validate do
     if favorite_tricode&.to_sym == underdog_tricode&.to_sym
       errors.add(:favorite_tricode, 'must be different than underdog')
       errors.add(:underdog_tricode, 'must be different than favorite')
+    end
+  end
+
+# this is pretty crude code, open to improvements
+  validate do
+    if sport&.to_s == 'nba'
+      if conference&.to_s == 'AL' || conference&.to_s == 'NL' || conference&.to_s == 'WS'
+        errors.add(:sport, 'conference not in sport')
+        errors.add(:conference, 'conference not in sport')
+      end
+    elsif sport&.to_s == 'mlb'
+      if conference&.to_s == 'east' || conference&.to_s == 'west' || conference&.to_s == 'finals'
+        errors.add(:sport, 'conference not in sport')
+        errors.add(:conference, 'conference not in sport')
+      end
     end
   end
 
