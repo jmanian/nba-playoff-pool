@@ -26,7 +26,7 @@ class Matchup < ApplicationRecord
   }
   validates :conference, inclusion: {in: %w[east west AL NL], if: -> { round < 4 }},
                        exclusion: {in: %w[east west AL NL], if: -> { round == 4 }}
-  validates :number, uniqueness: {scope: %i[year round conference]},
+  validates :number, uniqueness: {scope: %i[sport year round conference]},
                      numericality: {greater_than_or_equal_to: 1}
   validate do
     errors.add(:number, "must be at most #{num_matchups_for_round}") if number > num_matchups_for_round
