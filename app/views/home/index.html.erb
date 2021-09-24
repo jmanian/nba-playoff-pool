@@ -1,13 +1,3 @@
 <% if current_user %>
   <p><%= link_to 'My Picks', {controller: :picks, action: :index}, method: :get %></p>
 <% end %>
-
-<% if controller.action_name == "index" %>
-  <p>You're on the index page</p>
-<% end %>
-
-<p>
-<%= Time.now %>
-</p>
-
-<%= link_to "Link to the popular search engine Google", "http://google.com" %>
