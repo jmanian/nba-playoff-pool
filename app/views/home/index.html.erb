@@ -1,5 +1,5 @@
 <% if current_user %>
-  <p><%= link_to 'My Picks', {controller: :picks, action: :new}, method: :get %></p>
+  <p><%= link_to 'My Picks', {controller: :picks, action: :index}, method: :get %></p>
 <% end %>
 
 <% if controller.action_name == "index" %>
