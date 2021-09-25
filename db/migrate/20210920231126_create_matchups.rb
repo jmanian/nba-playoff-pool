@@ -1,6 +1,7 @@
 class CreateMatchups < ActiveRecord::Migration[6.1]
   def change
     create_table :matchups do |t|
+      t.integer :sport, null: false
       t.integer :year, null: false
       t.integer :round, null: false
       t.integer :conference

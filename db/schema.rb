@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_08_015529) do
+ActiveRecord::Schema.define(version: 2021_09_21_015529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "matchups", force: :cascade do |t|
+    t.integer "sport", null: false
     t.integer "year", null: false
     t.integer "round", null: false
     t.integer "conference"
