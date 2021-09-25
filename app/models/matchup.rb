@@ -24,8 +24,6 @@ class Matchup < ApplicationRecord
   validates :round, numericality: {
     greater_than_or_equal_to: 1, less_than_or_equal_to: 4
   }
-  # validates :conference, inclusion: {in: %w[east west AL NL], if: -> { round < 4 }},
-  #                      exclusion: {in: %w[east west AL NL], if: -> { round == 4 }}
   validates :conference, inclusion: {in: %w[east west AL NL], unless: -> { final_round? }},
                        exclusion: {in: %w[east west AL NL], if: -> { final_round? }}
   validates :number, uniqueness: {scope: %i[sport year round conference]},
@@ -104,6 +102,14 @@ class Matchup < ApplicationRecord
   def final_round?
     (nba? && round == 4) ||
     (mlb? && round == 3)
+  end
+
+  def series_score_int
+    if favorite_wins == 4
+      underdog_wins
+    else
+      7 - favorite_wins
+    end
   end
 
 end
