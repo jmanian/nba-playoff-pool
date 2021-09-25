@@ -4,7 +4,7 @@ class CreateMatchups < ActiveRecord::Migration[6.1]
       t.integer :sport, null: false
       t.integer :year, null: false
       t.integer :round, null: false
-      t.integer :conference
+      t.integer :conference, null: false
       t.integer :number, null: false
       t.text :favorite_tricode, null: false
       t.text :underdog_tricode, null: false

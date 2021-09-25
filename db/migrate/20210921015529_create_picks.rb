@@ -3,7 +3,8 @@ class CreatePicks < ActiveRecord::Migration[6.1]
     create_table :picks do |t|
       t.references :user, foreign_key: true, index: false
       t.references :matchup, foreign_key: true
-      t.integer :result
+      t.boolean :winner_is_favorite, null: false
+      t.integer :num_games, null: false
       t.timestamps
       t.index %i[user_id matchup_id], unique: true
     end

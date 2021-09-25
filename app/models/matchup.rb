@@ -6,7 +6,7 @@
 #  sport            :integer          not null, indexed => [year, round, conference, number]
 #  year             :integer          not null, indexed => [sport, round, conference, number]
 #  round            :integer          not null, indexed => [sport, year, conference, number]
-#  conference       :integer          indexed => [sport, year, round, number]
+#  conference       :integer          not null, indexed => [sport, year, round, number]
 #  number           :integer          not null, indexed => [sport, year, round, conference]
 #  favorite_tricode :text             not null
 #  underdog_tricode :text             not null
@@ -90,6 +90,14 @@ class Matchup < ApplicationRecord
 
   def games_played
     favorite_wins + underdog_wins
+  end
+
+  def possible_results
+    games_range = (games_needed_to_win..max_games).to_a
+    [
+      *games_range.map { |n| [favorite, n, "f-#{n}"] },
+      *games_range.map { |n| [underdog, n, "u-#{n}"] }.reverse
+    ]
   end
 
   def title

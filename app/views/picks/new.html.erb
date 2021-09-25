@@ -6,12 +6,11 @@
     <p>
       <ul>
         <%= form.fields_for :matchup, index: matchup.id do |matchup_form| %>
-          <% Pick.results.keys.each do |result| %>
-            <% team = result.start_with?('f') ? matchup.favorite : matchup.underdog %>
-            <% games = result.last %>
+          <% matchup.possible_results.each do |team, games, code| %>
             <li>
-              <%= matchup_form.radio_button :result, result, checked: pick&.result == result %>
-              <%= matchup_form.label :"result_#{result}", "#{team.name} in #{games}" %>
+              <% checked = pick&.num_games == games && pick&.winner == team %>
+              <%= matchup_form.radio_button :result, code, checked: checked %>
+              <%= matchup_form.label :"result_#{code}", "#{team.name} in #{games}" %>
             </li>
           <% end %>
         <% end %>

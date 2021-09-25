@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_09_21_015529) do
     t.integer "sport", null: false
     t.integer "year", null: false
     t.integer "round", null: false
-    t.integer "conference"
+    t.integer "conference", null: false
     t.integer "number", null: false
     t.text "favorite_tricode", null: false
     t.text "underdog_tricode", null: false
@@ -34,7 +34,8 @@ ActiveRecord::Schema.define(version: 2021_09_21_015529) do
   create_table "picks", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "matchup_id"
-    t.integer "result"
+    t.boolean "winner_is_favorite", null: false
+    t.integer "num_games", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["matchup_id"], name: "index_picks_on_matchup_id"

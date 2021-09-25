@@ -19,9 +19,13 @@ class PicksController < ApplicationController
       matchup_id = matchup_id.to_i
       next unless valid_matchup_ids.include?(matchup_id)
 
-      result = pick_data[:result]
+      winner_code, num_games = pick_data[:result].split('-')
+      winner_is_favorite = winner_code == 'f'
+      num_games = num_games.to_i
+
       pick = current_user.picks.find_or_initialize_by(matchup_id: matchup_id)
-      pick.result = result
+      pick.winner_is_favorite = winner_is_favorite
+      pick.num_games = num_games
       pick.save!
     end
     redirect_to action: :index
