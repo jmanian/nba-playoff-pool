@@ -19,23 +19,26 @@
 class Matchup < ApplicationRecord
   validates :sport, :year, :round, :conference, :number, :favorite_tricode, :underdog_tricode,
             :favorite_wins, :underdog_wins, :starts_at, presence: true
-  validates :sport, inclusion: {in: %w[nba mlb]}
+
   validates :year, numericality: {equal_to: 2021}
-  validates :round, numericality: {
-    greater_than_or_equal_to: 1, less_than_or_equal_to: 4
-  }
-  validates :conference, inclusion: {in: %w[east west AL NL], unless: -> { final_round? }},
-                       exclusion: {in: %w[east west AL NL], if: -> { final_round? }}
+
+  validates :round, numericality: {greater_than_or_equal_to: 1, less_than_or_equal_to: ->(m) { m.num_rounds }}
+
+  validates :conference, inclusion: {in: %w[east west], if: -> { nba? && !final_round? }}
+  validates :conference, inclusion: {in: %w[finals], if: -> { nba? && final_round? }}
+  validates :conference, inclusion: {in: %w[al nl], if: -> { mlb? && !final_round? }}
+  validates :conference, inclusion: {in: %w[ws], if: -> { mlb? && final_round? }}
+
   validates :number, uniqueness: {scope: %i[sport year round conference]},
-                     numericality: {greater_than_or_equal_to: 1}
-  validate do
-    errors.add(:number, "must be at most #{num_matchups_for_round}") if number > num_matchups_for_round
-  end
+                     numericality: {
+                       greater_than_or_equal_to: 1,
+                       less_than_or_equal_to: ->(m) { m.num_matchups_for_round }
+                     }
   validates :favorite_wins, :underdog_wins, numericality: {
-    greater_than_or_equal_to: 0, less_than_or_equal_to: 4
+    greater_than_or_equal_to: 0, less_than_or_equal_to: ->(m) { m.games_needed_to_win }
   }
-  validates :games_played, numericality: {less_than_or_equal_to: 7},
-                           if: ->(m) { m.favorite_wins && m.underdog_wins }
+  validates :games_played, numericality: {less_than_or_equal_to: ->(m) { m.max_games }},
+                           if: -> { favorite_wins && underdog_wins }
 
   validate do
     if favorite_tricode&.to_sym == underdog_tricode&.to_sym
@@ -44,25 +47,10 @@ class Matchup < ApplicationRecord
     end
   end
 
-# this is pretty crude code, open to improvements
-  validate do
-    if sport&.to_s == 'nba'
-      if conference&.to_s == 'AL' || conference&.to_s == 'NL' || conference&.to_s == 'WS'
-        errors.add(:sport, 'conference not in sport')
-        errors.add(:conference, 'conference not in sport')
-      end
-    elsif sport&.to_s == 'mlb'
-      if conference&.to_s == 'east' || conference&.to_s == 'west' || conference&.to_s == 'finals'
-        errors.add(:sport, 'conference not in sport')
-        errors.add(:conference, 'conference not in sport')
-      end
-    end
-  end
-
   has_many :picks, dependent: :restrict_with_exception
 
   enum sport: {nba: 0, mlb: 1}
-  enum conference: {east: 0, west: 1, finals: 2, AL: 3, NL: 4, WS: 5}
+  enum conference: {east: 0, west: 1, finals: 2, al: 3, nl: 4, ws: 5}
   enum favorite_tricode: Team.tricodes_for_enum, _prefix: :favorite
   enum underdog_tricode: Team.tricodes_for_enum, _prefix: :underdog
 
@@ -77,7 +65,7 @@ class Matchup < ApplicationRecord
   end
 
   def finished?
-    favorite_wins == 4 || underdog_wins == 4
+    favorite_wins == games_needed_to_win || underdog_wins == games_needed_to_win
   end
 
   def games_played
@@ -88,20 +76,48 @@ class Matchup < ApplicationRecord
     [favorite_tricode&.upcase, underdog_tricode&.upcase].join(' v ')
   end
 
-  def num_matchups_for_round
-    case round
-    when 1
-      4
-    when 2
-      2
+  def games_needed_to_win
+    if mlb? && round == 1
+      3
     else
-      1
+      4
+    end
+  end
+
+  def max_games
+    games_needed_to_win * 2 - 1
+  end
+
+  def num_rounds
+    if nba?
+      4
+    elsif mlb?
+      3
+    end
+  end
+
+  def num_matchups_for_round
+    if nba?
+      case round
+      when 1
+        4
+      when 2
+        2
+      else
+        1
+      end
+    elsif mlb?
+      case round
+      when 1
+        2
+      else
+        1
+      end
     end
   end
 
   def final_round?
-    (nba? && round == 4) ||
-    (mlb? && round == 3)
+    round == num_rounds
   end
 
   def series_score_int
@@ -111,5 +127,4 @@ class Matchup < ApplicationRecord
       7 - favorite_wins
     end
   end
-
 end

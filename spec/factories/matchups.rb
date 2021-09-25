@@ -1,9 +1,10 @@
 FactoryBot.define do
   factory :matchup do
+    sport { :nba }
     year { 2021 }
     round { 1 }
     conference { :east }
-    number { 0 }
+    number { 1 }
     favorite_tricode { :nyk }
     underdog_tricode { :chi }
     starts_at { 1.week.from_now }
