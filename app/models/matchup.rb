@@ -76,8 +76,16 @@ class Matchup < ApplicationRecord
     end
   end
 
+  def favorite_won?
+    favorite_wins == games_needed_to_win
+  end
+
+  def underdog_won?
+    underdog_wins == games_needed_to_win
+  end
+
   def finished?
-    favorite_wins == games_needed_to_win || underdog_wins == games_needed_to_win
+    favorite_won? || underdog_won?
   end
 
   def games_played
@@ -132,11 +140,41 @@ class Matchup < ApplicationRecord
     round == num_rounds
   end
 
-  def series_score_int
-    if favorite_wins == 4
-      underdog_wins
+  def all_scores
+    if games_needed_to_win == 3
+      [
+        [9, 5, 3, 1, 0, 0],
+        [5, 7, 5, 2, 1, 0],
+        [3, 5, 7, 4, 2, 1],
+        nil,
+        nil,
+        [1, 2, 4, 7, 5, 3],
+        [0, 1, 2, 5, 7, 5],
+        [0, 0, 1, 3, 5, 9]
+      ]
     else
-      7 - favorite_wins
+      [
+        [10, 6, 4, 3, 0, 0, 0, 0],
+        [6, 8, 6, 4, 1, 0, 0, 0],
+        [4, 6, 8, 6, 2, 1, 0, 0],
+        [3, 4, 6, 8, 4, 2, 1, 0],
+        [0, 1, 2, 4, 8, 6, 4, 3],
+        [0, 0, 1, 2, 6, 8, 6, 4],
+        [0, 0, 0, 1, 4, 6, 8, 6],
+        [0, 0, 0, 0, 3, 4, 6, 10]
+      ]
+    end
+  end
+
+  def possible_scores
+    min_index = underdog_wins
+    max_index = max_games - favorite_wins
+
+    max_index = min_index if favorite_won?
+    min_index = max_index if underdog_won?
+
+    all_scores.map do |row|
+      row[min_index..max_index]
     end
   end
 end

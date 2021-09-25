@@ -25,9 +25,7 @@
         <em><%= pick.loser.name %></em>
         in
         <strong><%= pick.num_games %></strong>
-        (
-        <%= pick.n_points %>
-        points)
+        (<%= pick.min_points %>-<%= pick.max_points%> points)
       </li>
     <% end %>
   </ul>

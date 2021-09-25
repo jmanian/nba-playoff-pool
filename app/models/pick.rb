@@ -49,20 +49,15 @@ class Pick < ApplicationRecord
     "#{winner.name} in #{num_games} (#{user.title})" if persisted?
   end
 
-  def n_points
-    scoring_matrix = [[10, 6, 4, 3, 0, 0, 0, 0],
-                      [6, 8, 6, 4, 1, 0, 0, 0],
-                      [4, 6, 8, 6, 2, 1, 0, 0],
-                      [3, 4, 6, 8, 4, 2, 1, 0],
-                      [0, 1, 2, 4, 8, 6, 4, 3],
-                      [0, 0, 1, 2, 6, 8, 6, 4],
-                      [0, 0, 0, 1, 4, 6, 8, 6],
-                      [0, 0, 0, 0, 3, 4, 6, 10]]
-    if matchup.finished?
-      scoring_matrix[result_before_type_cast][matchup.series_score_int]
-    else
-      0
-    end
+  def possible_points
+    matchup.possible_scores[result_before_type_cast]
   end
 
+  def min_points
+    possible_points.min
+  end
+
+  def max_points
+    possible_points.max
+  end
 end
