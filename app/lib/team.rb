@@ -96,11 +96,11 @@ class Team
     end
 
     def nba(tricode)
-      NBA_TEAMS(tricode)
+      NBA_TEAMS[tricode]
     end
 
     def mlb(tricode)
-      MLB_TEAMS(tricode)
+      MLB_TEAMS[tricode]
     end
   end
 end
