@@ -3,11 +3,11 @@
 # Table name: matchups
 #
 #  id               :bigint           not null, primary key
-#  sport            :integer          not null
-#  year             :integer          not null, indexed => [round, conference, number]
-#  round            :integer          not null, indexed => [year, conference, number]
-#  conference       :integer          indexed => [year, round, number]
-#  number           :integer          not null, indexed => [year, round, conference]
+#  sport            :integer          not null, indexed => [year, round, conference, number]
+#  year             :integer          not null, indexed => [sport, round, conference, number]
+#  round            :integer          not null, indexed => [sport, year, conference, number]
+#  conference       :integer          indexed => [sport, year, round, number]
+#  number           :integer          not null, indexed => [sport, year, round, conference]
 #  favorite_tricode :text             not null
 #  underdog_tricode :text             not null
 #  favorite_wins    :integer          default(0), not null

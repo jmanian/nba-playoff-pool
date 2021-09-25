@@ -12,7 +12,7 @@ class CreateMatchups < ActiveRecord::Migration[6.1]
       t.integer :underdog_wins, null: false, default: 0
       t.datetime :starts_at, null: false
       t.timestamps
-      t.index %i[year round conference number], unique: true
+      t.index %i[sport year round conference number], unique: true, name: 'index_matchups_uniquely'
     end
   end
 end

@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2021_09_21_015529) do
     t.datetime "starts_at", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["year", "round", "conference", "number"], name: "index_matchups_on_year_and_round_and_conference_and_number", unique: true
+    t.index ["sport", "year", "round", "conference", "number"], name: "index_matchups_uniquely", unique: true
   end
 
   create_table "picks", force: :cascade do |t|
