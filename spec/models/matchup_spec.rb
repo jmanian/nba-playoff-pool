@@ -14,13 +14,13 @@ RSpec.describe Matchup, type: :model do
   describe '#favorite' do
     subject { matchup.favorite }
 
-    context 'in the nba' do
+    context 'when in the nba' do
       let(:matchup) { create :matchup, :nba }
 
       it { is_expected.to eql(Team.nba(matchup.favorite_tricode)) }
     end
 
-    context 'in the mlb' do
+    context 'when in the mlb' do
       let(:matchup) { create :matchup, :mlb }
 
       it { is_expected.to eql(Team.mlb(matchup.favorite_tricode)) }
