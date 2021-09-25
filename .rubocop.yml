@@ -26,6 +26,15 @@ Style/FrozenStringLiteralComment:
 Style/Documentation:
   Enabled: false
 
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
 Metrics/MethodLength:
   Exclude:
     - 'db/migrate/*'
+
+RSpec/NestedGroups:
+  Enabled: false

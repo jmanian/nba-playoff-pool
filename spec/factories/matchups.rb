@@ -9,9 +9,9 @@ FactoryBot.define do
     underdog_tricode { :chi }
     starts_at { 1.week.from_now }
 
-    trait :seven_games
+    trait :nba
 
-    trait :five_games do
+    trait :mlb do
       sport { :mlb }
       year { 2021 }
       round { 1 }
@@ -20,6 +20,13 @@ FactoryBot.define do
       favorite_tricode { :nyy }
       underdog_tricode { :chc }
       starts_at { 1.week.from_now }
+    end
+
+    trait :seven_games
+
+    trait :five_games do
+      mlb
+      round { 1 }
     end
   end
 end

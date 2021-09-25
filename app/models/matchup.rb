@@ -117,10 +117,10 @@ class Matchup < ApplicationRecord
   end
 
   def num_rounds
-    if nba?
-      4
-    elsif mlb?
+    if mlb?
       3
+    else
+      4
     end
   end
 
