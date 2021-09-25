@@ -26,6 +26,7 @@
         in
         <strong><%= pick.num_games %></strong>
         (<%= pick.min_points %>-<%= pick.max_points%> points)
+        (<%= pick.matchup.favorite_wins %> to <%= pick.matchup.underdog_wins %>)
       </li>
     <% end %>
   </ul>
