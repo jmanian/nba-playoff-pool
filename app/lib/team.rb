@@ -43,7 +43,7 @@ class Team
     [:uta, 'Utah', 'Jazz'],
     [:was, 'Washington', 'Wizards']
   ].map { |tc, c, n| [tc, Team.new(tc, c, n)] }
-          .to_h.with_indifferent_access
+              .to_h.with_indifferent_access
 
   MLB_TEAMS = [
     [:ari, 'Arizona', 'Diamondbacks'],
@@ -77,7 +77,7 @@ class Team
     [:tor, 'Toronto', 'Blue Jays'],
     [:wsh, 'Washington', 'Nationals']
   ].map { |tc, c, n| [tc, Team.new(tc, c, n)] }
-          .to_h.with_indifferent_access
+              .to_h.with_indifferent_access
 
   class << self
     def nba_tricodes
