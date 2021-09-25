@@ -34,6 +34,10 @@ class Matchup < ApplicationRecord
                        greater_than_or_equal_to: 1,
                        less_than_or_equal_to: ->(m) { m.num_matchups_for_round }
                      }
+
+  validates :favorite_tricode, :underdog_tricode, inclusion: {in: Team.nba_tricodes, if: -> { nba? }}
+  validates :favorite_tricode, :underdog_tricode, inclusion: {in: Team.mlb_tricodes, if: -> { mlb? }}
+
   validates :favorite_wins, :underdog_wins, numericality: {
     greater_than_or_equal_to: 0, less_than_or_equal_to: ->(m) { m.games_needed_to_win }
   }
@@ -57,11 +61,19 @@ class Matchup < ApplicationRecord
   scope :accepting_entries, -> { where('starts_at > ?', Time.current) }
 
   def favorite
-    Team[favorite_tricode]
+    if nba?
+      Team.nba(favorite_tricode)
+    elsif mlb?
+      Team.mlb(favorite_tricode)
+    end
   end
 
   def underdog
-    Team[underdog_tricode]
+    if nba?
+      Team.nba(underdog_tricode)
+    elsif mlb?
+      Team.mlb(underdog_tricode)
+    end
   end
 
   def finished?

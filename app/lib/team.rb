@@ -11,7 +11,7 @@ class Team
     [city, name].join(' ')
   end
 
-  TEAMS = [
+  NBA_TEAMS = [
     [:atl, 'Atlanta', 'Hawks'],
     [:bkn, 'Brooklyn', 'Nets'],
     [:bos, 'Boston', 'Celtics'],
@@ -41,21 +41,66 @@ class Team
     [:sas, 'San Antonio', 'Spurs'],
     [:tor, 'Toronto', 'Raptors'],
     [:uta, 'Utah', 'Jazz'],
-    [:was, 'Washington', 'Wizards'],
+    [:was, 'Washington', 'Wizards']
+  ].map { |tc, c, n| [tc, Team.new(tc, c, n)] }
+          .to_h.with_indifferent_access
+
+  MLB_TEAMS = [
+    [:ari, 'Arizona', 'Diamondbacks'],
+    [:atl, 'Atlanta', 'Braves'],
+    [:bal, 'Baltimore', 'Orioles'],
+    [:bos, 'Boston', 'Red Sox'],
+    [:chc, 'Chicago', 'Cubs'],
+    [:cin, 'Cincinnati', 'Reds'],
+    [:cle, 'Cleveland', 'Guardians'],
+    [:col, 'Colorado', 'Rockies'],
+    [:cws, 'Chicago', 'White Sox'],
+    [:det, 'Detroit', 'Tigers'],
+    [:hou, 'Houston', 'Astros'],
+    [:kc, 'Kansas City', 'Royals'],
+    [:laa, 'Los Angeles', 'Angels'],
+    [:lad, 'Los Angeles', 'Dodgers'],
+    [:mia, 'Miami', 'Marlins'],
+    [:mil, 'Milwaukee', 'Brewers'],
+    [:min, 'Minnesota', 'Twins'],
+    [:nym, 'New York', 'Mets'],
+    [:nyy, 'New York', 'Yankees'],
+    [:oak, 'Oakland', 'Athletics'],
+    [:phi, 'Philadelphia', 'Phillies'],
+    [:pit, 'Pittsburgh', 'Pirates'],
+    [:sd, 'San Diego', 'Padres'],
+    [:sea, 'Seattle', 'Mariners'],
+    [:sf, 'San Francisco', 'Giants'],
+    [:stl, 'St. Louis', 'Cardinals'],
+    [:tb, 'Tampa Bay', 'Rays'],
+    [:tex, 'Texas', 'Rangers'],
+    [:tor, 'Toronto', 'Blue Jays'],
+    [:wsh, 'Washington', 'Nationals']
   ].map { |tc, c, n| [tc, Team.new(tc, c, n)] }
           .to_h.with_indifferent_access
 
   class << self
-    def tricodes
-      TEAMS.keys
+    def nba_tricodes
+      NBA_TEAMS.keys
+    end
+
+    def mlb_tricodes
+      MLB_TEAMS.keys
     end
 
     def tricodes_for_enum
-      tricodes.map { |tc| [tc, tc] }.to_h
+      (nba_tricodes + mlb_tricodes)
+        .uniq
+        .sort
+        .map { |tc| [tc, tc] }.to_h
     end
 
-    def [](tricode)
-      TEAMS[tricode]
+    def nba(tricode)
+      NBA_TEAMS(tricode)
+    end
+
+    def mlb(tricode)
+      MLB_TEAMS(tricode)
     end
   end
 end
