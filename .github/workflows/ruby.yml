@@ -42,7 +42,7 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          PG_HOST: postgres
+          PG_HOST: localhost
           PG_USER: postgres
         run: |
           bundle exec rails db:setup
