@@ -126,21 +126,9 @@ class Matchup < ApplicationRecord
 
   def num_matchups_for_round
     if nba?
-      case round
-      when 1
-        4
-      when 2
-        2
-      else
-        1
-      end
+      nba_matchups_for_round
     elsif mlb?
-      case round
-      when 1
-        2
-      else
-        1
-      end
+      mlb_matchups_for_round
     end
   end
 
@@ -161,6 +149,28 @@ class Matchup < ApplicationRecord
 
     all_scores.map do |row|
       row[min_index..max_index]
+    end
+  end
+
+  private
+
+  def nba_matchups_for_round
+    case round
+    when 1
+      4
+    when 2
+      2
+    else
+      1
+    end
+  end
+
+  def mlb_matchups_for_round
+    case round
+    when 1
+      2
+    else
+      1
     end
   end
 end
