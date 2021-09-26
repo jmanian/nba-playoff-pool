@@ -1,0 +1,54 @@
+name: Test and Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # Label of the container job
+  container-job:
+    runs-on: ubuntu-latest
+
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Set up Ruby
+      # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+      # change this to (see https://github.com/ruby/setup-ruby#versioning):
+      # uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+        with:
+          ruby-version: 2.7
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Rubocop
+        run: bundle exec rubocop
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          POSTGRES_HOST: localhost
+          POSTGRES_USERNAME: postgres
+          POSTGRES_PASSWORD: postgres
+        run: |
+          bundle exec rails db:setup
+          bundle exec rake
