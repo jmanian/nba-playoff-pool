@@ -113,7 +113,7 @@ class Matchup < ApplicationRecord
   end
 
   def max_games
-    games_needed_to_win * 2 - 1
+    (games_needed_to_win * 2) - 1
   end
 
   def num_rounds
