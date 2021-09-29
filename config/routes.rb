@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
   resources :picks, only: %i[index new create]
+  resources :standings, only: %i[index]
 end

@@ -1,3 +1,4 @@
 <% if current_user %>
   <p><%= link_to 'My Picks', {controller: :picks, action: :index}, method: :get %></p>
+  <p><%= link_to 'Standings', {controller: :standings, action: :index}, method: :get %></p>
 <% end %>
