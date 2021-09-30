@@ -11,6 +11,7 @@
 #  username               :string           not null, indexed
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  admin                  :boolean          default(FALSE), not null
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
