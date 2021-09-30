@@ -1,1 +1,24 @@
 <h1>Standings</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <% @rounds.each do |round| %>
+      <th><%= "R#{round} Locked" %></th>
+      <th><%= "R#{round} Potential" %></th>
+    <% end %>
+    <th>Total Locked</th>
+    <th>Total Potential</th>
+  </tr>
+
+  <% @data.each do |user, round_scores, totals| %>
+    <tr>
+      <td><%= user.username %></td>
+      <% @rounds.each do |round| %>
+        <td><%= round_scores[round].first %></td>
+        <td><%= round_scores[round].last %></td>
+      <% end %>
+      <td><%= totals.first %></td>
+      <td><%= totals.last %></td>
+    </tr>
+  <% end %>
+</table>
