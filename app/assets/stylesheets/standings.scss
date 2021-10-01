@@ -37,5 +37,9 @@ td.inner {
   max-width: 30px;
   min-width: 20px;
   padding: 0px;
+  text-align: right;
+}
+
+td.inner.separator {
   text-align: center;
 }
