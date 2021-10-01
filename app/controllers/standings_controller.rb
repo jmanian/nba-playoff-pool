@@ -12,7 +12,7 @@ class StandingsController < ApplicationController
       round_scores = picks.transform_values do |picks|
         [
           picks.sum(&:min_points),
-          picks.sum(&:potential_points)
+          picks.sum(&:max_points)
         ]
       end
       round_scores.default = [0, 0]
