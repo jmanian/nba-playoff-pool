@@ -60,6 +60,10 @@ class Matchup < ApplicationRecord
 
   scope :accepting_entries, -> { where('starts_at > ?', Time.current) }
 
+  def started?
+    starts_at.past?
+  end
+
   def favorite
     if nba?
       Team.nba(favorite_tricode)

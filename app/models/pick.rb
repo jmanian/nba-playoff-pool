@@ -52,4 +52,8 @@ class Pick < ApplicationRecord
   def max_points
     possible_points.max
   end
+
+  def potential_points
+    max_points - min_points
+  end
 end
