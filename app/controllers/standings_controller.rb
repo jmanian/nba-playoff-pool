@@ -1,15 +1,16 @@
 class StandingsController < ApplicationController
   before_action :authenticate_user!
 
+  # rubocop:disable Metrics
   def index
     users = User.includes(picks: :matchup)
 
     @data = users.map do |user|
-      picks = user.picks
-                  .select { |p| p.matchup.started? }
-                  .group_by { |p| p.matchup.round }
+      picks_by_round = user.picks
+                           .select { |p| p.matchup.started? }
+                           .group_by { |p| p.matchup.round }
 
-      round_scores = picks.transform_values do |picks|
+      round_scores = picks_by_round.transform_values do |picks|
         [
           picks.sum(&:min_points),
           picks.sum(&:max_points)
@@ -32,4 +33,5 @@ class StandingsController < ApplicationController
 
     @rounds = @data.map(&:second).flat_map(&:keys).uniq.sort
   end
+  # rubocop:enable Metrics
 end
