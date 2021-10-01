@@ -25,6 +25,11 @@ class StandingsController < ApplicationController
       [user, round_scores, totals]
     end
 
+    @data.sort_by! do |_, _, totals|
+      # Sort first by max total and then min
+      totals.map { |t| -t }.reverse
+    end
+
     @rounds = @data.map(&:second).flat_map { |user_scores| user_scores.keys }.uniq.sort
   end
 end
