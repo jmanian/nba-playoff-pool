@@ -34,12 +34,17 @@ table.inner {
 
 td.inner {
   border: none;
+  padding: 0px;
+}
+
+td.inner.number {
   max-width: 30px;
   min-width: 20px;
-  padding: 0px;
   text-align: right;
 }
 
 td.inner.separator {
+  max-width: 30px;
+  min-width: 20px;
   text-align: center;
 }

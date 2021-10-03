@@ -59,6 +59,7 @@ class Matchup < ApplicationRecord
   enum underdog_tricode: Team.tricodes_for_enum, _prefix: :underdog
 
   scope :accepting_entries, -> { where('starts_at > ?', Time.current) }
+  scope :started, -> { where('starts_at < ?', Time.current) }
 
   def started?
     starts_at.past?
@@ -108,6 +109,10 @@ class Matchup < ApplicationRecord
     [favorite_tricode&.upcase, underdog_tricode&.upcase].join(' v ')
   end
 
+  def summary
+    "#{favorite.name} (#{favorite_wins}) v #{underdog.name} (#{underdog_wins})"
+  end
+
   def games_needed_to_win
     if mlb? && round == 1
       3
@@ -154,6 +159,16 @@ class Matchup < ApplicationRecord
     all_scores.map do |row|
       row[min_index..max_index]
     end
+  end
+
+  def <=>(other)
+    sort_key <=> other.sort_key
+  end
+
+  protected
+
+  def sort_key
+    [sport, year, round, conference_before_type_cast, number]
   end
 
   private

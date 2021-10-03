@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   root to: redirect('/standings')
   resources :picks, only: %i[index new create]
   resources :standings, only: %i[index]
+
+  get '/:sport/:year/:round', to: 'round#show'
 end
