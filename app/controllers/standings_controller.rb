@@ -1,6 +1,4 @@
 class StandingsController < ApplicationController
-  before_action :authenticate_user!
-
   # rubocop:disable Metrics
   def index
     users = User.includes(picks: :matchup)
