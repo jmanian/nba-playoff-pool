@@ -16,8 +16,11 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  # Model was originally generated with :recoverable, but was removed
+  # until we can add email ability.
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :rememberable, :validatable
 
   has_many :picks, dependent: :restrict_with_exception
 
