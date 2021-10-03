@@ -1,0 +1,8 @@
+<li>
+  <%= link_to('Standings', '/standings') %>
+</li>
+<% if user_signed_in? %>
+  <li>
+    <%= link_to('My Picks', '/picks') %>
+  </li>
+<% end %>
