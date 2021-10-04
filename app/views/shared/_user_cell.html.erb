@@ -1,2 +1,5 @@
-<% cls = user == current_user ? 'user self' : 'user' %>
-<td class='<%= cls %>'><%= user.username %></td>
+<% if user == current_user %>
+  <th scope="row"><%= user.username %></th>
+<% else %>
+  <td><%= user.username %></td>
+<% end %>

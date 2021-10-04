@@ -1,11 +1,20 @@
-<td class='holder'>
-  <table class='inner'>
-    <tr>
-      <td class='inner team'><%= pick.winner.name %></td>
-      <td class='inner number'><%= pick.num_games %></td>
-      <td class='inner scores'>
-        <%= render partial: 'shared/score_range_table', locals: {min: pick.min_points, max: pick.max_points} %>
-      </td>
-    </tr>
-  </table>
-</td>
+<% pick = picks_by_matchup_id[matchup.id] %>
+<% if pick %>
+  <td class="<%= class_names(:'text-center', 'table-secondary': !pick.winner_is_favorite)%>">
+    <%= pick.winner.name %>
+  </td>
+  <td class="text-center">
+    in <%= pick.num_games %>
+  </td>
+  <td class="text-end">
+    <%= pick.min_points %>
+  </td>
+  <td class="text-end">
+    <%= pick.max_points %>
+  </td>
+<% else %>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+<% end %>
