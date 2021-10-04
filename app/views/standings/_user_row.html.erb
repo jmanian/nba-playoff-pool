@@ -1,0 +1,11 @@
+<% user, round_scores, totals = user_row %>
+<tr>
+  <% cls = user == current_user ? 'user self' : 'user' %>
+  <td class='<%= cls %>'><%= user.username %></td>
+  <% @rounds.each do |round| %>
+    <% min, max = round_scores[round] %>
+    <%= render partial: 'standings/score_cell', locals: {min: min, max: max} %>
+  <% end %>
+  <% min, max = totals %>
+  <%= render partial: 'standings/score_cell', locals: {min: min, max: max} %>
+</tr>
