@@ -9,53 +9,5 @@
       <th>Total</th>
     </tr>
   </thead>
-
-  <% @data.each do |user, round_scores, totals| %>
-    <tr>
-      <% cls = user == current_user ? 'user self' : 'user' %>
-      <td class='<%= cls %>'><%= user.username %></td>
-      <% @rounds.each do |round| %>
-        <% min, max = round_scores[round] %>
-        <td>
-          <% if min == max %>
-            <%= min %>
-          <% else %>
-            <table class='inner'>
-              <tr>
-                <td class='inner'>
-                  <%= round_scores[round].first %>
-                </td>
-                <td class='inner separator'>
-                  –
-                </td>
-                <td class='inner'>
-                  <%= round_scores[round].last %>
-                </td>
-              </tr>
-            </table>
-          <% end %>
-        </td>
-      <% end %>
-      <td>
-        <% min, max = totals %>
-        <% if min == max %>
-          <%= min %>
-        <% else %>
-          <table class='inner'>
-            <tr>
-              <td class='inner'>
-                <%= min %>
-              </td>
-              <td class='inner separator'>
-                –
-              </td>
-              <td class='inner'>
-                <%= max %>
-              </td>
-            </tr>
-          </table>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
+  <%= render partial: 'standings/user_row', collection: @data %>
 </table>

@@ -1,0 +1,11 @@
+<td class='holder'>
+  <table class='inner'>
+    <tr>
+      <td class='inner team'><%= pick.winner.name %></td>
+      <td class='inner number'><%= pick.num_games %></td>
+      <td class='inner scores'>
+        <%= render partial: 'shared/score_range_table', locals: {min: pick.min_points, max: pick.max_points} %>
+      </td>
+    </tr>
+  </table>
+</td>

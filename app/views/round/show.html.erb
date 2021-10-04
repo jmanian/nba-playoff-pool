@@ -1,0 +1,12 @@
+<h1>Round <%= params[:round] %></h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <% @matchups.each do |matchup| %>
+        <th><%= matchup.summary %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <%= render partial: 'round/user_row', collection: @user_data %>
+</table>

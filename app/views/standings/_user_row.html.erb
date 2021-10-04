@@ -1,0 +1,10 @@
+<% user, round_scores, totals = user_row %>
+<tr>
+  <%= render partial: 'shared/user_cell', locals: {user: user} %>
+  <% @rounds.each do |round| %>
+    <% min, max = round_scores[round] %>
+    <%= render partial: 'standings/score_cell', locals: {min: min, max: max} %>
+  <% end %>
+  <% min, max = totals %>
+  <%= render partial: 'standings/score_cell', locals: {min: min, max: max} %>
+</tr>
