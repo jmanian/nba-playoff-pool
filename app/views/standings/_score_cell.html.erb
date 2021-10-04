@@ -1,19 +1,7 @@
-<td>
+<td class='holder'>
   <% if min == max %>
     <%= min %>
   <% else %>
-    <table class='inner'>
-      <tr>
-        <td class='inner number'>
-          <%= min %>
-        </td>
-        <td class='inner separator'>
-          –
-        </td>
-        <td class='inner number'>
-          <%= max %>
-        </td>
-      </tr>
-    </table>
+    <%= render partial: 'shared/score_range_table', locals: {min: min, max: max} %>
   <% end %>
 </td>
