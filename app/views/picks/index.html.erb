@@ -1,8 +1,6 @@
-<h1>My Picks</h1>
 <% if @other_matchups.any? %>
   <h2>Unpicked Series</h2>
-  <p><%= button_to 'Submit Picks', {action: :new}, method: :get %></p>
-  <ul>
+  <ul class="list-unstyled">
     <% @other_matchups.each do |matchup| %>
       <li>
         <%= matchup.favorite.name %>
@@ -11,13 +9,14 @@
       </li>
     <% end %>
   </ul>
+  <p><%= button_to 'Submit Picks', {action: :new}, method: :get %></p>
 <% elsif @accepting_picks %>
   <p><%= button_to 'Edit Picks', {action: :new}, method: :get %></p>
 <% end %>
 <h2>Picked Series</h2>
 <% @picks.each do |round, picks| %>
-  <h3><%= "Round #{round}" %></h3>
-  <ul>
+  <p class="lead"><%= "Round #{round}" %></p>
+  <ul class="list-unstyled">
     <% picks.each do |pick| %>
       <li>
         <strong><%= pick.winner.name %></strong>
