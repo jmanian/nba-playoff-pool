@@ -1,0 +1,10 @@
+<% user, picks_by_matchup_id = user_row %>
+<tr>
+  <%= render partial: 'shared/user_cell', locals: {user: user} %>
+  <% @matchups.each do |matchup| %>
+    <% pick = picks_by_matchup_id[matchup.id] %>
+    <% if pick %>
+      <%= render partial: 'round/pick_cell', locals: {pick: pick} %>
+    <% end %>
+  <% end %>
+</tr>

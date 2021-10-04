@@ -8,23 +8,5 @@
       <% end %>
     </tr>
   </thead>
-  <% @user_data.each do |user, picks_by_matchup_id| %>
-    <tr>
-      <% cls = user == current_user ? 'user self' : 'user' %>
-      <td class='<%= cls %>'><%= user.username %></td>
-      <% @matchups.each do |matchup| %>
-        <% pick = picks_by_matchup_id[matchup.id] %>
-        <td>
-          <table class='inner'>
-            <tr>
-              <td class='inner team'><%= pick.winner.name %></td>
-              <td class='inner number'><%= pick.num_games %></td>
-              <td class='inner number'><%= pick.min_points %></td>
-              <td class='inner number'><%= pick.max_points %></td>
-            </tr>
-          </table>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
+  <%= render partial: 'round/user_row', collection: @user_data %>
 </table>
