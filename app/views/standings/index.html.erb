@@ -1,12 +1,24 @@
-<h1>Standings</h1>
-<table>
+<table class="table table-hover table-responsive table-bordere">
   <thead>
     <tr>
-      <th>Name</th>
+      <th scope="col">Name</th>
       <% @rounds.each do |round| %>
-        <th><%= "R#{round}" %></th>
+        <th scope="col" class="text-end" colspan="2"><%= "R#{round}" %></th>
+        <td></td>
+        <td></td>
       <% end %>
-      <th>Total</th>
+      <th scope="col" class="text-end" colspan="2">Total</th>
+    </tr>
+    <tr>
+      <td></td>
+      <% @rounds.each do |round| %>
+        <td class="text-end">Min</td>
+        <td class="text-end">Max</td>
+        <td></td>
+        <td></td>
+      <% end %>
+      <td class="text-end">Min</td>
+      <td class="text-end">Max</td>
     </tr>
   </thead>
   <%= render partial: 'standings/user_row', collection: @data %>

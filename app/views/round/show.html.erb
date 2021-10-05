@@ -1,11 +1,12 @@
-<h1>Round <%= params[:round] %></h1>
-<table>
+<table class="table table-hover table-responsive">
   <thead>
     <tr>
-      <th>Name</th>
-      <% @matchups.each do |matchup| %>
-        <th><%= matchup.summary %></th>
-      <% end %>
+      <th scope="col">Name</th>
+      <%= render partial: 'round/matchup_title', collection: @matchups, as: :matchup, spacer_template: 'shared/empty_cell' %>
+    </tr>
+    <tr>
+      <td></td>
+      <%= render partial: 'round/matchup_subtitle', collection: @matchups, spacer_template: 'shared/empty_cell' %>
     </tr>
   </thead>
   <%= render partial: 'round/user_row', collection: @user_data %>

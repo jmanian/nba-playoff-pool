@@ -1,9 +1,32 @@
-<li>
-  <%= link_to('Standings', '/standings') %>
-</li>
-<li>
-  <%= link_to('Round 1', '/mlb/2021/1') %>
-</li>
-<li>
-  <%= link_to('My Picks', '/picks') %>
-</li>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Sports Pals</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <% current = controller_name == 'standings' %>
+          <%= link_to('Standings', '/standings', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
+        </li>
+        <li class="nav-item dropdown">
+          <% current = controller_name == 'round' %>
+          <%= link_to('Rounds', '#', class: class_names(:'nav-link', :'dropdown-toggle', active: current), aria_current: (current ? :page : nil), id: 'navbarDropdown', role: 'button', 'data-bs-toggle': 'dropdown', 'aria-expanded': 'false') %>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/mlb/2021/1">Round 1</a></li>
+            <li><a class="dropdown-item" href="/mlb/2021/2">Round 2</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <% current = controller_name == 'picks' %>
+          <%= link_to('My Picks', '/picks', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
+        </li>
+      </ul>
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <%= render 'devise/menu/registration_items' %>
+        <%= render 'devise/menu/login_items' %>
+      </ul>
+    </div>
+  </div>
+</nav>
