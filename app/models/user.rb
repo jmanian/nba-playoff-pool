@@ -22,6 +22,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 
+  validates :username, uniqueness: true
+
   has_many :picks, dependent: :restrict_with_exception
 
   def title
