@@ -53,6 +53,14 @@ class Pick < ApplicationRecord
     possible_points.max
   end
 
+  def min_points_percentage
+    min_points.to_f / matchup.max_available_points
+  end
+
+  def max_points_percentage
+    max_points.to_f / matchup.max_available_points
+  end
+
   def potential_points
     max_points - min_points
   end

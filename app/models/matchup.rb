@@ -161,6 +161,10 @@ class Matchup < ApplicationRecord
     end
   end
 
+  def max_available_points
+    all_scores.flatten.max
+  end
+
   def possible_scores
     return @possible_scores if @possible_scores
 
