@@ -32,7 +32,7 @@ class StandingsController < ApplicationController
 
     @rounds = @data.map(&:second).flat_map(&:keys).uniq.sort
 
-    @labels = @data.map { |user, _, _| user.username }
+    @chart_labels = @data.map { |user, _, _| user.username }
 
     @chart_data = @rounds.flat_map do |round_num|
       round_name = @round_names[round_num]
@@ -48,7 +48,7 @@ class StandingsController < ApplicationController
           },
           {
             label: "#{round_name} Potential",
-            backgroundColor: 'rgba(201, 203, 207, 0.8)',
+            backgroundColor: 'rgba(180, 183, 187)',
             data: pots
           }
         ]
@@ -67,10 +67,10 @@ class StandingsController < ApplicationController
 
   def background_color(round_num)
     [
-      'rgba(255, 99, 132, 0.8)',
-      'rgba(75, 192, 192, 0.8)',
-      'rgba(54, 162, 235, 0.8)',
-      'rgba(153, 102, 255, 0.8)'
+      'rgba(51, 101, 138)',
+      'rgba(215, 129, 106)',
+      'rgba(117, 142, 79)',
+      'rgba(134, 187, 216)'
     ][round_num - 1]
   end
 end
