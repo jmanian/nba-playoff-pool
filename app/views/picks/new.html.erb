@@ -1,4 +1,4 @@
-<h2>Submit Picks</h2>
+<h2 class="mb-3">Submit Picks</h2>
 <%= form_with model: Pick.new do |form| %>
   <% @matchups.each do |matchup| %>
     <% pick = @picks[matchup.id] %>
@@ -7,10 +7,10 @@
       <ul class="list-unstyled">
         <%= form.fields_for :matchup, index: matchup.id do |matchup_form| %>
           <% matchup.possible_results.each do |team, games, code| %>
-            <li>
+            <li class="form-check">
               <% checked = pick&.num_games == games && pick&.winner == team %>
-              <%= matchup_form.radio_button :result, code, checked: checked %>
-              <%= matchup_form.label :"result_#{code}", "#{team.name} in #{games}" %>
+              <%= matchup_form.radio_button :result, code, checked: checked, class: "form-check-input" %>
+              <%= matchup_form.label :"result_#{code}", "#{team.name} in #{games}", class: "form-check-label" %>
             </li>
           <% end %>
         <% end %>
@@ -18,7 +18,7 @@
     </p>
   <% end %>
   <br>
-  <div>
+  <div class="mb-5">
     <%= form.submit "Submit Picks", class: "btn btn-primary" %>
   </div>
 <% end %>
