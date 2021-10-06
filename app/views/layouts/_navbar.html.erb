@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Sports Pals</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,8 +14,9 @@
           <% current = controller_name == 'round' %>
           <%= link_to('Rounds', '#', class: class_names(:'nav-link', :'dropdown-toggle', active: current), aria_current: (current ? :page : nil), id: 'navbarDropdown', role: 'button', 'data-bs-toggle': 'dropdown', 'aria-expanded': 'false') %>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/mlb/2021/1">Round 1</a></li>
-            <li><a class="dropdown-item" href="/mlb/2021/2">Round 2</a></li>
+            <% @round_names.sort.each do |n, name| %>
+              <li><a class="dropdown-item" href="/mlb/2021/<%= n %>"><%= name %></a></li>
+            <% end %>
           </ul>
         </li>
         <li class="nav-item">
