@@ -111,7 +111,7 @@ class Matchup < ApplicationRecord
   end
 
   def title
-    [favorite_tricode&.upcase, underdog_tricode&.upcase].join(' v ')
+    "#{round_name}: #{favorite_tricode.upcase} v #{underdog_tricode.upcase}"
   end
 
   def summary
