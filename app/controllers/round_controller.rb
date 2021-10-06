@@ -17,6 +17,8 @@ class RoundController < ApplicationController
                      .uniq
                      .sort
 
+    @round_name = @matchups.first.round_name
+
     @user_data = picks.group_by(&:user)
                       .transform_values { |user_picks| user_picks.index_by(&:matchup_id) }
   end

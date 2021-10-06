@@ -3,8 +3,11 @@ class PicksController < ApplicationController
 
   def index
     @picks = current_user.picks.includes(:matchup)
-    @other_matchups = Matchup.where(year: 2021).where.not(id: @picks.map(&:matchup_id)).accepting_entries.to_a
-    @accepting_picks = Matchup.accepting_entries.exists?
+    @other_matchups = Matchup.where(sport: :mlb, year: 2021)
+                             .where.not(id: @picks.map(&:matchup_id))
+                             .accepting_entries
+                             .group_by(&:round)
+    @accepting_picks = Matchup.where(sport: :mlb, year: 2021).accepting_entries.exists?
     @picks = @picks.group_by { |pick| pick.matchup.round }
   end
 

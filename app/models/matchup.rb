@@ -141,6 +141,26 @@ class Matchup < ApplicationRecord
     end
   end
 
+  def round_name
+    if nba?
+      case round
+      when 4
+        'Finals'
+      else
+        "Round #{n}"
+      end
+    elsif mlb?
+      case round
+      when 1
+        'Division Series'
+      when 2
+        'Championship Series'
+      else
+        'World Series'
+      end
+    end
+  end
+
   def final_round?
     round == num_rounds
   end
