@@ -1,0 +1,6 @@
+<% count = @matchup_data[matchup.id][outcome] %>
+<% winner, num_games = matchup.outcome_by_index(outcome) %>
+<td class="text-center"><%= winner.name %></td>
+<td class="text-center">in <%= num_games %></td>
+<td class="text-end bg-warning bg-gradient" style="--bs-bg-opacity: <%= count.to_f / @num_users %>"><%= count || 0 %></td>
+<td></td>
