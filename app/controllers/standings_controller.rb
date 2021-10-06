@@ -32,7 +32,7 @@ class StandingsController < ApplicationController
 
     @rounds = @data.map(&:second).flat_map(&:keys).uniq.sort
 
-    @labels = @data.map { |user, _, _| user.username }
+    @chart_labels = @data.map { |user, _, _| user.username }
 
     @chart_data = @rounds.flat_map do |round_num|
       round_name = @round_names[round_num]
