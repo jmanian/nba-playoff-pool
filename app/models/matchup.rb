@@ -143,21 +143,9 @@ class Matchup < ApplicationRecord
 
   def round_name
     if nba?
-      case round
-      when 4
-        'Finals'
-      else
-        "Round #{n}"
-      end
+      nba_round_name
     elsif mlb?
-      case round
-      when 1
-        'Division Series'
-      when 2
-        'Championship Series'
-      else
-        'World Series'
-      end
+      mlb_round_name
     end
   end
 
@@ -210,6 +198,26 @@ class Matchup < ApplicationRecord
       2
     else
       1
+    end
+  end
+
+  def nba_round_name
+    case round
+    when 4
+      'Finals'
+    else
+      "Round #{n}"
+    end
+  end
+
+  def mlb_round_name
+    case round
+    when 1
+      'Division Series'
+    when 2
+      'Championship Series'
+    else
+      'World Series'
     end
   end
 end
