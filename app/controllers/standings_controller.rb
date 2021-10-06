@@ -11,6 +11,7 @@ class StandingsController < ApplicationController
       round_scores = picks_by_round.transform_values do |picks|
         [
           picks.sum(&:min_points),
+          picks.sum(&:potential_points),
           picks.sum(&:max_points)
         ]
       end
@@ -30,6 +31,46 @@ class StandingsController < ApplicationController
     end
 
     @rounds = @data.map(&:second).flat_map(&:keys).uniq.sort
+
+    @labels = @data.map { |user, _, _| user.username }
+
+    @chart_data = @rounds.flat_map do |round_num|
+      round_name = @round_names[round_num]
+      user_round_scores = @data.map(&:second).map { |rs| rs[round_num] }
+      mins = user_round_scores.map(&:first)
+      pots = user_round_scores.map(&:second)
+      if pots.any?(&:positive?)
+        [
+          {
+            label: "#{round_name} Definite",
+            backgroundColor: background_color(round_num),
+            data: mins
+          },
+          {
+            label: "#{round_name} Potential",
+            backgroundColor: 'rgba(201, 203, 207, 0.8)',
+            data: pots
+          }
+        ]
+      else
+        [
+          {
+            label: round_name,
+            backgroundColor: background_color(round_num),
+            data: mins
+          }
+        ]
+      end
+    end
   end
   # rubocop:enable Metrics
+
+  def background_color(round_num)
+    [
+      'rgba(255, 99, 132, 0.8)',
+      'rgba(75, 192, 192, 0.8)',
+      'rgba(54, 162, 235, 0.8)',
+      'rgba(153, 102, 255, 0.8)'
+    ][round_num - 1]
+  end
 end
