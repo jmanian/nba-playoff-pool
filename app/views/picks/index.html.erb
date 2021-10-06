@@ -13,13 +13,13 @@
       <% end %>
     <% end %>
   </ul>
-  <p><%= button_to 'Submit Picks', {action: :new}, method: :get %></p>
-<% elsif @accepting_picks %>
-  <p><%= button_to 'Edit Picks', {action: :new}, method: :get %></p>
+  <p>
+    <%= button_to 'Submit Picks', {action: :new}, method: :get, class: "btn btn-primary" %>
+  </p>
 <% end %>
 <h2>Picked Series</h2>
 <% @picks.each do |round, picks| %>
-  <p class="lead"><%= @round_names[round] %></p>
+  <p class="lead"><%= picks.first.matchup.round_name %></p>
   <ul class="list-unstyled">
     <% picks.each do |pick| %>
       <li>
@@ -33,4 +33,9 @@
       </li>
     <% end %>
   </ul>
+<% end %>
+<% if @other_matchups.empty? && @accepting_picks %>
+  <p>
+    <%= button_to 'Edit Picks', {action: :new}, method: :get, class: "btn btn-primary" %>
+  </p>
 <% end %>
