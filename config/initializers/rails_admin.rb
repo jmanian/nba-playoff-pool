@@ -26,16 +26,55 @@ RailsAdmin.config do |config|
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
-    new
+    new do
+      only %w[Matchup]
+    end
     export
     bulk_delete
     show
-    edit
-    delete
+    edit do
+      only %w[User Matchup]
+    end
+    delete do
+      only %w[Matchup]
+    end
     show_in_app
 
     ## With an audit adapter, you can add:
     # history_index
     # history_show
+  end
+
+  config.model 'User' do
+    list do
+      field :id
+      field :email
+      field :username
+      field :admin
+    end
+    edit do
+      field :email
+      field :username
+      field :password
+      field :admin
+    end
+  end
+
+  config.model 'Matchup' do
+    list do
+      field :id
+      field :sport
+      field :year
+      field :title
+    end
+    edit do
+      exclude_fields :picks
+    end
+  end
+
+  config.model 'Pick' do
+    list do
+      exclude_fields :created_at, :updated_at
+    end
   end
 end
