@@ -65,6 +65,11 @@ class Matchup < ApplicationRecord
     starts_at.past?
   end
 
+  def starts_at_pretty
+    starts_at.in_time_zone('America/New_York')
+             .strftime('%a %-d %b, %l:%M %p %Z')
+  end
+
   def favorite
     if nba?
       Team.nba(favorite_tricode)
