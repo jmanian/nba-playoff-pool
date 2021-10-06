@@ -179,6 +179,14 @@ class Matchup < ApplicationRecord
     end
   end
 
+  def outcome_by_index(index)
+    if index < games_needed_to_win
+      [favorite, index + games_needed_to_win]
+    else
+      [underdog, max_games + games_needed_to_win - index]
+    end
+  end
+
   def <=>(other)
     sort_key <=> other.sort_key
   end
