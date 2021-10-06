@@ -154,17 +154,27 @@ class Matchup < ApplicationRecord
   end
 
   def all_scores
-    ScoringGrid[self]
+    @all_scores ||= ScoringGrid[self].map do |row|
+      row.map do |s|
+        s * round
+      end
+    end
+  end
+
+  def max_available_points
+    all_scores.flatten.max
   end
 
   def possible_scores
+    return @possible_scores if @possible_scores
+
     min_index = underdog_wins
     max_index = max_games - favorite_wins
 
     max_index = min_index if favorite_won?
     min_index = max_index if underdog_won?
 
-    all_scores.map do |row|
+    @possible_scores = all_scores.map do |row|
       row[min_index..max_index]
     end
   end

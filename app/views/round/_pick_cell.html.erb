@@ -6,10 +6,10 @@
   <td class="text-center">
     in <%= pick.num_games %>
   </td>
-  <td class="text-end">
+  <td class="text-end bg-danger bg-gradient" style="--bs-bg-opacity: <%= pick.min_points_percentage * 0.5 %>">
     <%= pick.min_points %>
   </td>
-  <td class="text-end">
+  <td class="text-end bg-danger bg-gradient" style="--bs-bg-opacity: <%= pick.max_points_percentage * 0.5 %>">
     <%= pick.max_points %>
   </td>
 <% else %>
