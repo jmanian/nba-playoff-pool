@@ -6,14 +6,19 @@
   <td class="text-center">
     in <%= pick.num_games %>
   </td>
-  <td class="text-end bg-danger bg-gradient" style="--bs-bg-opacity: <%= pick.min_points_percentage * 0.5 %>">
-    <%= pick.min_points %>
-  </td>
-  <td class="text-end bg-danger bg-gradient" style="--bs-bg-opacity: <%= pick.max_points_percentage * 0.5 %>">
-    <%= pick.max_points %>
+  <td>
+    <div class="progress">
+      <% pct = (pick.min_points_percentage * 100).round %>
+      <div class="progress-bar bg-primary" role="progressbar" style="width: <%= pct %>%" >
+        <%= pick.min_points %>
+      </div>
+      <% pct = (pick.potential_points_percentage * 100).round %>
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: <%= pct %>%" >
+        <%= pick.potential_points %>
+      </div>
+    </div>
   </td>
 <% else %>
-  <td></td>
   <td></td>
   <td></td>
   <td></td>
