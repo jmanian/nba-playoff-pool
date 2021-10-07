@@ -1,27 +1,29 @@
 <canvas id="standingsChart" class="mb-5" data-labels="<%= @chart_labels.to_json %>" data-data="<%= @chart_data.to_json %>"></canvas>
 
-<table class="table table-hover table-responsive">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <% @rounds.each do |round| %>
-        <th scope="col" class="text-end" colspan="2"><%= @round_names[round] %></th>
+<div class= "table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <% @rounds.each do |round| %>
+          <th scope="col" class="text-end" colspan="2"><%= @round_names[round] %></th>
+          <td></td>
+          <td></td>
+        <% end %>
+        <th scope="col" class="text-end" colspan="2">Total</th>
+      </tr>
+      <tr>
         <td></td>
-        <td></td>
-      <% end %>
-      <th scope="col" class="text-end" colspan="2">Total</th>
-    </tr>
-    <tr>
-      <td></td>
-      <% @rounds.each do |round| %>
+        <% @rounds.each do |round| %>
+          <td class="text-end">Min</td>
+          <td class="text-end">Max</td>
+          <td></td>
+          <td></td>
+        <% end %>
         <td class="text-end">Min</td>
         <td class="text-end">Max</td>
-        <td></td>
-        <td></td>
-      <% end %>
-      <td class="text-end">Min</td>
-      <td class="text-end">Max</td>
-    </tr>
-  </thead>
-  <%= render partial: 'standings/user_row', collection: @data %>
-</table>
+      </tr>
+    </thead>
+    <%= render partial: 'standings/user_row', collection: @data %>
+  </table>
+</div>
