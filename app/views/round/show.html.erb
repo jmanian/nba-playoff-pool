@@ -11,9 +11,11 @@
         <%= render partial: 'round/matchup_subtitle', collection: @matchups, spacer_template: 'shared/empty_cell' %>
       </tr>
     </thead>
-    <%= render partial: 'round/user_row', collection: @user_data %>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <%= render partial: 'round/matchup_summary_row', collection: (0...@num_outcomes).to_a, as: :outcome %>
+    <tbody>
+      <%= render partial: 'round/user_row', collection: @user_data %>
+    </tbody>
+    <tfoot>
+      <%= render partial: 'round/matchup_summary_row', collection: (0...@num_outcomes).to_a, as: :outcome %>
+    </tfoot>
   </table>
 </div>
