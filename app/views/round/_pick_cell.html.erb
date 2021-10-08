@@ -1,12 +1,12 @@
 <% pick = picks_by_matchup_id[matchup.id] %>
 <% if pick %>
-  <td class="<%= class_names(:'text-center', 'table-secondary': !pick.winner_is_favorite)%>">
+  <td class="<%= class_names(:'text-center', 'table-secondary': !pick.winner_is_favorite)%>" style="white-space: nowrap;">
     <%= pick.winner.name %>
   </td>
-  <td class="text-center">
+  <td class="text-center" style="white-space: nowrap;">
     in <%= pick.num_games %>
   </td>
-  <td class="align-middle">
+  <td class="align-middle" style="min-width: 75px;">
     <div class="progress bg-secondary" style="--bs-bg-opacity: .15;" data-bs-toggle="tooltip" data-bs-html="true" title="<%= pick.points_tooltip %>">
       <% if pick.min_points.positive? %>
         <% pct = (pick.min_points_percentage * 100).round %>
