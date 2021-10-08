@@ -68,4 +68,14 @@ class Pick < ApplicationRecord
   def potential_points_percentage
     potential_points.to_f / matchup.max_available_points
   end
+
+  def points_tooltip
+    if matchup.finished?
+      "This pick received #{min_points} points."
+    elsif potential_points.positive?
+      "Based on the results so far this pick will receive #{min_points}–#{max_points} points."
+    else
+      "Based on the results so far this pick will receive #{min_points} points."
+    end
+  end
 end
