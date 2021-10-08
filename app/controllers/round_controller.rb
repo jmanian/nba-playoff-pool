@@ -22,7 +22,7 @@ class RoundController < ApplicationController
 
     @user_data = picks.group_by(&:user)
                       .transform_values { |user_picks| user_picks.index_by(&:matchup_id) }
-                      .sort_by { |u, _| [u == current_user ? 0 : 1, u.username] }
+                      .sort_by { |_u, mp| [-mp.values.map(&:max_points).sum, -mp.values.map(&:min_points).sum] }
 
     @num_users = @user_data.length
 
