@@ -1,5 +1,5 @@
 <% user, picks_by_matchup_id = user_row %>
-<tr <%= 'class=table-active' if user == current_user %>>
+<tr>
   <%= render partial: 'shared/user_cell', locals: {user: user} %>
   <%= render partial: 'round/pick_cell', collection: @matchups, as: :matchup, locals: {picks_by_matchup_id: picks_by_matchup_id}, spacer_template: 'shared/empty_cell' %>
 </tr>
