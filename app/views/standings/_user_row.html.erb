@@ -1,12 +1,25 @@
 <% user, round_scores, totals = user_row %>
 <tr>
+  <td><%= user_row_counter + 1 %></td>
   <%= render partial: 'shared/user_cell', locals: {user: user} %>
-  <% @rounds.each do |round| %>
-    <% min, _potential, max = round_scores[round] %>
-    <%= render partial: 'standings/score_cell', locals: {min: min, max: max} %>
-    <td></td>
-    <td></td>
-  <% end %>
   <% min, max = totals %>
-  <%= render partial: 'standings/score_cell', locals: {min: min, max: max} %>
+  <td class="align-middle">
+    <div class="progress bg-secondary" style="--bs-bg-opacity: .15;">
+      <% @rounds.each do |round| %>
+        <% min, potential, max = round_scores[round] %>
+        <% bg = @bg_colors[round] %>
+        <% round_name = @round_names[round] %>
+        <% if min.positive? %>
+          <% tip = potential.positive? ? "#{round_name} Definite" : round_name %>
+          <% pct = (min.to_f / @biggest_max_total * 100).round %>
+          <div class="progress-bar <%= bg %>" role="progressbar" style="width: <%= pct %>%" data-bs-toggle="tooltip" title="<%= tip %>"><%= min %></div>
+        <% end %>
+        <% if potential.positive? %>
+          <% tip = "#{round_name} Potential" %>
+          <% pct = (potential.to_f / @biggest_max_total * 100).round %>
+          <div class="progress-bar progress-bar-striped <%= bg %>" role="progressbar" style="--bs-bg-opacity: .5; width: <%= pct %>%" data-bs-toggle="tooltip" title="<%= tip %>"><%= potential %></div>
+        <% end %>
+      <% end %>
+    </div>
+  </td>
 </tr>

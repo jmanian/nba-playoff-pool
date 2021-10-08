@@ -30,7 +30,17 @@ class StandingsController < ApplicationController
       totals.map(&:-@).reverse
     end
 
+    @biggest_max_total = @data.first.last.last
+
     @rounds = @data.map(&:second).flat_map(&:keys).uniq.sort
+
+    @bg_colors = %w[
+      filler
+      bg-primary
+      bg-danger
+      bg-success
+      bg-secondary
+    ]
   end
   # rubocop:enable Metrics
 end
