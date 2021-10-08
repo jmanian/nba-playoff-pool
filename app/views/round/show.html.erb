@@ -6,10 +6,6 @@
         <th scope="col">Name</th>
         <%= render partial: 'round/matchup_title', collection: @matchups, as: :matchup, spacer_template: 'shared/empty_cell' %>
       </tr>
-      <tr>
-        <td></td>
-        <%= render partial: 'round/matchup_subtitle', collection: @matchups, spacer_template: 'shared/empty_cell' %>
-      </tr>
     </thead>
     <tbody>
       <%= render partial: 'round/user_row', collection: @user_data %>
