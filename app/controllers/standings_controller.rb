@@ -30,7 +30,10 @@ class StandingsController < ApplicationController
       totals.map(&:-@).reverse
     end
 
+    scores = @data.map { |_, _, totals| totals.last }
     @biggest_max_total = @data.first.last.last
+
+    @data.map! { |user, round_scores, totals| [user, round_scores, totals, scores.index(totals.last) + 1] }
 
     @rounds = @data.map(&:second).flat_map(&:keys).uniq.sort
 

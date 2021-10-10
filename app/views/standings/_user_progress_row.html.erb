@@ -1,6 +1,6 @@
-<% user, round_scores, totals = user_data %>
+<% user, round_scores, totals, rank = user_data %>
 <tr>
-  <td><%= user_data_counter + 1 %></td>
+  <td><%= rank %></td>
   <%= render partial: 'shared/user_cell', locals: {user: user} %>
   <% min, max = totals %>
   <td class="align-middle">
@@ -11,12 +11,12 @@
         <% round_name = @round_names[round] %>
         <% if min.positive? %>
           <% tip = potential.positive? ? "#{round_name} Definite" : round_name %>
-          <% pct = (min.to_f / @biggest_max_total * 100).round %>
+          <% pct = (min.to_f / @biggest_max_total * 100).round(4) %>
           <div class="progress-bar <%= bg %>" role="progressbar" style="width: <%= pct %>%" data-bs-toggle="tooltip" title="<%= tip %>"><%= min %></div>
         <% end %>
         <% if potential.positive? %>
           <% tip = "#{round_name} Potential" %>
-          <% pct = (potential.to_f / @biggest_max_total * 100).round %>
+          <% pct = (potential.to_f / @biggest_max_total * 100).round(4) %>
           <div class="progress-bar progress-bar-striped <%= bg %>" role="progressbar" style="--bs-bg-opacity: .5; width: <%= pct %>%" data-bs-toggle="tooltip" title="<%= tip %>"><%= potential %></div>
         <% end %>
       <% end %>

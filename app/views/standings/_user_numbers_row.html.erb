@@ -1,6 +1,6 @@
-<% user, round_scores, totals = user_data %>
+<% user, round_scores, totals, rank = user_data %>
 <tr>
-  <td><%= user_data_counter + 1 %></td>
+  <td><%= rank %></td>
   <%= render partial: 'shared/user_cell', locals: {user: user} %>
   <% @rounds.each do |round| %>
     <% min, _potential, max = round_scores[round] %>
