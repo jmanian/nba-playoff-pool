@@ -27,7 +27,7 @@ RailsAdmin.config do |config|
     dashboard                     # mandatory
     index                         # mandatory
     new do
-      only %w[Matchup]
+      only %w[Matchup Pick]
     end
     export
     bulk_delete

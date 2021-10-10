@@ -28,6 +28,9 @@
         </li>
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0">
+        <% if current_user&.admin %>
+          <%= link_to('Admin', '/admin', class: :'nav-link') %>
+        <% end %>
         <%= render 'devise/menu/registration_items' %>
         <%= render 'devise/menu/login_items' %>
       </ul>

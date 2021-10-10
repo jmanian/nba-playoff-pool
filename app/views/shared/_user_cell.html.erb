@@ -1,5 +1,5 @@
 <% if user == current_user %>
-  <th scope="row"><%= user.username %></th>
+  <th scope="row" style="white-space: nowrap;"><%= user.username %></th>
 <% else %>
-  <td><%= user.username %></td>
+  <td style="white-space: nowrap;"><%= user.username %></td>
 <% end %>
