@@ -37,13 +37,7 @@ class StandingsController < ApplicationController
 
     @rounds = @data.map(&:second).flat_map(&:keys).uniq.sort
 
-    @bg_colors = %w[
-      filler
-      bg-primary
-      bg-danger
-      bg-success
-      bg-secondary
-    ]
+    @bg_colors = BG_COLORS
   end
   # rubocop:enable Metrics
 end

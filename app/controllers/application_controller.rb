@@ -2,6 +2,14 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :load_round_names
 
+  BG_COLORS = %w[
+    filler
+    bg-primary
+    bg-danger
+    bg-success
+    bg-secondary
+  ].freeze
+
   protected
 
   def configure_permitted_parameters

@@ -31,6 +31,8 @@ class RoundController < ApplicationController
                            pps.group_by(&:scoring_index)
                               .transform_values(&:length)
                          end
+
+    @bg_color = BG_COLORS[params[:round].to_i]
   end
   # rubocop:enable Metrics
 end
