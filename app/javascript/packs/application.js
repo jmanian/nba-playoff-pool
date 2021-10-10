@@ -13,8 +13,6 @@ import { Tooltip, Popover } from "bootstrap"
 import '../stylesheets/application'
 
 
-import Chart from 'chart.js/auto';
-
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
@@ -30,26 +28,4 @@ document.addEventListener("turbolinks:load", () => {
     var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
         return new Popover(popoverTriggerEl)
     })
-})
-
-document.addEventListener('turbolinks:load', () => {
-  var ctx = document.getElementById('standingsChart').getContext('2d');
-  var standingsChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: JSON.parse(ctx.canvas.dataset.labels),
-      datasets: JSON.parse(ctx.canvas.dataset.data)
-    },
-    options: {
-      indexAxis: 'y',
-      scales: {
-        y: {
-          stacked: true
-        },
-        x: {
-          stacked: true
-        }
-      }
-    }
-  });
 })

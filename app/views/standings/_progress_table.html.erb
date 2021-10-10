@@ -1,0 +1,14 @@
+<div class= "table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="col-1">#</th>
+        <th scope="col" class="col-2 col-md-3">Name</th>
+        <th scope="col" class="col">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'standings/user_progress_row', collection: @data, as: :user_data %>
+    </tbody>
+  </table>
+</div>
