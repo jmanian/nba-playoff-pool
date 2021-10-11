@@ -1,7 +1,0 @@
-en:
-  admin:
-    actions:
-      add_game_result:
-        menu: 'Add Game Result'
-        title: 'Add Game Result'
-        breadcrumb: 'Add Game Result'
