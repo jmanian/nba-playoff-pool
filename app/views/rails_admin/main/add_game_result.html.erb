@@ -1,0 +1,25 @@
+<h2>Who won game <%= @matchup.games_played + 1 %>?</h2>
+
+<%= form_for 'matchup', method: :post do |f| %>
+  <div>
+    <%= f.hidden_field :favorite_wins, value: @matchup.favorite_wins + 1 %>
+    <% text = "New score: #{@matchup.favorite.name} #{@matchup.favorite_wins + 1}, #{@matchup.underdog.name} #{@matchup.underdog_wins}" %>
+    <div class="form-text"><%= text %></div>
+  </div>
+  <div>
+    <%= f.submit @matchup.favorite.name, class: 'btn btn-primary' %>
+  </div>
+<% end %>
+<br>
+
+
+<%= form_for 'matchup', method: :post do |f| %>
+  <div>
+    <%= f.hidden_field :underdog_wins, value: @matchup.underdog_wins + 1 %>
+    <% text = "New score: #{@matchup.favorite.name} #{@matchup.favorite_wins}, #{@matchup.underdog.name} #{@matchup.underdog_wins + 1}" %>
+    <div class="form-text"><%= text %></div>
+  </div>
+  <div>
+    <%= f.submit @matchup.underdog.name, class: 'btn btn-primary' %>
+  </div>
+<% end %>
