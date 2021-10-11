@@ -1,3 +1,6 @@
+# require all the action files
+Dir[Rails.root.join('app', 'lib', 'rails_admin', '*')].sort.each { |file| require file }
+
 RailsAdmin.config do |config|
 
   ### Popular gems integration
@@ -40,6 +43,10 @@ RailsAdmin.config do |config|
     end
     show_in_app
 
+    add_game_result do
+      only %w[Matchup]
+    end
+
     ## With an audit adapter, you can add:
     # history_index
     # history_show
@@ -66,6 +73,9 @@ RailsAdmin.config do |config|
       field :sport
       field :year
       field :title
+    end
+    show do
+      exclude_fields :picks
     end
     edit do
       exclude_fields :picks
