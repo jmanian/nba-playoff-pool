@@ -1,13 +1,11 @@
-<% user, round_scores, totals, rank = user_data %>
 <tr>
-  <td><%= rank %></td>
-  <%= render partial: 'shared/user_cell', locals: {user: user} %>
+  <td><%= user_totals.rank %></td>
+  <%= render partial: 'shared/user_cell', locals: {user: user_totals.user} %>
   <% @rounds.each do |round| %>
-    <% min, _potential, max = round_scores[round] %>
+    <% min, _p, max = user_totals.rounds[round].totals %>
     <%= render partial: 'standings/score_cell', locals: {min: min, max: max} %>
     <td></td>
     <td></td>
   <% end %>
-  <% min, max = totals %>
-  <%= render partial: 'standings/score_cell', locals: {min: min, max: max} %>
+  <%= render partial: 'standings/score_cell', locals: {min: user_totals.min_total, max: user_totals.max_total} %>
 </tr>

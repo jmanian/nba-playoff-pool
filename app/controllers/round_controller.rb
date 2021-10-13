@@ -20,9 +20,7 @@ class RoundController < ApplicationController
     @round_name = @matchups.first.round_name
     @num_outcomes = @matchups.first.games_needed_to_win * 2
 
-    @user_data = picks.group_by(&:user)
-                      .transform_values { |user_picks| user_picks.index_by(&:matchup_id) }
-                      .sort_by { |_u, mp| [-mp.values.map(&:max_points).sum, -mp.values.map(&:min_points).sum] }
+    @user_data = UserScores::Round.build(picks)
 
     @num_users = @user_data.length
 
