@@ -111,7 +111,7 @@ class Matchup < ApplicationRecord
   end
 
   def title
-    "#{round_name}: #{favorite_tricode.upcase} v #{underdog_tricode.upcase}"
+    "#{round_name}: #{favorite_tricode.upcase} v #{underdog_tricode.upcase}" unless new_record?
   end
 
   def summary
