@@ -1,21 +1,10 @@
 module UserScores
-  class Total
-    attr_reader :user, :picks, :rounds
-    attr_accessor :rank
-
-    def self.build(picks)
-      totals = picks.group_by(&:user).map do |user, p|
-        new(user, p)
-      end.sort
-
-      ranks = totals.map(&:rank_key)
-
-      totals.each { |t| t.rank = ranks.index(t.rank_key) + 1 }
-    end
+  class Total < Base
+    attr_reader :rounds
 
     def initialize(user, picks)
-      @user = user
-      @picks = picks
+      super(user, picks)
+
       @rounds = picks.select { |p| p.matchup.started? }
                      .group_by { |p| p.matchup.round }
                      .transform_values do |p|
@@ -25,25 +14,11 @@ module UserScores
     end
 
     def min_total
-      @rounds.values.sum(&:min_total)
+      @min_total ||= @rounds.values.sum(&:min_total)
     end
 
     def max_total
-      @rounds.values.sum(&:max_total)
-    end
-
-    def <=>(other)
-      sort_key <=> other.sort_key
-    end
-
-    def rank_key
-      [max_total, min_total]
-    end
-
-    protected
-
-    def sort_key
-      [-max_total, -min_total, user.username]
+      @max_total ||= @rounds.values.sum(&:max_total)
     end
   end
 end
