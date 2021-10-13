@@ -43,7 +43,7 @@ module UserScores
     protected
 
     def sort_key
-      [-max_total, -min_total, user.username]
+      [-max_total, -min_total, user.username.downcase]
     end
   end
 end
