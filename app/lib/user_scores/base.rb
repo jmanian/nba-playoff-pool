@@ -10,7 +10,7 @@ module UserScores
 
       ranks = scores.map(&:rank_key)
 
-      scores.each { |r| r.rank = ranks.index(r.rank_key) + 1 }
+      scores.each { |s| s.rank = ranks.index(s.rank_key) + 1 }
     end
 
     def initialize(user, picks)

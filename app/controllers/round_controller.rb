@@ -16,6 +16,7 @@ class RoundController < ApplicationController
     @matchups = picks.map(&:matchup)
                      .uniq
                      .sort
+    @show_totals = @matchups.length > 1
 
     @round_name = @matchups.first.round_name
     @num_outcomes = @matchups.first.games_needed_to_win * 2

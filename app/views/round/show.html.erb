@@ -3,7 +3,12 @@
   <table class="table table-hover">
     <thead>
       <tr>
+        <th scope="col">#</th>
         <th scope="col">Name</th>
+        <% if @show_totals %>
+          <th scope="col" class="text-center">Total</th>
+          <%= render partial: 'shared/empty_cell' %>
+        <% end %>
         <%= render partial: 'round/matchup_title', collection: @matchups, as: :matchup, spacer_template: 'shared/empty_cell' %>
       </tr>
     </thead>

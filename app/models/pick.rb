@@ -71,11 +71,12 @@ class Pick < ApplicationRecord
 
   def points_tooltip
     if matchup.finished?
-      "This pick received #{min_points} points."
+      "This pick received #{min_points} #{'point'.pluralize(min_points)}."
     elsif potential_points.positive?
-      "Based on the results so far this pick will receive #{min_points}–#{max_points} points."
+      "Based on the results so far this pick will receive #{min_points}–#{max_points} "\
+        "#{'point'.pluralize(max_points)}."
     else
-      "Based on the results so far this pick will receive #{min_points} points."
+      "Based on the results so far this pick will receive #{min_points} #{'point'.pluralize(min_points)}."
     end
   end
 end
