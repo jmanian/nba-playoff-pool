@@ -1,16 +1,9 @@
 module UserScores
-  class Round
-    attr_reader :user, :picks, :picks_by_matchup_id
-
-    def self.build(picks)
-      picks.group_by(&:user).map do |user, p|
-        new(user, p)
-      end.sort
-    end
+  class Round < Base
+    attr_reader :picks_by_matchup_id
 
     def initialize(user, picks)
-      @user = user
-      @picks = picks
+      super(user, picks)
       @picks_by_matchup_id = picks.index_by(&:matchup_id)
     end
 
@@ -32,20 +25,6 @@ module UserScores
 
     def totals
       [min_total, potential_total, max_total]
-    end
-
-    def <=>(other)
-      sort_key <=> other.sort_key
-    end
-
-    def rank_key
-      [max_total, min_total]
-    end
-
-    protected
-
-    def sort_key
-      [-max_total, -min_total, user.username.downcase]
     end
   end
 end
