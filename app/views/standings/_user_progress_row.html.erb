@@ -1,12 +1,10 @@
-<% user, round_scores, totals, rank = user_data %>
 <tr>
-  <td><%= rank %></td>
-  <%= render partial: 'shared/user_cell', locals: {user: user} %>
-  <% min, max = totals %>
+  <td><%= user_totals.rank %></td>
+  <%= render partial: 'shared/user_cell', locals: {user: user_totals.user} %>
   <td class="align-middle">
     <div class="progress bg-secondary" style="--bs-bg-opacity: .15;">
       <% @rounds.each do |round| %>
-        <% min, potential, max = round_scores[round] %>
+        <% min, potential, max = user_totals.rounds[round].totals %>
         <% bg = @bg_colors[round] %>
         <% round_name = @round_names[round] %>
         <% if min.positive? %>

@@ -1,4 +1,4 @@
-<% pick = picks_by_matchup_id[matchup.id] %>
+<% pick = user_round.picks_by_matchup_id[matchup.id] %>
 <% if pick %>
   <td class="<%= class_names(:'text-center', 'table-secondary': !pick.winner_is_favorite)%>" style="white-space: nowrap;">
     <%= pick.winner.name %>

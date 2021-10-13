@@ -1,43 +1,16 @@
 class StandingsController < ApplicationController
-  # rubocop:disable Metrics
   def index
-    users = User.includes(picks: :matchup)
+    matchups = Matchup.started
+                      .where(sport: :mlb, year: 2021)
 
-    @data = users.map do |user|
-      picks_by_round = user.picks
-                           .select { |p| p.matchup.started? }
-                           .group_by { |p| p.matchup.round }
+    picks = Pick.joins(:matchup).merge(matchups).includes(:matchup, :user)
 
-      round_scores = picks_by_round.transform_values do |picks|
-        [
-          picks.sum(&:min_points),
-          picks.sum(&:potential_points),
-          picks.sum(&:max_points)
-        ]
-      end
-      round_scores.default = [0, 0]
+    @data = UserScores::Total.build(picks)
 
-      totals = [
-        round_scores.values.map(&:first).sum,
-        round_scores.values.map(&:last).sum
-      ]
+    @biggest_max_total = @data.first.max_total
 
-      [user, round_scores, totals]
-    end
-
-    @data.sort_by! do |_, _, totals|
-      # Sort first by max total and then min
-      totals.map(&:-@).reverse
-    end
-
-    scores = @data.map { |_, _, totals| totals.last }
-    @biggest_max_total = @data.first.last.last
-
-    @data.map! { |user, round_scores, totals| [user, round_scores, totals, scores.index(totals.last) + 1] }
-
-    @rounds = @data.map(&:second).flat_map(&:keys).uniq.sort
+    @rounds = @data.flat_map { |t| t.rounds.keys }.uniq.sort
 
     @bg_colors = BG_COLORS
   end
-  # rubocop:enable Metrics
 end
