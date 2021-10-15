@@ -10,17 +10,10 @@
           <% current = controller_name == 'standings' %>
           <%= link_to('Standings', '/standings', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item">
           <% current = controller_name == 'round' %>
-          <%= link_to('Rounds', '#', class: class_names(:'nav-link', :'dropdown-toggle', active: current), aria_current: (current ? :page : nil), id: 'navbarDropdown', role: 'button', 'data-bs-toggle': 'dropdown', 'aria-expanded': 'false') %>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <% if @round_names.empty? %>
-              <li class="dropdown-item disabled">No series have begun</li>
-            <% end %>
-            <% @round_names.sort.each do |n, name| %>
-              <li><a class="dropdown-item" href="/mlb/2021/<%= n %>"><%= name %></a></li>
-            <% end %>
-          </ul>
+          <% n, _name = @round_names.sort.last %>
+          <%= link_to('Pool Picks', "/mlb/2021/#{n}", class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
         </li>
         <li class="nav-item">
           <% current = controller_name == 'picks' %>
