@@ -1,4 +1,6 @@
 RailsAdmin.config do |config|
+  ## == Naming ==
+  config.main_app_name = 'Sports Pals'
 
   ### Popular gems integration
 
