@@ -1,4 +1,12 @@
-<p class="lead"><%= @round_name %></p>
+<ul class="nav nav-pills mb-3">
+  <% @round_names.each do |n, name| %>
+    <% current = n.to_s == params[:round] %>
+    <li class="nav-item">
+      <%= link_to(name, n.to_s, class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
+    </li>
+  <% end %>
+</ul>
+
 <div class="table-responsive">
   <table class="table table-hover">
     <thead>
