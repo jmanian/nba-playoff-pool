@@ -10,11 +10,13 @@
           <% current = controller_name == 'standings' %>
           <%= link_to('Standings', '/standings', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
         </li>
-        <li class="nav-item">
-          <% current = controller_name == 'round' %>
-          <% n, _name = @round_names.sort.last %>
-          <%= link_to('Pool Picks', "/mlb/2021/#{n}", class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
-        </li>
+        <% if @round_names.present? %>
+          <li class="nav-item">
+            <% current = controller_name == 'round' %>
+            <% n, _name = @round_names.sort.last %>
+            <%= link_to('Pool Picks', "/mlb/2021/#{n}", class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
+          </li>
+        <% end %>
         <li class="nav-item">
           <% current = controller_name == 'picks' %>
           <%= link_to('My Picks', '/picks', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>

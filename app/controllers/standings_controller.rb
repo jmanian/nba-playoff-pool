@@ -7,7 +7,7 @@ class StandingsController < ApplicationController
 
     @data = UserScores::Total.build(picks)
 
-    @biggest_max_total = @data.first.max_total
+    @biggest_max_total = @data.first&.max_total
 
     @rounds = @data.flat_map { |t| t.rounds.keys }.uniq.sort
 
