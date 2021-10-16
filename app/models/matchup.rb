@@ -184,6 +184,7 @@ class Matchup < ApplicationRecord
     end
   end
 
+  # rubocop:disable Metrics/AbcSize
   def outcome_by_index(index)
     if index < games_needed_to_win
       winner = favorite
@@ -197,6 +198,7 @@ class Matchup < ApplicationRecord
     possible &&= !finished? || num_games == games_played
     [winner, num_games, possible]
   end
+  # rubocop:enable Metrics/AbcSize
 
   def <=>(other)
     sort_key <=> other.sort_key
