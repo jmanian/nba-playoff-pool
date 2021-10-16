@@ -186,10 +186,16 @@ class Matchup < ApplicationRecord
 
   def outcome_by_index(index)
     if index < games_needed_to_win
-      [favorite, index + games_needed_to_win]
+      winner = favorite
+      num_games = index + games_needed_to_win
+      possible = underdog_wins <= index
     else
-      [underdog, max_games + games_needed_to_win - index]
+      winner = underdog
+      num_games = max_games + games_needed_to_win - index
+      possible = favorite_wins <= max_games - index
     end
+    possible &&= !finished? || num_games == games_played
+    [winner, num_games, possible]
   end
 
   def <=>(other)
