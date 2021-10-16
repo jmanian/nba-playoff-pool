@@ -1,5 +1,5 @@
 <ul class="nav nav-pills mb-3">
-  <% @round_names.each do |n, name| %>
+  <% @round_names.sort.each do |n, name| %>
     <% current = n.to_s == params[:round] %>
     <li class="nav-item">
       <%= link_to(name, n.to_s, class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
