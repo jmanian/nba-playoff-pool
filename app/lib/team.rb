@@ -47,7 +47,7 @@ class Team
 
   MLB_TEAMS = [
     [:ari, 'Arizona', 'Diamondbacks'],
-    [:atl, 'Atlanta', 'Braves'],
+    [:atl, 'Atlanta', 'Barves'],
     [:bal, 'Baltimore', 'Orioles'],
     [:bos, 'Boston', 'Red Sox'],
     [:chc, 'Chicago', 'Cubs'],
