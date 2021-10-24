@@ -83,6 +83,6 @@ class Pick < ApplicationRecord
       "Based on the results so far this pick will receive #{min_points} "\
         "#{'point'.pluralize(min_points)}#{pen}."
     end
-  # rubocop:enable Metrics/AbcSize
   end
+  # rubocop:enable Metrics/AbcSize
 end
