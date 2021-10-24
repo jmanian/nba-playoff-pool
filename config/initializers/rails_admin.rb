@@ -35,7 +35,7 @@ RailsAdmin.config do |config|
     bulk_delete
     show
     edit do
-      only %w[User Matchup]
+      only %w[User Matchup Pick]
     end
     delete do
       only %w[Matchup]
@@ -77,6 +77,29 @@ RailsAdmin.config do |config|
   config.model 'Pick' do
     list do
       exclude_fields :created_at, :updated_at
+    end
+    edit do
+      field :user do
+        read_only do
+          bindings[:object].persisted?
+        end
+      end
+      field :matchup do
+        read_only do
+          bindings[:object].persisted?
+        end
+      end
+      field :winner_is_favorite do
+        read_only do
+          bindings[:object].persisted?
+        end
+      end
+      field :num_games do
+        read_only do
+          bindings[:object].persisted?
+        end
+      end
+      field :penalty
     end
   end
 end
