@@ -9,6 +9,7 @@
 #  num_games          :integer          not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  penalty            :integer          default(0), not null
 #
 class Pick < ApplicationRecord
   validates :user_id, :matchup_id, :num_games, presence: true
@@ -17,6 +18,7 @@ class Pick < ApplicationRecord
     greater_than_or_equal_to: ->(p) { p.matchup.games_needed_to_win },
     less_than_or_equal_to: ->(p) { p.matchup.max_games }
   }
+  validates :penalty, numericality: {greater_than_or_equal_to: 0}
 
   belongs_to :user
   belongs_to :matchup
@@ -46,11 +48,11 @@ class Pick < ApplicationRecord
   end
 
   def min_points
-    possible_points.min
+    [possible_points.min - penalty, 0].max
   end
 
   def max_points
-    possible_points.max
+    [possible_points.max - penalty, 0].max
   end
 
   def potential_points
@@ -69,14 +71,18 @@ class Pick < ApplicationRecord
     potential_points.to_f / matchup.max_available_points
   end
 
+  # rubocop:disable Metrics/AbcSize
   def points_tooltip
+    pen = " (with a late penalty of #{penalty})" if penalty.positive?
     if matchup.finished?
-      "This pick received #{min_points} #{'point'.pluralize(min_points)}."
+      "This pick received #{min_points} #{'point'.pluralize(min_points)}#{pen}."
     elsif potential_points.positive?
       "Based on the results so far this pick will receive #{min_points}–#{max_points} "\
-        "#{'point'.pluralize(max_points)}."
+        "#{'point'.pluralize(max_points)}#{pen}."
     else
-      "Based on the results so far this pick will receive #{min_points} #{'point'.pluralize(min_points)}."
+      "Based on the results so far this pick will receive #{min_points} "\
+        "#{'point'.pluralize(min_points)}#{pen}."
     end
   end
+  # rubocop:enable Metrics/AbcSize
 end
