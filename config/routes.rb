@@ -10,5 +10,9 @@ Rails.application.routes.draw do
   resources :picks, only: %i[index new create]
   resources :standings, only: %i[index]
 
+  resources :posts do
+    resources :comments
+  end
+
   get '/:sport/:year/:round', to: 'round#show'
 end

@@ -21,6 +21,10 @@
           <% current = controller_name == 'picks' %>
           <%= link_to('My Picks', '/picks', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
         </li>
+        <li class="nav-item">
+          <% current = controller_name == 'posts' %>
+          <%= link_to('Conversation', '/posts', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
+        </li>
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0">
         <% if current_user&.admin %>
