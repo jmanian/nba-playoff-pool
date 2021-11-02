@@ -13,8 +13,8 @@
 
 <% @posts.each do |post| %>
 	<div class="post_wrapper">
-		<h2 class="title"><%= link_to post.title, post %></h2>
-		<p><%= post.user.username %></p>
-    <p class="date"><%= post.created_at.strftime("%B %d, %Y") %></p>
+		<p class="title"><%= link_to post.title, post %><br>
+		<%= post.user.username %><br>
+    <%= post.created_at.strftime("%B %d, %Y") %></p>
 	</div>
 <% end %>
