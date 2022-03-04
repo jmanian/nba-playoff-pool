@@ -11,6 +11,26 @@ RSpec.describe Matchup, type: :model do
   it { is_expected.to validate_numericality_of(:year).is_equal_to(2021) }
   it { is_expected.to validate_numericality_of(:round).is_greater_than_or_equal_to(1) }
 
+  describe '::accepting_entries' do
+    subject { described_class.accepting_entries }
+
+    let!(:future) { 2.times.map { |n| create :matchup, starts_at: 5.minutes.from_now, number: n + 1 } }
+
+    before { 2.times.map { |n| create :matchup, starts_at: 5.minutes.ago, number: n + 3 } }
+
+    it { is_expected.to match_array future }
+  end
+
+  describe '::started' do
+    subject { described_class.started }
+
+    let!(:past) { 2.times.map { |n| create :matchup, starts_at: 5.minutes.ago, number: n + 3 } }
+
+    before { 2.times.map { |n| create :matchup, starts_at: 5.minutes.from_now, number: n + 1 } }
+
+    it { is_expected.to match_array past }
+  end
+
   describe '#favorite' do
     subject { matchup.favorite }
 

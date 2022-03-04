@@ -58,8 +58,8 @@ class Matchup < ApplicationRecord
   enum favorite_tricode: Team.tricodes_for_enum, _prefix: :favorite
   enum underdog_tricode: Team.tricodes_for_enum, _prefix: :underdog
 
-  scope :accepting_entries, -> { where('starts_at > ?', Time.current) }
-  scope :started, -> { where('starts_at < ?', Time.current) }
+  scope :accepting_entries, -> { where(starts_at: Time.current...) }
+  scope :started, -> { where(starts_at: ...Time.current) }
 
   def started?
     starts_at.past?
