@@ -71,7 +71,6 @@ class Pick < ApplicationRecord
     potential_points.to_f / matchup.max_available_points
   end
 
-  # rubocop:disable Metrics/AbcSize
   def points_tooltip
     pen = " (with a late penalty of #{penalty})" if penalty.positive?
     if matchup.finished?
@@ -84,5 +83,4 @@ class Pick < ApplicationRecord
         "#{'point'.pluralize(min_points)}#{pen}."
     end
   end
-  # rubocop:enable Metrics/AbcSize
 end
