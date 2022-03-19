@@ -1,4 +1,6 @@
 class StandingsController < ApplicationController
+  before_action :set_round_names
+
   def index
     matchups = Matchup.started
                       .where(params.permit(:sport, :year))
