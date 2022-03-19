@@ -72,7 +72,7 @@ describe PicksController, type: :controller do
 
         let!(:started) do
           (1..2).map do |n|
-            create :matchup, CurrentSeason.sport, :accepting_entries, round: 1, number: n, **CurrentSeason.params
+            create :matchup, CurrentSeason.sport, :started, round: 1, number: n, **CurrentSeason.params
           end
         end
 
