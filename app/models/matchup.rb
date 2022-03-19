@@ -20,7 +20,7 @@ class Matchup < ApplicationRecord
   validates :sport, :year, :round, :conference, :number, :favorite_tricode, :underdog_tricode,
             :favorite_wins, :underdog_wins, :starts_at, presence: true
 
-  validates :year, numericality: {equal_to: 2021}
+  validates :year, numericality: {greater_than_or_equal_to: 2021, less_than_or_equal_to: Date.current.year}
 
   validates :round, numericality: {greater_than_or_equal_to: 1, less_than_or_equal_to: ->(m) { m.num_rounds }}
 
