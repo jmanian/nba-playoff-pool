@@ -237,7 +237,7 @@ class Matchup < ApplicationRecord
     when 4
       'Finals'
     else
-      "Round #{n}"
+      "Round #{round}"
     end
   end
 
