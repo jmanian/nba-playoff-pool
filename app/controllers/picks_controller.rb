@@ -18,7 +18,6 @@ class PicksController < ApplicationController
     @picks = current_user.picks.where(matchup: @matchups).index_by(&:matchup_id)
   end
 
-  # rubocop:disable Metrics/AbcSize
   def create
     valid_matchup_ids = Matchup.current_season.accepting_entries.ids
     params.require(:pick).permit(matchup: :result).to_h[:matchup].each do |matchup_id, pick_data|
@@ -36,5 +35,4 @@ class PicksController < ApplicationController
     end
     redirect_to action: :index
   end
-  # rubocop:enable Metrics/AbcSize
 end
