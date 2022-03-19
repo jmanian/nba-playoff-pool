@@ -7,16 +7,24 @@ module CurrentSeason
   SPORT_YEAR = [SPORT, YEAR].freeze
 
   class << self
+    def sport
+      SPORT
+    end
+
+    def year
+      YEAR
+    end
+
     def path
-      PATH
+      @path ||= "/#{sport}/#{year}".freeze
     end
 
     def params
-      PARAMS
+      @params ||= {sport: sport, year: year}.freeze
     end
 
     def sport_year
-      SPORT_YEAR
+      @sport_year ||= [sport, year].freeze
     end
   end
 end

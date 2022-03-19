@@ -22,6 +22,12 @@ FactoryBot.define do
       starts_at { 1.week.from_now }
     end
 
+    trait :accepting_entries
+
+    trait :started do
+      starts_at { 1.week.ago }
+    end
+
     trait :seven_games
 
     trait :five_games do
