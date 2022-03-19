@@ -8,7 +8,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <% current = controller_name == 'standings' %>
-          <%= link_to('Standings', '/standings', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
+          <%= link_to('Standings', '/mlb/2021', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
         </li>
         <% if @round_names.present? %>
           <li class="nav-item">
