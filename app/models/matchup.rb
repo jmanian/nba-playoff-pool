@@ -60,6 +60,7 @@ class Matchup < ApplicationRecord
 
   scope :accepting_entries, -> { where(starts_at: Time.current...) }
   scope :started, -> { where(starts_at: ...Time.current) }
+  scope :current_season, -> { where(CurrentSeason.params) }
 
   def started?
     starts_at.past?

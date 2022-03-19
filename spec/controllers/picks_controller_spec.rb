@@ -9,7 +9,10 @@ describe PicksController, type: :controller do
   describe '#index' do
     before do
       stub_const('CurrentSeason::SPORT', :nba)
-      stub_const('CurrentSeason::YEAR', 2021)
+      stub_const('CurrentSeason::YEAR', 2022)
+
+      matchup = create :matchup, :mlb, :started
+      create :pick, user: user, matchup: matchup
     end
 
     context 'when there are no matchups' do
