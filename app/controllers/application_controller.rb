@@ -18,11 +18,12 @@ class ApplicationController < ActionController::Base
   end
 
   def load_round_names
-    @round_names = Matchup.started
-                          .where(sport: :mlb, year: 2021)
-                          .distinct(:round)
-                          .select(:round, :sport)
-                          .map { |m| [m.round, m.round_name] }
-                          .to_h
+    @past_seasons = Matchup.started
+                           .select(:sport, :year, :round)
+                           .distinct
+                           .group_by { |m| [m.sport.to_sym, m.year] }
+                           .transform_values { |matchups| matchups.to_h { |m| [m.round, m.round_name] } }
+
+    @round_names = @past_seasons.delete(CurrentSeason.sport_year)
   end
 end

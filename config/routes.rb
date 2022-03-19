@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  root to: redirect('/mlb/2021')
+  root to: redirect(CurrentSeason.path)
   resources :picks, only: %i[index new create]
   get '/:sport/:year', to: 'standings#index'
   get '/:sport/:year/:round', to: 'round#show'
