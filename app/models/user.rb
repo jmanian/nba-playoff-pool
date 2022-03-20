@@ -20,7 +20,7 @@ class User < ApplicationRecord
   # Model was originally generated with :recoverable, but was removed
   # until we can add email ability.
   devise :database_authenticatable, :registerable,
-         :rememberable, :validatable
+         :rememberable, :validatable, :recoverable
 
   validates :username, uniqueness: true
 
