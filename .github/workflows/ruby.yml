@@ -47,5 +47,5 @@ jobs:
           POSTGRES_USERNAME: postgres
           POSTGRES_PASSWORD: postgres
         run: |
-          bundle exec rails db:setup
+          bundle exec rails db:test:prepare
           bundle exec rake

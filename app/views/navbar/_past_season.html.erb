@@ -1,0 +1,3 @@
+<% sport, year, round = sport_year_last_round %>
+<li><a class="dropdown-item" href="/<%= sport %>/<%= year %>"><%= "#{sport.to_s.upcase} #{year} Standings" %></a></li>
+<li><a class="dropdown-item" href="/<%= sport %>/<%= year %>/<%= round %>"><%= "#{sport.to_s.upcase} #{year} Picks" %></a></li>

@@ -6,9 +6,8 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  root to: redirect('/standings')
+  root to: redirect(CurrentSeason.path)
   resources :picks, only: %i[index new create]
-  resources :standings, only: %i[index]
-
+  get '/:sport/:year', to: 'standings#index'
   get '/:sport/:year/:round', to: 'round#show'
 end

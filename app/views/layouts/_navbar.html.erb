@@ -8,19 +8,31 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <% current = controller_name == 'standings' %>
-          <%= link_to('Standings', '/standings', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
+          <%= link_to('Standings', CurrentSeason.path, class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
         </li>
-        <% if @round_names.present? %>
+
+        <% if @current_last_round.present? %>
           <li class="nav-item">
             <% current = controller_name == 'round' %>
-            <% n, _name = @round_names.sort.last %>
-            <%= link_to('Pool Picks', "/mlb/2021/#{n}", class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
+            <%= link_to('Pool Picks', "#{CurrentSeason.path}/#{@current_last_round}", class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
           </li>
         <% end %>
+
         <li class="nav-item">
           <% current = controller_name == 'picks' %>
           <%= link_to('My Picks', '/picks', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
         </li>
+
+        <% if @past_seasons.present? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Past Seasons
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= render partial: 'navbar/past_season', collection: @past_seasons, as: :sport_year_last_round, spacer_template: 'navbar/dropdown_divider' %>
+            </ul>
+          </li>
+        <% end %>
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0">
         <% if current_user&.admin %>

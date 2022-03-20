@@ -2,23 +2,24 @@ class PicksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @picks = current_user.picks.includes(:matchup)
-    @other_matchups = Matchup.where(sport: :mlb, year: 2021)
-                             .where.not(id: @picks.map(&:matchup_id))
-                             .accepting_entries
-                             .group_by(&:round)
-    @accepting_picks = Matchup.where(sport: :mlb, year: 2021).accepting_entries.exists?
+    matchups = Matchup.current_season
+
+    @picks = current_user.picks.includes(:matchup).joins(:matchup).merge(matchups)
+    @other_matchups = matchups.accepting_entries
+                              .where.not(id: @picks.map(&:matchup_id))
+                              .group_by(&:round)
+
+    @accepting_picks = matchups.accepting_entries.exists?
     @picks = @picks.group_by { |pick| pick.matchup.round }
   end
 
   def new
-    @matchups = Matchup.accepting_entries.order(:conference, :number)
+    @matchups = Matchup.current_season.accepting_entries.order(:conference, :number)
     @picks = current_user.picks.where(matchup: @matchups).index_by(&:matchup_id)
   end
 
-  # rubocop:disable Metrics/AbcSize
   def create
-    valid_matchup_ids = Matchup.accepting_entries.ids
+    valid_matchup_ids = Matchup.current_season.accepting_entries.ids
     params.require(:pick).permit(matchup: :result).to_h[:matchup].each do |matchup_id, pick_data|
       matchup_id = matchup_id.to_i
       next unless valid_matchup_ids.include?(matchup_id)
@@ -34,5 +35,4 @@ class PicksController < ApplicationController
     end
     redirect_to action: :index
   end
-  # rubocop:enable Metrics/AbcSize
 end

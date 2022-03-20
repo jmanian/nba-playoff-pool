@@ -20,7 +20,7 @@ class Matchup < ApplicationRecord
   validates :sport, :year, :round, :conference, :number, :favorite_tricode, :underdog_tricode,
             :favorite_wins, :underdog_wins, :starts_at, presence: true
 
-  validates :year, numericality: {equal_to: 2021}
+  validates :year, numericality: {greater_than_or_equal_to: 2021, less_than_or_equal_to: Date.current.year}
 
   validates :round, numericality: {greater_than_or_equal_to: 1, less_than_or_equal_to: ->(m) { m.num_rounds }}
 
@@ -60,6 +60,7 @@ class Matchup < ApplicationRecord
 
   scope :accepting_entries, -> { where(starts_at: Time.current...) }
   scope :started, -> { where(starts_at: ...Time.current) }
+  scope :current_season, -> { where(CurrentSeason.params) }
 
   def started?
     starts_at.past?
@@ -184,7 +185,6 @@ class Matchup < ApplicationRecord
     end
   end
 
-  # rubocop:disable Metrics/AbcSize
   def outcome_by_index(index)
     if index < games_needed_to_win
       winner = favorite
@@ -198,7 +198,6 @@ class Matchup < ApplicationRecord
     possible &&= !finished? || num_games == games_played
     [winner, num_games, possible]
   end
-  # rubocop:enable Metrics/AbcSize
 
   def <=>(other)
     sort_key <=> other.sort_key
@@ -237,7 +236,7 @@ class Matchup < ApplicationRecord
     when 4
       'Finals'
     else
-      "Round #{n}"
+      "Round #{round}"
     end
   end
 

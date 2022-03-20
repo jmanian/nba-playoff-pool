@@ -1,4 +1,6 @@
 class RoundController < ApplicationController
+  before_action :set_round_names
+
   # rubocop:disable Metrics
   def show
     redirect_to :root unless Matchup.sports.keys.include?(params[:sport])
