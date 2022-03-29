@@ -1,0 +1,19 @@
+<div id="main_content">
+  <% if user_signed_in? %>
+  <div class="buttons">
+    <button class="button"><%= link_to "New Post", new_post_path %></button>
+  </div>
+  <% end %>
+  <% flash.each do |name, msg| %>
+    <%= content_tag(:div, msg, class: "alert") %>
+  <% end %>
+  <%= yield %>
+</div>
+
+<% @posts.each do |post| %>
+  <div class="post_wrapper">
+    <p class="title"><%= link_to post.title, post %><br>
+    <%= post.user.username %><br>
+    <%= post.created_at.strftime("%B %d, %Y") %></p>
+  </div>
+<% end %>

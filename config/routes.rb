@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   root to: redirect(CurrentSeason.path)
   resources :picks, only: %i[index new create]
+
+  resources :posts do
+    resources :comments
+  end
+
   get '/:sport/:year', to: 'standings#index'
   get '/:sport/:year/:round', to: 'round#show'
 end
