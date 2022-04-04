@@ -167,8 +167,8 @@ class Matchup < ApplicationRecord
     end
   end
 
-  def max_available_points
-    all_scores.flatten.max
+  def max_possible_points
+    possible_scores.flatten.max
   end
 
   def possible_scores
