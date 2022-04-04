@@ -1,14 +1,17 @@
 module UserScores
   class Round < Base
     attr_reader :picks_by_matchup_id
-    attr_accessor :max_available
+    attr_accessor :max_possible_round_total, :biggest_matchup_max_possible
 
     def self.build(picks)
       scores = super(picks)
 
-      max_available = picks.map(&:matchup).uniq.sum(&:max_available_points)
+      max_possibles = picks.map(&:matchup).uniq.map(&:max_possible_points)
+      biggest_matchup_max_possible = max_possibles.max
+      max_possible_round_total = max_possibles.sum
       scores.each do |s|
-        s.max_available = max_available
+        s.max_possible_round_total = max_possible_round_total
+        s.biggest_matchup_max_possible = biggest_matchup_max_possible
       end
     end
 
@@ -38,11 +41,11 @@ module UserScores
     end
 
     def min_total_percentage
-      min_total.to_f / max_available
+      min_total.to_f / max_possible_round_total
     end
 
     def potential_total_percentage
-      potential_total.to_f / max_available
+      potential_total.to_f / max_possible_round_total
     end
 
     def points_tooltip
