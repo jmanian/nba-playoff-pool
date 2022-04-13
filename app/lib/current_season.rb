@@ -1,6 +1,6 @@
 module CurrentSeason
-  SPORT = :mlb
-  YEAR = 2021
+  SPORT = :nba
+  YEAR = 2022
 
   PATH = "/#{SPORT}/#{YEAR}".freeze
   PARAMS = {sport: SPORT, year: YEAR}.freeze
