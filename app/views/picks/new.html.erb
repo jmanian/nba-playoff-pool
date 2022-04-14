@@ -1,8 +1,11 @@
-<h2 class="mb-3">Submit Picks</h2>
+<div class="alert alert-primary" role="alert">
+  You can submit and change your picks up until the start of each series.
+</div>
 <%= form_with model: Pick.new do |form| %>
   <% @matchups.each do |matchup| %>
     <% pick = @picks[matchup.id] %>
     <h3><%= "#{matchup.favorite.full_name} vs. #{matchup.underdog.full_name}" %></h3>
+    <p>Starts <%= matchup.starts_at_pretty %></p>
     <p>
       <ul class="list-unstyled">
         <%= form.fields_for :matchup, index: matchup.id do |matchup_form| %>

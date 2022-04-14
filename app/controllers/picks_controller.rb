@@ -7,6 +7,7 @@ class PicksController < ApplicationController
     @picks = current_user.picks.includes(:matchup).joins(:matchup).merge(matchups)
     @other_matchups = matchups.accepting_entries
                               .where.not(id: @picks.map(&:matchup_id))
+                              .order(:starts_at)
                               .group_by(&:round)
 
     @accepting_picks = matchups.accepting_entries.exists?
@@ -14,7 +15,7 @@ class PicksController < ApplicationController
   end
 
   def new
-    @matchups = Matchup.current_season.accepting_entries.order(:conference, :number)
+    @matchups = Matchup.current_season.accepting_entries.order(:starts_at)
     @picks = current_user.picks.where(matchup: @matchups).index_by(&:matchup_id)
   end
 
