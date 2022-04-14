@@ -1,20 +1,27 @@
+<% if @accepting_picks %>
+  <div class="alert alert-primary" role="alert">
+    You can submit and change your picks up until the start of each series.
+  </div>
+<% end %>
+
 <% if @other_matchups.any? %>
   <h2>Unpicked Series</h2>
-  <ul class="list-unstyled">
-    <% @other_matchups.each do |round, matchups| %>
-      <p class="lead"><%= matchups.first.round_name %></p>
+  <% @other_matchups.each do |round, matchups| %>
+    <p class="lead"><%= matchups.first.round_name %></p>
+    <ul class="list-unstyled">
       <% matchups.each do |matchup| %>
         <li>
           <%= matchup.favorite.name %> v. <%= matchup.underdog.name %>
           — Starts <%= matchup.starts_at_pretty %>
         </li>
       <% end %>
-    <% end %>
-  </ul>
+    </ul>
+  <% end %>
   <p>
     <%= button_to 'Submit Picks', {action: :new}, method: :get, class: "btn btn-primary" %>
   </p>
 <% end %>
+
 <h2>Picked Series</h2>
 <% @picks.each do |round, picks| %>
   <p class="lead"><%= picks.first.matchup.round_name %></p>
@@ -33,7 +40,10 @@
     <% end %>
   </ul>
 <% end %>
-<% if @other_matchups.empty? && @accepting_picks %>
+<% if @picks.empty? %>
+  <p>You haven't made any picks.</p>
+<% end %>
+<% if @accepting_picks && @picks.any? %>
   <p>
     <%= button_to 'Edit Picks', {action: :new}, method: :get, class: "btn btn-primary" %>
   </p>
