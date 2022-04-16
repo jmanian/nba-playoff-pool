@@ -38,6 +38,9 @@
         <% if current_user&.admin %>
           <%= link_to('Admin', '/admin', class: :'nav-link') %>
         <% end %>
+        <% if CurrentSeason.sport == :nba %>
+          <%= link_to("Schedules \u2197", 'https://taargus.taarg.us/nba/', class: :'nav-link', target: :_blank) %>
+        <% end %>
         <%= render 'devise/menu/registration_items' %>
         <%= render 'devise/menu/login_items' %>
       </ul>
