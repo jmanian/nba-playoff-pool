@@ -35,6 +35,13 @@ class Pick < ApplicationRecord
     "#{winner.name} in #{num_games} (#{user.title})" if persisted?
   end
 
+  def code
+    [
+      winner_is_favorite ? 'f' : 'u',
+      num_games
+    ].join('-')
+  end
+
   def scoring_index
     if winner_is_favorite
       num_games - matchup.games_needed_to_win

@@ -1,27 +1,28 @@
 <div class="alert alert-primary" role="alert">
   You can submit and change your picks up until the start of each series.
 </div>
+
 <%= form_with model: Pick.new do |form| %>
-  <% @matchups.each do |matchup| %>
-    <% pick = @picks[matchup.id] %>
-    <h3><%= "#{matchup.favorite.full_name} vs. #{matchup.underdog.full_name}" %></h3>
-    <p>Starts <%= matchup.starts_at_pretty %></p>
-    <p>
-      <ul class="list-unstyled">
-        <%= form.fields_for :matchup, index: matchup.id do |matchup_form| %>
-          <% matchup.possible_results.each do |team, games, code| %>
-            <li class="form-check">
-              <% checked = pick&.num_games == games && pick&.winner == team %>
-              <%= matchup_form.radio_button :result, code, checked: checked, class: "form-check-input" %>
-              <%= matchup_form.label :"result_#{code}", "#{team.name} in #{games}", class: "form-check-label" %>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
-    </p>
-  <% end %>
-  <br>
+  <div class="row">
+    <% @matchups.each do |matchup| %>
+      <% pick = @picks[matchup.id] %>
+      <div class='col-xl-4 col-lg-6 col-md-6 col-sm-6' style='padding-bottom: 20px'>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= "#{matchup.favorite.full_name} vs. #{matchup.underdog.full_name}" %></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Starts <%= matchup.starts_at_pretty %></h6>
+            <p class="card-text">
+              <%= form.fields_for :matchup, index: matchup.id do |matchup_form| %>
+                <%= matchup_form.select :result, matchup.possible_results, {selected: pick&.code, prompt: 'Select a result'}, {class: 'form-select'} %>
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <br>
+  </div>
   <div class="mb-5">
-    <%= form.submit "Submit Picks", class: "btn btn-primary" %>
+    <%= form.submit "Save Picks", class: "btn btn-primary" %>
   </div>
 <% end %>

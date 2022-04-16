@@ -24,6 +24,7 @@ class PicksController < ApplicationController
     params.require(:pick).permit(matchup: :result).to_h[:matchup].each do |matchup_id, pick_data|
       matchup_id = matchup_id.to_i
       next unless valid_matchup_ids.include?(matchup_id)
+      next if pick_data[:result].blank?
 
       winner_code, num_games = pick_data[:result].split('-')
       winner_is_favorite = winner_code == 'f'

@@ -18,7 +18,7 @@
     </ul>
   <% end %>
   <p>
-    <%= button_to 'Submit Picks', {action: :new}, method: :get, class: "btn btn-primary" %>
+    <%= button_to 'Add Picks', {action: :new}, method: :get, class: "btn btn-primary" %>
   </p>
 <% end %>
 
@@ -45,6 +45,6 @@
 <% end %>
 <% if @accepting_picks && @picks.any? %>
   <p>
-    <%= button_to 'Edit Picks', {action: :new}, method: :get, class: "btn btn-primary" %>
+    <%= button_to 'Change Picks', {action: :new}, method: :get, class: "btn btn-primary" %>
   </p>
 <% end %>

@@ -106,8 +106,8 @@ class Matchup < ApplicationRecord
   def possible_results
     games_range = (games_needed_to_win..max_games).to_a
     [
-      *games_range.map { |n| [favorite, n, "f-#{n}"] },
-      *games_range.map { |n| [underdog, n, "u-#{n}"] }.reverse
+      *games_range.map { |n| ["#{favorite.name} in #{n}", "f-#{n}"] },
+      *games_range.map { |n| ["#{underdog.name} in #{n}", "u-#{n}"] }.reverse
     ]
   end
 
