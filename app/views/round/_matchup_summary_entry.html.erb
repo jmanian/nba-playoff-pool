@@ -2,6 +2,6 @@
 <% winner, num_games, possible = matchup.outcome_by_index(outcome) %>
 <% bg = "bg-danger bg-gradient text-white text-decoration-line-through" unless possible %>
 <% bg = "bg-success bg-gradient text-white" if possible && matchup.finished? %>
-<td class="text-center <%= bg %>"><%= winner.name %></td>
-<td class="text-center <%= bg %>">in <%= num_games %></td>
+<td class="text-center <%= bg %>" style="white-space: nowrap;"><%= winner.name %></td>
+<td class="text-center <%= bg %>" style="white-space: nowrap;">in <%= num_games %></td>
 <td class="text-center bg-warning bg-gradient" style="--bs-bg-opacity: <%= count.to_f / @num_users %>"><%= count || 0 %></td>
