@@ -6,7 +6,7 @@
   <div class="row">
     <% @matchups.each do |matchup| %>
       <% pick = @picks[matchup.id] %>
-      <div class='col-xl-4 col-lg-6 col-md-6 col-sm-6' style='padding-bottom: 20px'>
+      <div class='col-lg-6' style='padding-bottom: 20px'>
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><%= "#{matchup.favorite.full_name} vs. #{matchup.underdog.full_name}" %></h5>
