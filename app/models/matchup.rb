@@ -115,8 +115,12 @@ class Matchup < ApplicationRecord
     "#{round_name}: #{favorite_tricode.upcase} v #{underdog_tricode.upcase}" unless new_record?
   end
 
-  def summary
-    "#{favorite.name} (#{favorite_wins}) v #{underdog.name} (#{underdog_wins})"
+  def favorite_name_and_wins
+    "#{favorite.name} (#{favorite_wins})"
+  end
+
+  def underdog_name_and_wins
+    "#{underdog.name} (#{underdog_wins})"
   end
 
   def games_needed_to_win

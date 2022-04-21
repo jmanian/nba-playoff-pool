@@ -1,1 +1,9 @@
-<th scope="col" colspan="3" class="text-center"><%= matchup.summary %></th>
+<th scope="col" colspan="3" class="text-center" style="white-space: nowrap;">
+  <% if @matchups.length > 2 %>
+    <%= matchup.favorite_name_and_wins %>
+    <br>
+    <%= matchup.underdog_name_and_wins %>
+  <% else %>
+    <%= "#{matchup.favorite_name_and_wins} v #{matchup.underdog_name_and_wins}" %>
+  <% end %>
+</th>
