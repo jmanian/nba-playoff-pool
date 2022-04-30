@@ -4,7 +4,7 @@
     <%= pick.winner.name %>
   </td>
   <td class="text-center text-nowrap">
-    <div class="text-muted" style="display: inline;">in</div> <%= pick.num_games %>
+    in <%= pick.num_games %>
   </td>
   <td class="align-middle" style="min-width: 75px;">
     <% width = (matchup.max_possible_points * 100.0 / user_round.biggest_matchup_max_possible).round(4) %>
