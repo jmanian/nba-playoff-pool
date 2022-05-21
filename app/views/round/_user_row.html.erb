@@ -1,5 +1,5 @@
 <tr <%= "class=fw-bold" if user_round.user == current_user %>>
-  <td><%= user_round.rank %></td>
+  <td style="width: 1%;"><%= user_round.rank %></td>
   <%= render partial: 'shared/user_cell', locals: {user: user_round.user} %>
   <% if @show_totals %>
     <%= render partial: 'round/total_cell', locals: {user_round: user_round} %>
