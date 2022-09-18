@@ -9,13 +9,17 @@
 # MLB 2021
 # rubocop:disable Metrics/ParameterLists
 [
-  [1, :al, 1, :tb, :bos, 1, 3],
-  [1, :al, 2, :hou, :cws, 3, 1],
-  [1, :nl, 1, :sf, :lad, 2, 3],
-  [1, :nl, 2, :mil, :atl, 1, 3],
-  [2, :al, 1, :hou, :bos, 4, 2],
-  [2, :nl, 1, :atl, :lad, 4, 2],
-  [3, :ws, 1, :hou, :atl, 2, 4]
+  [1, :al, 1, :tb, :bos, 1, 2],
+  [1, :al, 2, :hou, :cws, 2, 1],
+  [1, :nl, 1, :sf, :lad, 2, 0],
+  [1, :nl, 2, :mil, :atl, 1, 2],
+  [2, :al, 1, :tor, :bos, 3, 2],
+  [2, :al, 2, :oak, :hou, 3, 2],
+  [2, :nl, 1, :chc, :sf, 3, 1],
+  [2, :nl, 2, :nym, :atl, 3, 1],
+  [3, :al, 1, :tor, :oak, 3, 2],
+  [3, :nl, 1, :chc, :nym, 3, 1],  
+  [4, :ws, 1, :oak, :chc, 2, 4]
 ].each do |round, conference, number, fav, dog, fav_wins, dog_wins|
   Matchup.find_or_create_by!(
     sport: :mlb,

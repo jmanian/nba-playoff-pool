@@ -125,6 +125,8 @@ class Matchup < ApplicationRecord
 
   def games_needed_to_win
     if mlb? && round == 1
+      2
+    elsif mlb? && round == 2
       3
     else
       4
@@ -136,11 +138,7 @@ class Matchup < ApplicationRecord
   end
 
   def num_rounds
-    if mlb?
-      3
-    else
-      4
-    end
+    4
   end
 
   def num_matchups_for_round
@@ -228,7 +226,7 @@ class Matchup < ApplicationRecord
 
   def mlb_matchups_for_round
     case round
-    when 1
+    when 1 || 2
       2
     else
       1
@@ -247,8 +245,10 @@ class Matchup < ApplicationRecord
   def mlb_round_name
     case round
     when 1
-      'Division Series'
+      'Wildcard Round'
     when 2
+      'Division Series'
+    when 3
       'Championship Series'
     else
       'World Series'

@@ -10,6 +10,13 @@ module ScoringGrid
     [0, 0, 0, 0, 3, 4, 6, 10].freeze
   ].freeze
 
+  MLB_THREE_GRID = [
+    [3, 2, 0, 0].freeze,
+    [2, 3, 0, 0].freeze,
+    [0, 0, 3, 2].freeze,
+    [0, 0, 2, 3].freeze
+  ].freeze
+
   MLB_FIVE_GRID = [
     [9, 5, 3, 1, 0, 0].freeze,
     [5, 7, 5, 2, 1, 0].freeze,
@@ -32,7 +39,9 @@ module ScoringGrid
 
   def self.[](matchup)
     if matchup.mlb?
-      if matchup.games_needed_to_win == 3
+      if matchup.games_needed_to_win == 2
+        MLB_THREE_GRID
+      elsif matchup.games_needed_to_win == 3
         MLB_FIVE_GRID
       else
         MLB_SEVEN_GRID
