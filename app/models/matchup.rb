@@ -226,7 +226,9 @@ class Matchup < ApplicationRecord
 
   def mlb_matchups_for_round
     case round
-    when 1 || 2
+    when 1
+      2
+    when 2
       2
     else
       1
