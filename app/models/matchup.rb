@@ -20,7 +20,7 @@ class Matchup < ApplicationRecord
   validates :sport, :year, :round, :conference, :number, :favorite_tricode, :underdog_tricode,
             :favorite_wins, :underdog_wins, :starts_at, presence: true
 
-  validates :year, numericality: {greater_than_or_equal_to: 2021, less_than_or_equal_to: Date.current.year}
+  validates :year, numericality: {greater_than_or_equal_to: 2020, less_than_or_equal_to: Date.current.year}
 
   validates :round, numericality: {greater_than_or_equal_to: 1, less_than_or_equal_to: ->(m) { m.num_rounds }}
 
@@ -124,10 +124,22 @@ class Matchup < ApplicationRecord
   end
 
   def games_needed_to_win
-    if mlb? && round == 1
-      2
-    elsif mlb? && round == 2
-      3
+    if mlb?
+      if year == 2021
+        if round == 1
+          3
+        else
+          4
+        end
+      else
+        if round == 1
+          2
+        elsif round == 2
+          3
+        else
+          4
+        end
+      end
     else
       4
     end
@@ -138,7 +150,11 @@ class Matchup < ApplicationRecord
   end
 
   def num_rounds
-    4
+    if mlb? && year == 2021
+      3
+    else
+      4
+    end
   end
 
   def num_matchups_for_round
@@ -225,13 +241,22 @@ class Matchup < ApplicationRecord
   end
 
   def mlb_matchups_for_round
-    case round
-    when 1
-      2
-    when 2
-      2
+    if year == 2021
+      case round
+      when 1
+        2
+      else
+        1
+      end
     else
-      1
+      case round
+      when 1
+        2
+      when 2
+        2
+      else
+        1
+      end
     end
   end
 
@@ -245,15 +270,26 @@ class Matchup < ApplicationRecord
   end
 
   def mlb_round_name
-    case round
-    when 1
-      'Wildcard Round'
-    when 2
-      'Division Series'
-    when 3
-      'Championship Series'
+    if year == 2021
+      case round
+      when 1
+        'Division Series'
+      when 2
+        'Championship Series'
+      else
+        'World Series'
+      end
     else
-      'World Series'
+      case round
+      when 1
+        'Wildcard Round'
+      when 2
+        'Division Series'
+      when 3
+        'Championship Series'
+      else
+        'World Series'
+      end
     end
   end
 end
