@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Matchup, type: :model do
+  it { is_expected.to validate_presence_of(:sport) }
   it { is_expected.to validate_presence_of(:year) }
   it { is_expected.to validate_presence_of(:round) }
   it { is_expected.to validate_presence_of(:number) }

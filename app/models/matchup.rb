@@ -123,12 +123,19 @@ class Matchup < ApplicationRecord
     "#{underdog.name} (#{underdog_wins})"
   end
 
+  def playoff_structure
+    @playoff_structure ||= PlayoffStructure[self] || []
+  end
+
+  def round_structure
+    @round_structure ||= playoff_structure[round - 1] if round
+    # This fallback is for validation test cases, so that the numericality
+    # tests get numbers and not nil
+    @round_structure ||= Hash.new(1)
+  end
+
   def games_needed_to_win
-    if mlb? && round == 1
-      3
-    else
-      4
-    end
+    round_structure[:games_needed_to_win]
   end
 
   def max_games
@@ -136,27 +143,15 @@ class Matchup < ApplicationRecord
   end
 
   def num_rounds
-    if mlb?
-      3
-    else
-      4
-    end
+    playoff_structure.length
   end
 
   def num_matchups_for_round
-    if nba?
-      nba_matchups_for_round
-    elsif mlb?
-      mlb_matchups_for_round
-    end
+    round_structure[:matchups_per_conference]
   end
 
   def round_name
-    if nba?
-      nba_round_name
-    elsif mlb?
-      mlb_round_name
-    end
+    round_structure[:name]
   end
 
   def final_round?
@@ -211,47 +206,5 @@ class Matchup < ApplicationRecord
 
   def sort_key
     [sport, year, round, conference_before_type_cast, number]
-  end
-
-  private
-
-  def nba_matchups_for_round
-    case round
-    when 1
-      4
-    when 2
-      2
-    else
-      1
-    end
-  end
-
-  def mlb_matchups_for_round
-    case round
-    when 1
-      2
-    else
-      1
-    end
-  end
-
-  def nba_round_name
-    case round
-    when 4
-      'Finals'
-    else
-      "Round #{round}"
-    end
-  end
-
-  def mlb_round_name
-    case round
-    when 1
-      'Division Series'
-    when 2
-      'Championship Series'
-    else
-      'World Series'
-    end
   end
 end
