@@ -3,11 +3,11 @@ class ApplicationController < ActionController::Base
   before_action :load_all_seasons
 
   BG_COLORS = %w[
-    filler
+    not-used
     bg-primary
     bg-danger
     bg-success
-    bg-secondary
+    bg-warning
   ].freeze
 
   protected
