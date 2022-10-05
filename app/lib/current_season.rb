@@ -26,5 +26,14 @@ module CurrentSeason
     def sport_year
       @sport_year ||= [sport, year].freeze
     end
+
+    def favicon
+      case sport
+      when :nba
+        'basketball.png'
+      when :mlb
+        'baseball.png'
+      end
+    end
   end
 end
