@@ -21,6 +21,7 @@ describe PicksController, type: :controller do
         expect(assigns(:picks)).to eql({})
         expect(assigns(:other_matchups)).to be_empty
         expect(assigns(:accepting_picks)).to be false
+        expect(assigns(:can_change_picks)).to be false
       end
     end
 
@@ -40,6 +41,7 @@ describe PicksController, type: :controller do
             expect(assigns(:picks)).to eql({})
             expect(assigns(:other_matchups)).to eql(1 => accepting_entries)
             expect(assigns(:accepting_picks)).to be true
+            expect(assigns(:can_change_picks)).to be false
           end
         end
 
@@ -51,6 +53,7 @@ describe PicksController, type: :controller do
             expect(assigns(:picks)).to eql({1 => [pick]})
             expect(assigns(:other_matchups)).to eql(1 => [accepting_entries.last])
             expect(assigns(:accepting_picks)).to be true
+            expect(assigns(:can_change_picks)).to be true
           end
         end
 
@@ -66,6 +69,7 @@ describe PicksController, type: :controller do
             expect(assigns(:picks)).to eql({1 => picks})
             expect(assigns(:other_matchups)).to eql({})
             expect(assigns(:accepting_picks)).to be true
+            expect(assigns(:can_change_picks)).to be true
           end
         end
       end
@@ -91,6 +95,7 @@ describe PicksController, type: :controller do
             expect(assigns(:picks)).to eql({1 => old_picks})
             expect(assigns(:other_matchups)).to eql(2 => accepting_entries)
             expect(assigns(:accepting_picks)).to be true
+            expect(assigns(:can_change_picks)).to be false
           end
         end
 
@@ -102,6 +107,7 @@ describe PicksController, type: :controller do
             expect(assigns(:picks)).to eql({1 => old_picks, 2 => [pick]})
             expect(assigns(:other_matchups)).to eql(2 => [accepting_entries.last])
             expect(assigns(:accepting_picks)).to be true
+            expect(assigns(:can_change_picks)).to be true
           end
         end
 
@@ -117,6 +123,7 @@ describe PicksController, type: :controller do
             expect(assigns(:picks)).to eql({1 => old_picks, 2 => picks})
             expect(assigns(:other_matchups)).to eql({})
             expect(assigns(:accepting_picks)).to be true
+            expect(assigns(:can_change_picks)).to be true
           end
         end
       end
