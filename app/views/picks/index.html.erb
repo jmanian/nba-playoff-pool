@@ -43,7 +43,7 @@
 <% if @picks.empty? %>
   <p>You haven't made any picks.</p>
 <% end %>
-<% if @accepting_picks && @picks.any? %>
+<% if @can_change_picks %>
   <p>
     <%= button_to 'Change Picks', {action: :new}, method: :get, class: "btn btn-primary" %>
   </p>

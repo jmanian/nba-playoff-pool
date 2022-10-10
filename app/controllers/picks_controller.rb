@@ -10,7 +10,8 @@ class PicksController < ApplicationController
                               .order(:starts_at)
                               .group_by(&:round)
 
-    @accepting_picks = matchups.accepting_entries.exists?
+    @can_change_picks = @picks.any? { |pick| pick.matchup.accepting_entries? }
+    @accepting_picks = @can_change_picks || @other_matchups.any?
     @picks = @picks.group_by { |pick| pick.matchup.round }
   end
 
