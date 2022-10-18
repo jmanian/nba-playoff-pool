@@ -1,1 +1,8 @@
-<td class="text-nowrap" style="width: 1px; padding-inline-end: 10px"><%= user.username %></td>
+<td class="text-nowrap" style="width: 1px; padding-inline-end: 10px"
+<% if current_user %>
+  data-bs-toggle="tooltip"
+  title="<%= user.email %>"
+<% end %>
+>
+<%= user.username %>
+</td>
