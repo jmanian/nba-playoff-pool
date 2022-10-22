@@ -26,6 +26,10 @@ class User < ApplicationRecord
 
   has_many :picks, dependent: :restrict_with_exception
 
+  has_many :posts, dependent: :destroy
+
+  has_many :comments, dependent: :destroy
+
   def title
     email
   end
