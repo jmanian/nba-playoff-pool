@@ -2,10 +2,10 @@ class RoundController < ApplicationController
   before_action :set_round_names
 
   def show
-    redirect_to :root unless Matchup.sports.keys.include?(params[:sport])
+    redirect_to :root unless Matchup.sports.key?(params[:sport])
 
     matchups = Matchup.started
-                      .where(params.permit(:sport, :year, :round))
+      .where(params.permit(:sport, :year, :round))
 
     if matchups.empty?
       redirect_to :root
@@ -15,8 +15,8 @@ class RoundController < ApplicationController
     picks = Pick.joins(:matchup).merge(matchups).includes(:matchup, :user)
 
     @matchups = picks.map(&:matchup)
-                     .uniq
-                     .sort
+      .uniq
+      .sort
     @show_totals = @matchups.length > 1
 
     @round_name = @matchups.first.round_name
@@ -27,10 +27,10 @@ class RoundController < ApplicationController
     @num_users = @user_data.length
 
     @matchup_data = picks.group_by(&:matchup_id)
-                         .transform_values do |pps|
-                           pps.group_by(&:scoring_index)
-                              .transform_values(&:length)
-                         end
+      .transform_values do |pps|
+      pps.group_by(&:scoring_index)
+        .transform_values(&:length)
+    end
 
     @bg_color = BG_COLORS[params[:round].to_i]
   end

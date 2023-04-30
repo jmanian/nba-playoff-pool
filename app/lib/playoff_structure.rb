@@ -1,17 +1,17 @@
 module PlayoffStructure
   MLB_V1 = [
     {
-      name: 'Division Series',
+      name: "Division Series",
       games_needed_to_win: 3,
       matchups_per_conference: 2
     },
     {
-      name: 'Championship Series',
+      name: "Championship Series",
       games_needed_to_win: 4,
       matchups_per_conference: 1
     },
     {
-      name: 'World Series',
+      name: "World Series",
       games_needed_to_win: 4,
       matchups_per_conference: 1
     }
@@ -19,22 +19,22 @@ module PlayoffStructure
 
   MLB_V2 = [
     {
-      name: 'Wild Card',
+      name: "Wild Card",
       games_needed_to_win: 2,
       matchups_per_conference: 2
     },
     {
-      name: 'Division Series',
+      name: "Division Series",
       games_needed_to_win: 3,
       matchups_per_conference: 2
     },
     {
-      name: 'Championship Series',
+      name: "Championship Series",
       games_needed_to_win: 4,
       matchups_per_conference: 1
     },
     {
-      name: 'World Series',
+      name: "World Series",
       games_needed_to_win: 4,
       matchups_per_conference: 1
     }
@@ -42,22 +42,22 @@ module PlayoffStructure
 
   NBA = [
     {
-      name: 'Round 1',
+      name: "Round 1",
       games_needed_to_win: 4,
       matchups_per_conference: 4
     },
     {
-      name: 'Round 2',
+      name: "Round 2",
       games_needed_to_win: 4,
       matchups_per_conference: 2
     },
     {
-      name: 'Round 3',
+      name: "Round 3",
       games_needed_to_win: 4,
       matchups_per_conference: 1
     },
     {
-      name: 'Finals',
+      name: "Finals",
       games_needed_to_win: 4,
       matchups_per_conference: 1
     }

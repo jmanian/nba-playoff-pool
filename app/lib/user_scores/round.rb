@@ -50,12 +50,12 @@ module UserScores
 
     def points_tooltip
       if picks.all? { |p| p.matchup.finished? }
-        "These picks received #{min_total} #{'point'.pluralize(min_total)}."
+        "These picks received #{min_total} #{"point".pluralize(min_total)}."
       elsif potential_total.positive?
-        "Based on the results so far these picks will receive #{min_total}–#{max_total} "\
-          "#{'point'.pluralize(max_total)}."
+        "Based on the results so far these picks will receive #{min_total}–#{max_total} " \
+          "#{"point".pluralize(max_total)}."
       else
-        "Based on the results so far these picks will receive #{min_total} #{'point'.pluralize(min_total)}."
+        "Based on the results so far these picks will receive #{min_total} #{"point".pluralize(min_total)}."
       end
     end
   end

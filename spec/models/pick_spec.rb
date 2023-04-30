@@ -1,13 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Pick, type: :model do
-  describe '#scoring_index' do
+  describe "#scoring_index" do
     subject { pick.scoring_index }
 
-    context 'with a seven-game series' do
+    context "with a seven-game series" do
       let(:matchup) { create :matchup, :seven_games }
 
-      context 'with the favorite as winner' do
+      context "with the favorite as winner" do
         let(:pick) { create :pick, matchup: matchup, winner_is_favorite: true, num_games: num_games }
 
         [
@@ -24,7 +24,7 @@ RSpec.describe Pick, type: :model do
         end
       end
 
-      context 'with the underdog as winner' do
+      context "with the underdog as winner" do
         let(:pick) { create :pick, matchup: matchup, winner_is_favorite: false, num_games: num_games }
 
         [
@@ -42,10 +42,10 @@ RSpec.describe Pick, type: :model do
       end
     end
 
-    context 'with a five-game series' do
+    context "with a five-game series" do
       let(:matchup) { create :matchup, :five_games }
 
-      context 'with the favorite as winner' do
+      context "with the favorite as winner" do
         let(:pick) { create :pick, matchup: matchup, winner_is_favorite: true, num_games: num_games }
 
         [
@@ -61,7 +61,7 @@ RSpec.describe Pick, type: :model do
         end
       end
 
-      context 'with the underdog as winner' do
+      context "with the underdog as winner" do
         let(:pick) { create :pick, matchup: matchup, winner_is_favorite: false, num_games: num_games }
 
         [

@@ -30,9 +30,9 @@ module CurrentSeason
     def favicon
       case sport
       when :nba
-        'basketball.png'
+        "basketball.png"
       when :mlb
-        'baseball.png'
+        "baseball.png"
       end
     end
   end

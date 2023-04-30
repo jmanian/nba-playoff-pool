@@ -3,7 +3,7 @@ class StandingsController < ApplicationController
 
   def index
     matchups = Matchup.started
-                      .where(params.permit(:sport, :year))
+      .where(params.permit(:sport, :year))
 
     picks = Pick.joins(:matchup).merge(matchups).includes(:matchup, :user)
 

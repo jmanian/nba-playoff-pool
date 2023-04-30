@@ -37,9 +37,9 @@ class Pick < ApplicationRecord
 
   def code
     [
-      winner_is_favorite ? 'f' : 'u',
+      winner_is_favorite ? "f" : "u",
       num_games
-    ].join('-')
+    ].join("-")
   end
 
   def scoring_index
@@ -81,13 +81,13 @@ class Pick < ApplicationRecord
   def points_tooltip
     pen = " (with a late penalty of #{penalty})" if penalty.positive?
     if matchup.finished?
-      "This pick received #{min_points} #{'point'.pluralize(min_points)}#{pen}."
+      "This pick received #{min_points} #{"point".pluralize(min_points)}#{pen}."
     elsif potential_points.positive?
-      "Based on the results so far this pick will receive #{min_points}–#{max_points} "\
-        "#{'point'.pluralize(max_points)}#{pen}."
+      "Based on the results so far this pick will receive #{min_points}–#{max_points} " \
+        "#{"point".pluralize(max_points)}#{pen}."
     else
-      "Based on the results so far this pick will receive #{min_points} "\
-        "#{'point'.pluralize(min_points)}#{pen}."
+      "Based on the results so far this pick will receive #{min_points} " \
+        "#{"point".pluralize(min_points)}#{pen}."
     end
   end
 end

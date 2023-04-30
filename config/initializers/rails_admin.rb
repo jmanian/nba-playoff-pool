@@ -1,6 +1,6 @@
 RailsAdmin.config do |config|
   ## == Naming ==
-  config.main_app_name = 'Sports Pals'
+  config.main_app_name = "Sports Pals"
 
   ### Popular gems integration
 
@@ -47,7 +47,7 @@ RailsAdmin.config do |config|
     # history_show
   end
 
-  config.model 'User' do
+  config.model "User" do
     list do
       field :id
       field :email
@@ -62,7 +62,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model 'Matchup' do
+  config.model "Matchup" do
     list do
       field :id
       field :sport
@@ -74,7 +74,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model 'Pick' do
+  config.model "Pick" do
     list do
       exclude_fields :created_at, :updated_at
     end

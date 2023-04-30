@@ -6,10 +6,10 @@ module UserScores
       super(user, picks)
 
       @rounds = picks.select { |p| p.matchup.started? }
-                     .group_by { |p| p.matchup.round }
-                     .transform_values do |p|
-                       Round.new(user, p)
-                     end
+        .group_by { |p| p.matchup.round }
+        .transform_values do |p|
+        Round.new(user, p)
+      end
       @rounds.default = OpenStruct.new(totals: [0, 0, 0])
     end
 

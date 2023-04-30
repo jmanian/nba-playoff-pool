@@ -18,7 +18,7 @@
 #
 class Matchup < ApplicationRecord
   validates :sport, :year, :round, :conference, :number, :favorite_tricode, :underdog_tricode,
-            :favorite_wins, :underdog_wins, :starts_at, presence: true
+    :favorite_wins, :underdog_wins, :starts_at, presence: true
 
   validates :year, numericality: {greater_than_or_equal_to: 2021, less_than_or_equal_to: Date.current.year}
 
@@ -30,10 +30,10 @@ class Matchup < ApplicationRecord
   validates :conference, inclusion: {in: %w[ws], if: -> { mlb? && final_round? }}
 
   validates :number, uniqueness: {scope: %i[sport year round conference]},
-                     numericality: {
-                       greater_than_or_equal_to: 1,
-                       less_than_or_equal_to: ->(m) { m.num_matchups_for_round }
-                     }
+    numericality: {
+      greater_than_or_equal_to: 1,
+      less_than_or_equal_to: ->(m) { m.num_matchups_for_round }
+    }
 
   validates :favorite_tricode, :underdog_tricode, inclusion: {in: Team.nba_tricodes, if: -> { nba? }}
   validates :favorite_tricode, :underdog_tricode, inclusion: {in: Team.mlb_tricodes, if: -> { mlb? }}
@@ -42,12 +42,12 @@ class Matchup < ApplicationRecord
     greater_than_or_equal_to: 0, less_than_or_equal_to: ->(m) { m.games_needed_to_win }
   }
   validates :games_played, numericality: {less_than_or_equal_to: ->(m) { m.max_games }},
-                           if: -> { favorite_wins && underdog_wins }
+    if: -> { favorite_wins && underdog_wins }
 
   validate do
     if favorite_tricode&.to_sym == underdog_tricode&.to_sym
-      errors.add(:favorite_tricode, 'must be different than underdog')
-      errors.add(:underdog_tricode, 'must be different than favorite')
+      errors.add(:favorite_tricode, "must be different than underdog")
+      errors.add(:underdog_tricode, "must be different than favorite")
     end
   end
 
@@ -71,8 +71,8 @@ class Matchup < ApplicationRecord
   end
 
   def starts_at_pretty
-    starts_at.in_time_zone('America/New_York')
-             .strftime('%a %-d %b, %l:%M %p %Z')
+    starts_at.in_time_zone("America/New_York")
+      .strftime("%a %-d %b, %l:%M %p %Z")
   end
 
   def favorite
