@@ -12,7 +12,7 @@
 #  penalty            :integer          default(0), not null
 #
 class Pick < ApplicationRecord
-  validates :user_id, :matchup_id, :num_games, presence: true
+  validates :num_games, presence: true
   validates :winner_is_favorite, inclusion: {in: [true, false]}
   validates :num_games, numericality: {
     greater_than_or_equal_to: ->(p) { p.matchup.games_needed_to_win },

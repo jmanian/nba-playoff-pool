@@ -263,6 +263,10 @@ GEM
     rubocop-performance (1.16.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
+    rubocop-rails (2.19.1)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.33.0, < 2.0)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
@@ -300,6 +304,9 @@ GEM
     standard-performance (1.0.1)
       lint_roller (~> 1.0)
       rubocop-performance (~> 1.16.0)
+    standard-rails (0.1.0)
+      lint_roller (~> 1.0)
+      rubocop-rails (~> 2.19.0)
     temple (0.8.2)
     thor (1.2.1)
     tilt (2.0.10)
@@ -358,6 +365,7 @@ DEPENDENCIES
   shoulda-matchers (~> 4.0)
   spring
   standard (~> 1.28)
+  standard-rails (~> 0.1)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
