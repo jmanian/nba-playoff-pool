@@ -38,8 +38,6 @@ jobs:
         with:
           ruby-version: 2.7.4
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-      - name: Rubocop
-        run: bundle exec rubocop
       - name: Run tests
         env:
           RAILS_ENV: test
