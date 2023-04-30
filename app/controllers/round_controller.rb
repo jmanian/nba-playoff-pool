@@ -1,7 +1,6 @@
 class RoundController < ApplicationController
   before_action :set_round_names
 
-  # rubocop:disable Metrics
   def show
     redirect_to :root unless Matchup.sports.keys.include?(params[:sport])
 
@@ -35,5 +34,4 @@ class RoundController < ApplicationController
 
     @bg_color = BG_COLORS[params[:round].to_i]
   end
-  # rubocop:enable Metrics
 end

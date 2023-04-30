@@ -7,7 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # MLB 2021
-# rubocop:disable Metrics/ParameterLists
 [
   [1, :al, 1, :tb, :bos, 1, 3],
   [1, :al, 2, :hou, :cws, 3, 1],
@@ -30,7 +29,6 @@
     starts_at: Date.new(2021, 11, 1)
   )
 end
-# rubocop:enable Metrics/ParameterLists
 
 usernames = %w[
   alpha
@@ -76,5 +74,5 @@ usernames.each do |username|
     )
   end
 rescue ActiveRecord::RecordInvalid
-  puts "skipping #{username}" # rubocop:disable Rails/Output
+  puts "skipping #{username}"
 end
