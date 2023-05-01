@@ -46,7 +46,7 @@ class Matchup < ApplicationRecord
 
   validate do
     if favorite_tricode&.to_sym == underdog_tricode&.to_sym
-      errors.add(:favorite_tricode, "must be different than underdog")
+      errors.add(:favorite_tricode, 'must be different than underdog')
       errors.add(:underdog_tricode, "must be different than favorite")
     end
   end
