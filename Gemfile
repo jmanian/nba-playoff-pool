@@ -39,6 +39,7 @@ group :development, :test do
   gem "rspec-rails", "~> 4.1.0"
   gem "factory_bot_rails"
   gem "standard", "~> 1.28"
+  gem "standard-rails", "~> 0.2.0"
 end
 
 group :development do
