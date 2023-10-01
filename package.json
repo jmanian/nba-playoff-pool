@@ -8,6 +8,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.3",
     "bootstrap": "^5.2.2",
+    "rails_admin": "3.1.2",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
@@ -15,7 +16,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "engines": {
-    "node": "16.x"
+    "node": "18.x"
   },
   "resolutions": {
     "rails_admin/@fortawesome/fontawesome-free": "^5.15.0"
