@@ -1,5 +1,4 @@
 RailsAdmin.config do |config|
-  config.asset_source = :webpacker
   ## == Naming ==
   config.main_app_name = "Sports Pals"
 
