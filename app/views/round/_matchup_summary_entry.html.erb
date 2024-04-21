@@ -4,7 +4,7 @@
 <% bg = "bg-success bg-gradient text-white" if possible && matchup.finished? %>
 <td class="text-end text-nowrap <%= bg %>"><%= winner.name %> in <%= num_games %></td>
 <td class="align-middle" style="min-width: 75px;">
-  <div class="progress bg-secondary" style="--bs-bg-opacity: .15" data-bs-toggle="tooltip" data-bs-html="true" title="<%= "#{count} people picked #{winner.name} in #{num_games}." %>">
+  <div class="progress bg-secondary" style="--bs-bg-opacity: .15" data-bs-toggle="tooltip" data-bs-html="true" title="<%= "#{count} #{"person".pluralize(count)} picked #{winner.name} in #{num_games}." %>">
     <% pct = (count.to_f * 100 / @num_users).round(4) %>
     <div class="progress-bar bg-secondary" role="progressbar" style="width: <%= pct %>%">
       <%= count %>
