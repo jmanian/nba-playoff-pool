@@ -10,7 +10,7 @@ module Sync
       end
 
       def fetch_bracket
-        connection.get
+        connection.get.body
       end
 
       private
@@ -24,6 +24,7 @@ module Sync
         end
       end
 
+      # It uses the year that the season started rather than the playoff year.
       def url
         url ||= "https://cdn.nba.com/static/json/staticData/brackets/#{year - 1}/PlayoffBracket.json"
       end
