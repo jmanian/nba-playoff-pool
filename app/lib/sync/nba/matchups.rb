@@ -57,7 +57,7 @@ module Sync
         matchup_base = Matchup.where(sport: :nba, year: year, round: round, conference: conference)
 
         matchup_base.find_by(favorite_tricode: favorite_tricode, underdog_tricode: underdog_tricode) ||
-        matchup_base.find_by(favorite_tricode: underdog_tricode, underdog_tricode: favorite_tricode)
+          matchup_base.find_by(favorite_tricode: underdog_tricode, underdog_tricode: favorite_tricode)
       end
 
       def series_started?

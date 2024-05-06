@@ -26,7 +26,7 @@ module Sync
 
       # It uses the year that the season started rather than the playoff year.
       def url
-        url ||= "https://cdn.nba.com/static/json/staticData/brackets/#{year - 1}/PlayoffBracket.json"
+        @url ||= "https://cdn.nba.com/static/json/staticData/brackets/#{year - 1}/PlayoffBracket.json"
       end
 
       # nba.com currently sends this as text/plain rather than application/json, so we must
