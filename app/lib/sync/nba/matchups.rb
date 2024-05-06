@@ -4,6 +4,7 @@ module Sync
       def self.run(year)
         bracket = Client.fetch_bracket(year)[:bracket]
         all_series = bracket[:playoffBracketSeries]
+        # The `seasonYear` in the API is the year of the season start, in the fall.
         year = bracket[:seasonYear].to_i + 1
 
         all_series.each do |series_data|
@@ -56,6 +57,7 @@ module Sync
       def find_existing_matchup
         matchup_base = Matchup.where(sport: :nba, year: year, round: round, conference: conference)
 
+        # Just to be extra careful, this looks for a matchup where the teams are reversed.
         matchup_base.find_by(favorite_tricode: favorite_tricode, underdog_tricode: underdog_tricode) ||
           matchup_base.find_by(favorite_tricode: underdog_tricode, underdog_tricode: favorite_tricode)
       end
@@ -79,9 +81,9 @@ module Sync
       def number
         case round
         when 1
-          series_data[:highSeedRank]
+          series_data[:highSeedRank].to_i
         when 2
-          case series_data[:highSeedRank]
+          case series_data[:highSeedRank].to_i
           when 1, 4, 5, 8
             1
           else
