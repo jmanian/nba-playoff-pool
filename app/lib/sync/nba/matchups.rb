@@ -34,13 +34,22 @@ module Sync
       attr_reader :year, :series_data
 
       def sync_wins
-        find_existing_matchup&.update!(favorite_wins: favorite_wins, underdog_wins: underdog_wins)
+        matchup = find_existing_matchup
+
+        if matchup
+          matchup.favorite_wins = favorite_wins
+          matchup.underdog_wins = underdog_wins
+          if matchup.has_changes_to_save?
+            matchup.save!
+            Rails.logger.info("Matchup updated: #{matchup.saved_changes.except(:updated_at).to_json}")
+          end
+        end
       end
 
       def create_matchup
-        return if find_existing_matchup
+        return if find_existing_matchup || find_existing_reversed_matchup
 
-        Matchup.create!(
+        matchup = Matchup.create!(
           sport: :nba,
           year: year,
           round: round,
@@ -52,14 +61,21 @@ module Sync
           underdog_wins: underdog_wins,
           starts_at: starts_at
         )
+
+        Rails.logger.info("Matchup created: #{matchup.attributes.except("created_at", "updated_at").to_json}")
       end
 
       def find_existing_matchup
-        matchup_base = Matchup.where(sport: :nba, year: year, round: round, conference: conference)
+        matchup_base.find_by(favorite_tricode: favorite_tricode, underdog_tricode: underdog_tricode)
+      end
 
-        # Just to be extra careful, this looks for a matchup where the teams are reversed.
-        matchup_base.find_by(favorite_tricode: favorite_tricode, underdog_tricode: underdog_tricode) ||
-          matchup_base.find_by(favorite_tricode: underdog_tricode, underdog_tricode: favorite_tricode)
+      # Just to be extra careful, this looks for a matchup where the teams are reversed.
+      def find_existing_reversed_matchup
+        matchup_base.find_by(favorite_tricode: underdog_tricode, underdog_tricode: favorite_tricode)
+      end
+
+      def matchup_base
+        Matchup.where(sport: :nba, year: year, round: round, conference: conference)
       end
 
       def series_started?
