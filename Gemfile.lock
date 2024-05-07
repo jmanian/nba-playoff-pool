@@ -336,6 +336,8 @@ GEM
     standard-rails (0.2.0)
       lint_roller (~> 1.0)
       rubocop-rails (~> 2.20.2)
+    strong_migrations (1.8.0)
+      activerecord (>= 5.2)
     temple (0.10.2)
     thor (1.2.2)
     tilt (2.3.0)
@@ -398,6 +400,7 @@ DEPENDENCIES
   spring
   standard (~> 1.28)
   standard-rails (~> 0.2.0)
+  strong_migrations
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
