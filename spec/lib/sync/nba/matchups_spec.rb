@@ -44,7 +44,6 @@ RSpec.describe Sync::Nba::Matchups do
         let(:starts_at) { next_game_at + 10.minutes if next_game_at }
 
         context "when there's no existing matchup" do
-
           shared_examples_for "creates matchup" do
             it "creates a matchup" do
               subject
@@ -150,7 +149,7 @@ RSpec.describe Sync::Nba::Matchups do
       let(:number) { favorite_seed }
       let(:favorite_tricode) { "nyk" }
       let(:underdog_tricode) { "bos" }
-      let!(:other_matchup) { create :matchup, year: year, round: 1, conference: "east", number: 2, favorite_tricode: "atl", underdog_tricode: "phi"}
+      let!(:other_matchup) { create :matchup, year: year, round: 1, conference: "east", number: 2, favorite_tricode: "atl", underdog_tricode: "phi" }
 
       it_behaves_like "syncing"
     end
@@ -163,7 +162,7 @@ RSpec.describe Sync::Nba::Matchups do
       let(:number) { 2 }
       let(:favorite_tricode) { "gsw" }
       let(:underdog_tricode) { "lal" }
-      let!(:other_matchup) { create :matchup, year: year, round: 2, conference: "west", number: 1, favorite_tricode: "lac", underdog_tricode: "dal"}
+      let!(:other_matchup) { create :matchup, year: year, round: 2, conference: "west", number: 1, favorite_tricode: "lac", underdog_tricode: "dal" }
 
       it_behaves_like "syncing"
     end
@@ -176,7 +175,7 @@ RSpec.describe Sync::Nba::Matchups do
       let(:number) { 1 }
       let(:favorite_tricode) { "nyk" }
       let(:underdog_tricode) { "bos" }
-      let!(:other_matchup) { create :matchup, year: year, round: 3, conference: "west", number: 1, favorite_tricode: "lac", underdog_tricode: "dal"}
+      let!(:other_matchup) { create :matchup, year: year, round: 3, conference: "west", number: 1, favorite_tricode: "lac", underdog_tricode: "dal" }
 
       it_behaves_like "syncing"
     end
@@ -189,7 +188,7 @@ RSpec.describe Sync::Nba::Matchups do
       let(:number) { 1 }
       let(:favorite_tricode) { "nyk" }
       let(:underdog_tricode) { "gsw" }
-      let!(:other_matchup) { create :matchup, year: year, round: 3, conference: "west", number: 1, favorite_tricode: "lac", underdog_tricode: "dal"}
+      let!(:other_matchup) { create :matchup, year: year, round: 3, conference: "west", number: 1, favorite_tricode: "lac", underdog_tricode: "dal" }
 
       it_behaves_like "syncing"
     end
