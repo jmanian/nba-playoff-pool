@@ -162,6 +162,8 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     nested_form (0.3.2)
+    net-http (0.4.1)
+      uri
     net-imap (0.3.7)
       date
       net-protocol
@@ -346,6 +348,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
+    uri (0.13.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -384,6 +387,7 @@ DEPENDENCIES
   faraday (~> 2.8)
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  net-http
   pg (~> 1.1)
   postmark-rails
   puma (~> 5.0)

@@ -34,6 +34,9 @@ gem "rails_admin", "~> 2.0"
 gem "postmark-rails"
 
 gem "faraday", "~> 2.8"
+# Adding net-http eliminates some "already initialized constant" warnings
+# https://github.com/ruby/net-imap/issues/16#issuecomment-803086765
+gem "net-http"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
