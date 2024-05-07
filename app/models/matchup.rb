@@ -12,7 +12,7 @@
 #  underdog_tricode :text             not null
 #  favorite_wins    :integer          default(0), not null
 #  underdog_wins    :integer          default(0), not null
-#  starts_at        :datetime         not null
+#  starts_at        :datetime
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

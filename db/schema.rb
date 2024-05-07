@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_24_023204) do
+ActiveRecord::Schema.define(version: 2024_05_07_132902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_10_24_023204) do
     t.text "underdog_tricode", null: false
     t.integer "favorite_wins", default: 0, null: false
     t.integer "underdog_wins", default: 0, null: false
-    t.datetime "starts_at", null: false
+    t.datetime "starts_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["sport", "year", "round", "conference", "number"], name: "index_matchups_uniquely", unique: true
