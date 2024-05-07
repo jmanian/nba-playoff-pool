@@ -24,6 +24,8 @@ module Sync
       def sync_matchup
         if series_started?
           sync_wins
+        elsif existing_matchup
+          sync_starts_at
         elsif teams_known?
           create_matchup
         end
@@ -34,20 +36,36 @@ module Sync
       attr_reader :year, :series_data
 
       def sync_wins
-        matchup = find_existing_matchup
+        matchup = existing_matchup
 
         if matchup
           matchup.favorite_wins = favorite_wins
           matchup.underdog_wins = underdog_wins
-          if matchup.has_changes_to_save?
-            matchup.save!
-            Rails.logger.info("Matchup updated: #{matchup.saved_changes.except(:updated_at).to_json}")
-          end
+          matchup.save! if matchup.has_changes_to_save?
+
+          log_update(matchup)
         end
       end
 
+      def sync_starts_at
+        matchup = existing_matchup
+
+        if matchup.starts_at.nil? && starts_at
+          matchup.update!(starts_at: starts_at)
+        end
+
+        log_update(matchup)
+      end
+
+      def log_update(matchup)
+        return unless matchup
+
+        data = {id: matchup.id, changes: matchup.saved_changes.except(:updated_at)}
+        Rails.logger.info("Matchup updated: #{data.to_json}")
+      end
+
       def create_matchup
-        return if find_existing_matchup || find_existing_reversed_matchup
+        return if existing_matchup || find_existing_reversed_matchup
 
         matchup = Matchup.create!(
           sport: :nba,
@@ -65,8 +83,9 @@ module Sync
         Rails.logger.info("Matchup created: #{matchup.attributes.except("created_at", "updated_at").to_json}")
       end
 
-      def find_existing_matchup
-        matchup_base.find_by(favorite_tricode: favorite_tricode, underdog_tricode: underdog_tricode)
+      def existing_matchup
+        @existing_matchup ||=
+          matchup_base.find_by(favorite_tricode: favorite_tricode, underdog_tricode: underdog_tricode)
       end
 
       # Just to be extra careful, this looks for a matchup where the teams are reversed.
@@ -91,7 +110,14 @@ module Sync
       end
 
       def conference
-        series_data[:seriesConference].downcase
+        case series_data[:seriesConference]
+        when /finals/i
+          "finals"
+        when /east/i
+          "east"
+        when /west/i
+          "west"
+        end
       end
 
       def number
@@ -127,7 +153,9 @@ module Sync
       end
 
       def starts_at
-        Time.parse(series_data[:nextGameDateTimeUTC]) + 10.minutes
+        if series_data[:nextGameDateTimeUTC].present?
+          Time.parse(series_data[:nextGameDateTimeUTC]) + 10.minutes
+        end
       end
     end
   end
