@@ -18,7 +18,7 @@
 #
 class Matchup < ApplicationRecord
   validates :sport, :year, :round, :conference, :number, :favorite_tricode, :underdog_tricode,
-    :favorite_wins, :underdog_wins, :starts_at, presence: true
+    :favorite_wins, :underdog_wins, presence: true
 
   validates :year, numericality: {greater_than_or_equal_to: 2021, less_than_or_equal_to: Date.current.year}
 
@@ -58,7 +58,7 @@ class Matchup < ApplicationRecord
   enum favorite_tricode: Team.tricodes_for_enum, _prefix: :favorite
   enum underdog_tricode: Team.tricodes_for_enum, _prefix: :underdog
 
-  scope :accepting_entries, -> { where(starts_at: Time.current...) }
+  scope :accepting_entries, -> { where(starts_at: Time.current...).or(where(starts_at: nil)) }
   scope :started, -> { where(starts_at: ...Time.current) }
   scope :current_season, -> { where(CurrentSeason.params) }
 
@@ -67,12 +67,13 @@ class Matchup < ApplicationRecord
   end
 
   def started?
-    starts_at.past?
+    starts_at&.past? || false
   end
 
   def starts_at_pretty
-    starts_at.in_time_zone("America/New_York")
-      .strftime("%a %-d %b, %l:%M %p %Z")
+    starts_at&.in_time_zone("America/New_York")
+      &.strftime("%a %-d %b, %l:%M %p %Z") ||
+      "?"
   end
 
   def favorite

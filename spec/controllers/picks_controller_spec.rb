@@ -27,9 +27,10 @@ describe PicksController, type: :controller do
 
     context "when there are matchups" do
       let!(:accepting_entries) do
-        (1..2).map do |n|
-          create :matchup, CurrentSeason.sport, :accepting_entries, round: round, number: n, **CurrentSeason.params
-        end
+        [
+          create(:matchup, CurrentSeason.sport, :accepting_entries, round: round, number: 1, **CurrentSeason.params),
+          create(:matchup, CurrentSeason.sport, :accepting_entries, round: round, number: 2, starts_at: nil, **CurrentSeason.params)
+        ]
       end
 
       context "when in the first round" do

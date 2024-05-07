@@ -16,21 +16,65 @@ RSpec.describe Matchup, type: :model do
   describe "::accepting_entries" do
     subject { described_class.accepting_entries }
 
-    let!(:future) { 2.times.map { |n| create :matchup, starts_at: 5.minutes.from_now, number: n + 1 } }
+    let!(:future) { (1..2).map { |n| create :matchup, starts_at: 5.minutes.from_now, number: n } }
+    let!(:unknown) { (3..4).map { |n| create :matchup, starts_at: nil, number: n } }
+    let!(:past) { (1..2).map { |n| create :matchup, starts_at: 5.minutes.ago, number: n, conference: :west } }
 
-    before { 2.times.map { |n| create :matchup, starts_at: 5.minutes.ago, number: n + 3 } }
-
-    it { is_expected.to match_array future }
+    it { is_expected.to match_array future + unknown }
   end
 
   describe "::started" do
     subject { described_class.started }
 
-    let!(:past) { 2.times.map { |n| create :matchup, starts_at: 5.minutes.ago, number: n + 3 } }
-
-    before { 2.times.map { |n| create :matchup, starts_at: 5.minutes.from_now, number: n + 1 } }
+    let!(:future) { (1..2).map { |n| create :matchup, starts_at: 5.minutes.from_now, number: n } }
+    let!(:unknown) { (3..4).map { |n| create :matchup, starts_at: nil, number: n } }
+    let!(:past) { (1..2).map { |n| create :matchup, starts_at: 5.minutes.ago, number: n, conference: :west } }
 
     it { is_expected.to match_array past }
+  end
+
+  describe "#started?" do
+    subject { matchup.started? }
+
+    context "when starts_at is in the future" do
+      let(:matchup) { create :matchup, starts_at: 1.minute.from_now }
+      it { should be false }
+    end
+
+    context "when starts_at is unknown" do
+      let(:matchup) { create :matchup, starts_at: nil }
+      it { should be false }
+    end
+
+    context "when starts_at is in the past" do
+      let(:matchup) { create :matchup, starts_at: 1.minute.ago }
+      it { should be true }
+    end
+  end
+
+  describe "#starts_at_pretty" do
+    subject { matchup.starts_at_pretty }
+
+    context "when starts_at is in the future" do
+      let(:matchup) { create :matchup, starts_at: 1.minute.from_now }
+      it do
+        should be_present
+        should_not eql "?"
+      end
+    end
+
+    context "when starts_at is unknown" do
+      let(:matchup) { create :matchup, starts_at: nil }
+      it { should eql "?" }
+    end
+
+    context "when starts_at is in the past" do
+      let(:matchup) { create :matchup, starts_at: 1.minute.ago }
+      it do
+        should be_present
+        should_not eql "?"
+      end
+    end
   end
 
   describe "#favorite" do
