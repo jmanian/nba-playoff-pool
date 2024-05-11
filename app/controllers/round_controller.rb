@@ -26,10 +26,12 @@ class RoundController < ApplicationController
 
     @num_users = @user_data.length
 
+    # For each matchup, count the picks for each outcome
     @matchup_data = picks.group_by(&:matchup_id)
       .transform_values do |pps|
       pps.group_by(&:scoring_index)
         .transform_values(&:length)
+        .merge(total: pps.length)
     end
 
     @bg_color = BG_COLORS[params[:round].to_i]
