@@ -11,24 +11,4 @@
   <% end %>
 </ul>
 
-<div class="table-responsive">
-  <table class="table table-hover table-sm">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <% if @round_data[:show_totals] %>
-          <th scope="col" class="text-center">Total</th>
-          <%= render partial: 'shared/empty_cell' %>
-        <% end %>
-        <%= render partial: 'round/matchup_title', collection: @round_data[:matchups], as: :matchup, spacer_template: 'shared/empty_cell' %>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render partial: 'round/user_row', collection: @round_data[:user_data], as: :user_round %>
-    </tbody>
-    <tfoot>
-      <%= render partial: 'round/matchup_summary_row', collection: (0...@round_data[:num_outcomes]).to_a, as: :outcome %>
-    </tfoot>
-  </table>
-</div>
+<%= render partial: 'round/round_table' %>
