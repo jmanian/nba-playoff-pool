@@ -1,9 +1,9 @@
 <tr <%= "class=fw-bold" if user_round.user == current_user %>>
   <td style="width: 1%;"><%= user_round.rank %></td>
   <%= render partial: 'shared/user_cell', locals: {user: user_round.user} %>
-  <% if @round_data[:show_totals] %>
+  <% if round_data[:show_totals] %>
     <%= render partial: 'round/total_cell', locals: {user_round: user_round} %>
     <%= render partial: 'shared/empty_cell' %>
   <% end %>
-  <%= render partial: 'round/pick_cell', collection: @round_data[:matchups], as: :matchup, locals: {user_round: user_round}, spacer_template: 'shared/empty_cell' %>
+  <%= render partial: 'round/pick_cell', collection: round_data[:matchups], as: :matchup, locals: {user_round: user_round}, spacer_template: 'shared/empty_cell' %>
 </tr>

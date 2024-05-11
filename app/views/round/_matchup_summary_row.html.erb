@@ -1,9 +1,9 @@
 <tr>
 <td></td>
 <td></td>
-<% if @round_data[:show_totals] %>
+<% if round_data[:show_totals] %>
   <td></td>
   <%= render partial: 'shared/empty_cell' %>
 <% end %>
-<%= render partial: 'round/matchup_summary_entry', collection: @round_data[:matchups], as: :matchup, locals: {outcome: outcome}, spacer_template: 'shared/empty_cell' %>
+<%= render partial: 'round/matchup_summary_entry', collection: round_data[:matchups], as: :matchup, locals: {outcome: outcome}, spacer_template: 'shared/empty_cell' %>
 </tr>
