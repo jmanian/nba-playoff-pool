@@ -14,17 +14,11 @@ class RoundController < ApplicationController
 
     picks = Pick.joins(:matchup).merge(matchups).includes(:matchup, :user)
 
-    @matchups = picks.map(&:matchup)
+    matchups = picks.map(&:matchup)
       .uniq
       .sort
-    @show_totals = @matchups.length > 1
 
-    @round_name = @matchups.first.round_name
-    @num_outcomes = @matchups.first.games_needed_to_win * 2
-
-    @user_data = UserScores::Round.build(picks)
-
-    @num_users = @user_data.length
+    user_data = UserScores::Round.build(picks)
 
     # For each matchup, count the picks for each outcome
     @matchup_data = picks.group_by(&:matchup_id)
@@ -33,6 +27,14 @@ class RoundController < ApplicationController
         .transform_values(&:length)
         .merge(total: pps.length)
     end
+
+    @round_data = {
+      number: params[:round].to_i,
+      matchups: matchups,
+      user_data: user_data,
+      show_totals: matchups.length > 1,
+      num_outcomes: matchups.first.games_needed_to_win * 2
+    }
 
     @bg_color = BG_COLORS[params[:round].to_i]
   end

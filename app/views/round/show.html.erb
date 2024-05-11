@@ -1,6 +1,6 @@
 <ul class="nav nav-pills mb-3">
   <% @round_names.sort.each do |n, name| %>
-    <% current = n.to_s == params[:round] %>
+    <% current = n == @round_data[:number] %>
     <li class="nav-item">
       <% if current %>
         <button class="nav-link active"><%= name %></button>
@@ -17,18 +17,18 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
-        <% if @show_totals %>
+        <% if @round_data[:show_totals] %>
           <th scope="col" class="text-center">Total</th>
           <%= render partial: 'shared/empty_cell' %>
         <% end %>
-        <%= render partial: 'round/matchup_title', collection: @matchups, as: :matchup, spacer_template: 'shared/empty_cell' %>
+        <%= render partial: 'round/matchup_title', collection: @round_data[:matchups], as: :matchup, spacer_template: 'shared/empty_cell' %>
       </tr>
     </thead>
     <tbody>
-      <%= render partial: 'round/user_row', collection: @user_data, as: :user_round %>
+      <%= render partial: 'round/user_row', collection: @round_data[:user_data], as: :user_round %>
     </tbody>
     <tfoot>
-      <%= render partial: 'round/matchup_summary_row', collection: (0...@num_outcomes).to_a, as: :outcome %>
+      <%= render partial: 'round/matchup_summary_row', collection: (0...@round_data[:num_outcomes]).to_a, as: :outcome %>
     </tfoot>
   </table>
 </div>
