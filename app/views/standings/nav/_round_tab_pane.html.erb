@@ -1,0 +1,4 @@
+<% n = round_data[:number] %>
+<div class="tab-pane fade" id="round-<%= n %>-table" role="tabpanel" aria-labelledby="round-<%= n %>-table-tab">
+  <%= render partial: 'round/round_table', locals: {round_data: round_data} %>
+</div>

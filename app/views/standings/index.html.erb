@@ -1,10 +1,13 @@
-<ul class="nav nav-pills" id="standingsTabs" role="tablist">
+<ul class="nav nav-pills mb-3" id="standingsTabs" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="chart-tab" data-bs-toggle="tab" data-bs-target="#chart" type="button" role="tab" aria-controls="chart" aria-selected="true">Chart</button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="table-tab" data-bs-toggle="tab" data-bs-target="#table" type="button" role="tab" aria-controls="table" aria-selected="false">Table</button>
   </li>
+  <% if @show_new_rounds_interface %>
+    <%= render partial: 'standings/nav/round_list_item', collection: @rounds_data, as: :round_data %>
+  <% end %>
 </ul>
 <div class="tab-content" id="standingsTabsContent">
   <div class="tab-pane fade show active" id="chart" role="tabpanel" aria-labelledby="chart-tab">
@@ -13,6 +16,9 @@
   <div class="tab-pane fade" id="table" role="tabpanel" aria-labelledby="table-tab">
     <%= render partial: 'standings/numbers_table' %>
   </div>
+  <% if @show_new_rounds_interface %>
+    <%= render partial: 'standings/nav/round_tab_pane', collection: @rounds_data, as: :round_data %>
+  <% end %>
 </div>
 
 
