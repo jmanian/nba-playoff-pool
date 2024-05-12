@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   root to: redirect(CurrentSeason.path)
   resources :picks, only: %i[index new create]
+  # TODO: Add constraint on :sport values
   get "/:sport/:year", to: "standings#index"
   get "/:sport/:year/:round", to: "round#show"
 end
