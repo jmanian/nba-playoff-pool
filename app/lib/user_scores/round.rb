@@ -4,7 +4,7 @@ module UserScores
     attr_accessor :max_possible_round_total, :biggest_matchup_max_possible
 
     def self.build(picks)
-      scores = super(picks)
+      scores = super
 
       max_possibles = picks.map(&:matchup).uniq.map(&:max_possible_points)
       biggest_matchup_max_possible = max_possibles.max
@@ -16,7 +16,7 @@ module UserScores
     end
 
     def initialize(user, picks)
-      super(user, picks)
+      super
       @picks_by_matchup_id = picks.index_by(&:matchup_id)
     end
 

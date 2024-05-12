@@ -3,7 +3,7 @@ module UserScores
     attr_reader :rounds
 
     def initialize(user, picks)
-      super(user, picks)
+      super
 
       @rounds = picks.select { |p| p.matchup.started? }
         .group_by { |p| p.matchup.round }
