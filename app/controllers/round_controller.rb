@@ -28,14 +28,15 @@ class RoundController < ApplicationController
         .merge(total: pps.length)
     end
 
+    round_number = params[:round].to_i
+
     @round_data = {
-      number: params[:round].to_i,
+      number: round_number,
       matchups: matchups,
       user_data: user_data,
       show_totals: matchups.length > 1,
-      num_outcomes: matchups.first.games_needed_to_win * 2
+      num_outcomes: matchups.first.games_needed_to_win * 2,
+      bg_color: BG_COLORS[round_number]
     }
-
-    @bg_color = BG_COLORS[params[:round].to_i]
   end
 end

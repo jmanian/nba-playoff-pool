@@ -8,13 +8,13 @@
     <div class="progress bg-secondary" style="--bs-bg-opacity: .15; width: <%= width %>%" data-bs-toggle="tooltip" data-bs-html="true" title="<%= pick.points_tooltip %>">
       <% if pick.min_points.positive? %>
         <% pct = (pick.min_points_percentage * 100).round(4) %>
-        <div class="progress-bar <%= @bg_color %>" role="progressbar" style="width: <%= pct %>%">
+        <div class="progress-bar <%= round_data[:bg_color] %>" role="progressbar" style="width: <%= pct %>%">
           <%= pick.min_points %>
         </div>
       <% end %>
       <% if pick.potential_points.positive? %>
         <% pct = (pick.potential_points_percentage * 100).round(4) %>
-        <div class="progress-bar progress-bar-striped <%= @bg_color %>" role="progressbar" style="--bs-bg-opacity: .5; width: <%= pct %>%">
+        <div class="progress-bar progress-bar-striped <%= round_data[:bg_color] %>" role="progressbar" style="--bs-bg-opacity: .5; width: <%= pct %>%">
           <%= pick.potential_points %>
         </div>
       <% end %>
