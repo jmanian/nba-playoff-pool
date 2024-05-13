@@ -1,4 +1,5 @@
 <% n = round_data[:number] %>
+<% active = @initial_round == n %>
 <li class="nav-item" role="presentation">
-  <button class="nav-link" id="round-<%= n %>-tab" data-bs-toggle="tab" data-bs-target="#round-<%= n %>-table" type="button" role="tab" aria-controls="round-<%= n %>-table" aria-selected="false"><%= @round_names[n] %></button>
+  <button class="nav-link <%= class_names(active: active) %>" id="round-<%= n %>-tab" data-bs-toggle="tab" data-bs-target="#round-<%= n %>-table" type="button" role="tab" aria-controls="round-<%= n %>-table" aria-selected="false"><%= @round_names[n] %></button>
 </li>

@@ -1,6 +1,6 @@
 <ul class="nav nav-pills mb-3" id="standingsTabs" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="chart-tab" data-bs-toggle="tab" data-bs-target="#chart" type="button" role="tab" aria-controls="chart" aria-selected="true">Chart</button>
+    <button class="nav-link <%= class_names(active: @initial_round.nil?) %>" id="chart-tab" data-bs-toggle="tab" data-bs-target="#chart" type="button" role="tab" aria-controls="chart" aria-selected="true">Chart</button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="table-tab" data-bs-toggle="tab" data-bs-target="#table" type="button" role="tab" aria-controls="table" aria-selected="false">Table</button>
@@ -10,7 +10,7 @@
   <% end %>
 </ul>
 <div class="tab-content" id="standingsTabsContent">
-  <div class="tab-pane fade show active" id="chart" role="tabpanel" aria-labelledby="chart-tab">
+  <div class="tab-pane fade <%= class_names(show: @initial_round.nil?, active: @initial_round.nil?) %>" id="chart" role="tabpanel" aria-labelledby="chart-tab">
     <%= render partial: 'standings/progress_table' %>
   </div>
   <div class="tab-pane fade" id="table" role="tabpanel" aria-labelledby="table-tab">

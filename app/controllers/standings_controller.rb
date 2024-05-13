@@ -28,6 +28,7 @@ class StandingsController < ApplicationController
     end
 
     @show_new_rounds_interface = Rails.env.development? || current_user&.admin?
+    @initial_round = params[:round]&.to_i
   end
 
   def build_round_data(n, picks)

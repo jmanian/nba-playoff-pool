@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   resources :picks, only: %i[index new create]
   # TODO: Add constraint on :sport values
   get "/:sport/:year", to: "standings#index"
-  get "/:sport/:year/:round", to: "round#show"
+  get "/:sport/:year/:round", to: "standings#index"
 end
