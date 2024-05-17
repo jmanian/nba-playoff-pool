@@ -18,15 +18,12 @@ class ApplicationController < ActionController::Base
   end
 
   def load_all_seasons
-    @all_season_rounds =
+    @past_seasons =
       Matchup.started
-        .select(:sport, :year, :round)
         .distinct
-        .group_by { |m| [m.sport.to_sym, m.year] }
-        .transform_values { |matchups| matchups.to_h { |m| [m.round, m.round_name] } }
-
-    # Prior seasons and their last round number, for the past seasons navbar dropdown
-    @past_seasons = @all_season_rounds.reject { |sport_year, _| sport_year == CurrentSeason.sport_year }
-      .map { |sport_and_year, rounds| [*sport_and_year, rounds.keys.max] }
+        .order(:sport, year: :desc)
+        .pluck(:sport, :year)
+        .map { |sport, year| [sport.to_sym, year] }
+        .reject { |sy| sy == CurrentSeason.sport_year }
   end
 end
