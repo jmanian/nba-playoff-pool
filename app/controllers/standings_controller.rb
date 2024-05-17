@@ -31,6 +31,8 @@ class StandingsController < ApplicationController
 
     @show_new_rounds_interface = Rails.env.development? || current_user&.admin?
     @initial_round = params[:round]&.to_i
+    # The earliest unfinished round
+    @initial_round ||= picks.map(&:matchup).reject(&:finished?).map(&:round).min
   end
 
   def build_round_data(n, picks)
