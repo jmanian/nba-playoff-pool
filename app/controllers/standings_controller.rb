@@ -1,6 +1,4 @@
 class StandingsController < ApplicationController
-  before_action :set_round_names
-
   def index
     matchups = Matchup.started
       .where(params.permit(:sport, :year))
@@ -11,7 +9,11 @@ class StandingsController < ApplicationController
 
     @biggest_max_total = @data.first&.max_total
 
+    # Array of the relevant round integers
     @rounds = @data.flat_map { |t| t.rounds.keys }.uniq.sort
+
+    # Hash of round numbers to names
+    @round_names = picks.map(&:matchup).uniq(&:round).to_h { |m| [m.round, m.round_name] }
 
     @bg_colors = BG_COLORS
 

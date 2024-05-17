@@ -29,8 +29,4 @@ class ApplicationController < ActionController::Base
     @past_seasons = @all_season_rounds.reject { |sport_year, _| sport_year == CurrentSeason.sport_year }
       .map { |sport_and_year, rounds| [*sport_and_year, rounds.keys.max] }
   end
-
-  def set_round_names
-    @round_names = @all_season_rounds[[params[:sport].to_sym, params[:year].to_i]]
-  end
 end
