@@ -11,13 +11,6 @@
           <%= link_to('Standings', CurrentSeason.path, class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
         </li>
 
-        <% if @current_last_round.present? %>
-          <li class="nav-item">
-            <% current = controller_name == 'round' %>
-            <%= link_to('Pool Picks', "#{CurrentSeason.path}/#{@current_last_round}", class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
-          </li>
-        <% end %>
-
         <li class="nav-item">
           <% current = controller_name == 'picks' %>
           <%= link_to('My Picks', '/picks', class: class_names(:'nav-link', active: current), aria_current: (current ? :page : nil)) %>
@@ -29,7 +22,7 @@
               Past Seasons
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= render partial: 'navbar/past_season', collection: @past_seasons, as: :sport_year_last_round, spacer_template: 'navbar/dropdown_divider' %>
+              <%= render partial: 'navbar/past_season_sport', collection: @past_seasons, as: :sport_years, spacer_template: 'navbar/dropdown_divider' %>
             </ul>
           </li>
         <% end %>
