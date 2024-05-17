@@ -1,11 +1,11 @@
 <ul class="nav nav-pills mb-3" id="standingsTabs" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link <%= class_names(active: @initial_round.nil?) %>" id="chart-tab" data-bs-toggle="tab" data-bs-target="#chart" type="button" role="tab" aria-controls="chart" aria-selected="true">Overall</button>
+    <button class="nav-link <%= class_names(active: @initial_round.nil?) %>" id="overall-tab" data-bs-toggle="tab" data-bs-target="#overall" type="button" role="tab" aria-controls="overall" aria-selected="true">Overall</button>
   </li>
   <%= render partial: 'standings/nav/round_list_item', collection: @rounds_data, as: :round_data %>
 </ul>
 <div class="tab-content" id="standingsTabsContent">
-  <div class="tab-pane fade <%= class_names(show: @initial_round.nil?, active: @initial_round.nil?) %>" id="chart" role="tabpanel" aria-labelledby="chart-tab">
+  <div class="tab-pane fade <%= class_names(show: @initial_round.nil?, active: @initial_round.nil?) %>" id="overall" role="tabpanel" aria-labelledby="overall-tab">
     <%= render partial: 'standings/progress_table' %>
   </div>
   <%= render partial: 'standings/nav/round_tab_pane', collection: @rounds_data, as: :round_data %>
