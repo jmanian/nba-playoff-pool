@@ -22,7 +22,7 @@
               Past Seasons
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= render partial: 'navbar/past_season', collection: @past_seasons, as: :sport_year%>
+              <%= render partial: 'navbar/past_season_sport', collection: @past_seasons, as: :sport_years, spacer_template: 'navbar/dropdown_divider' %>
             </ul>
           </li>
         <% end %>

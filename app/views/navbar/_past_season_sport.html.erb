@@ -1,0 +1,3 @@
+<% sport, years = sport_years %>
+<li><h6 class="dropdown-header"><%= "#{sport.to_s.upcase}" %></h6></li>
+<%= render partial: 'navbar/past_season_year', collection: years, as: :year, locals: {sport: sport}%>
