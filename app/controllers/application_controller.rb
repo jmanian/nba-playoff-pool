@@ -25,8 +25,6 @@ class ApplicationController < ActionController::Base
         .group_by { |m| [m.sport.to_sym, m.year] }
         .transform_values { |matchups| matchups.to_h { |m| [m.round, m.round_name] } }
 
-    # The highest round number of the current season, for the rounds button on navbar
-    @current_last_round = @all_season_rounds[CurrentSeason.sport_year]&.sort&.last&.first
     # Prior seasons and their last round number, for the past seasons navbar dropdown
     @past_seasons = @all_season_rounds.reject { |sport_year, _| sport_year == CurrentSeason.sport_year }
       .map { |sport_and_year, rounds| [*sport_and_year, rounds.keys.max] }
