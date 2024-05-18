@@ -42,17 +42,17 @@ module PlayoffStructure
 
   NBA = [
     {
-      name: "Round 1",
+      name: "First Round",
       games_needed_to_win: 4,
       matchups_per_conference: 4
     },
     {
-      name: "Round 2",
+      name: "Conf Semis",
       games_needed_to_win: 4,
       matchups_per_conference: 2
     },
     {
-      name: "Round 3",
+      name: "Conf Finals",
       games_needed_to_win: 4,
       matchups_per_conference: 1
     },
