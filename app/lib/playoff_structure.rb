@@ -47,12 +47,12 @@ module PlayoffStructure
       matchups_per_conference: 4
     },
     {
-      name: "Conf. Semifinals",
+      name: "Conf Semis",
       games_needed_to_win: 4,
       matchups_per_conference: 2
     },
     {
-      name: "Conf. Finals",
+      name: "Conf Finals",
       games_needed_to_win: 4,
       matchups_per_conference: 1
     },
