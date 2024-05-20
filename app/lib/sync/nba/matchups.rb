@@ -137,11 +137,11 @@ module Sync
       end
 
       def favorite_tricode
-        series_data[:highSeedTricode]&.downcase
+        series_data[:highSeedTricode].presence&.downcase
       end
 
       def underdog_tricode
-        series_data[:lowSeedTricode]&.downcase
+        series_data[:lowSeedTricode].presence&.downcase
       end
 
       def favorite_wins
