@@ -11,8 +11,8 @@ RSpec.describe Sync::Nba::Matchups do
         roundNumber: round_number,
         seriesConference: series_conference,
         highSeedRank: favorite_seed,
-        highSeedTricode: favorite_tricode.to_s.upcase,
-        lowSeedTricode: underdog_tricode.to_s.upcase,
+        highSeedTricode: favorite_tricode&.to_s&.upcase,
+        lowSeedTricode: underdog_tricode&.to_s&.upcase,
         highSeedSeriesWins: favorite_wins,
         lowSeedSeriesWins: underdog_wins,
         nextGameDateTimeUTC: next_game_at_pretty
@@ -38,12 +38,27 @@ RSpec.describe Sync::Nba::Matchups do
     end
 
     shared_examples_for "syncing" do
-      context "when both teams are unknown" do
-        pending "test with all data as null"
+      context "when both teams are unknown (nulls)" do
+        let(:favorite_tricode) { nil }
+        let(:underdog_tricode) { nil }
+        let(:favorite_wins) { nil }
+        let(:underdog_wins) { nil }
+        let(:next_game_at) { nil }
+
+        it "does nothing" do
+          subject
+        end
       end
 
-      context "when one team is unknown" do
-        pending "test with the unknown team as blank strings"
+      context "when one team is unknown (blank string)" do
+        let(:underdog_tricode) { "" }
+        let(:favorite_wins) { 0 }
+        let(:underdog_wins) { 0 }
+        let(:next_game_at) { nil }
+
+        it "does nothing" do
+          subject
+        end
       end
 
       context "when the series hasn't started yet" do
