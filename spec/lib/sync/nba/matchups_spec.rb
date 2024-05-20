@@ -38,6 +38,14 @@ RSpec.describe Sync::Nba::Matchups do
     end
 
     shared_examples_for "syncing" do
+      context "when both teams are unknown" do
+        pending "test with all data as null"
+      end
+
+      context "when one team is unknown" do
+        pending "test with the unknown team as blank strings"
+      end
+
       context "when the series hasn't started yet" do
         let(:favorite_wins) { 0 }
         let(:underdog_wins) { 0 }
