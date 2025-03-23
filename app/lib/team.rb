@@ -76,8 +76,8 @@ class Team
     [:tex, "Texas", "Rangers"],
     [:tor, "Toronto", "Blue Jays"],
     [:wsh, "Washington", "Nationals"]
-  ].map { |tc, c, n| [tc, Team.new(tc, c, n)] }
-    .to_h.with_indifferent_access
+  ].to_h { |tc, c, n| [tc, Team.new(tc, c, n)] }
+    .with_indifferent_access
 
   class << self
     def nba_tricodes
@@ -89,10 +89,8 @@ class Team
     end
 
     def tricodes_for_enum
-      (nba_tricodes + mlb_tricodes)
-        .uniq
-        .sort
-        .map { |tc| [tc, tc] }.to_h
+      (nba_tricodes | mlb_tricodes)
+        .index_with(&:itself)
     end
 
     def nba(tricode)
