@@ -2,10 +2,6 @@ module CurrentSeason
   SPORT = :mlb
   YEAR = 2024
 
-  PATH = "/#{SPORT}/#{YEAR}".freeze
-  PARAMS = {sport: SPORT, year: YEAR}.freeze
-  SPORT_YEAR = [SPORT, YEAR].freeze
-
   class << self
     def sport
       SPORT
