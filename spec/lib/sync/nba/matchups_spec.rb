@@ -1,6 +1,54 @@
 require "rails_helper"
 
 RSpec.describe Sync::Nba::Matchups do
+  describe "::run" do
+    subject { described_class.run(year) }
+
+    let(:year) { rand(2020..2025) }
+    let(:data) do
+      {
+        bracket: {
+          seasonYear: (year - 1).to_s,
+          playoffBracketSeries: series
+        }
+      }
+    end
+    let(:series) do
+      [
+        {
+          data: 1
+        },
+        {
+          data: 2
+        }
+      ]
+    end
+
+    it "syncs all the matchups from the fetched bracket" do
+      expect(Sync::Nba::Client).to receive(:fetch_bracket).with(year).and_return(data)
+      series.each do |s|
+        expect(described_class).to receive(:sync_matchup).with(year, s)
+      end
+
+      subject
+    end
+  end
+
+  describe "::sync_matchup" do
+    subject { described_class.sync_matchup(year, series_data) }
+
+    let(:year) { rand(2020..2025) }
+    let(:series_data) { {data: SecureRandom.hex} }
+
+    it "syncs with an instance" do
+      expect_any_instance_of(described_class).to receive(:sync_matchup) do |instance|
+        expect(instance.instance_variable_get(:@year)).to eql(year)
+        expect(instance.instance_variable_get(:@series_data)).to eql(series_data)
+      end
+      subject
+    end
+  end
+
   describe "#sync_matchup" do
     subject { instance.sync_matchup }
     let(:instance) { described_class.new(year, series_data) }
@@ -177,7 +225,7 @@ RSpec.describe Sync::Nba::Matchups do
       it_behaves_like "syncing"
     end
 
-    context "when it's the west second round" do
+    context "when it's the west second round with a 3 seed" do
       let(:round_number) { 2 }
       let(:series_conference) { "West" }
       let(:conference) { "west" }
@@ -186,6 +234,19 @@ RSpec.describe Sync::Nba::Matchups do
       let(:favorite_tricode) { "gsw" }
       let(:underdog_tricode) { "lal" }
       let!(:other_matchup) { create :matchup, year: year, round: 2, conference: "west", number: 1, favorite_tricode: "lac", underdog_tricode: "dal" }
+
+      it_behaves_like "syncing"
+    end
+
+    context "when it's the west second round with a 4 seed" do
+      let(:round_number) { 2 }
+      let(:series_conference) { "West" }
+      let(:conference) { "west" }
+      let(:favorite_seed) { 4 }
+      let(:number) { 1 }
+      let(:favorite_tricode) { "gsw" }
+      let(:underdog_tricode) { "lal" }
+      let!(:other_matchup) { create :matchup, year: year, round: 2, conference: "west", number: 2, favorite_tricode: "lac", underdog_tricode: "dal" }
 
       it_behaves_like "syncing"
     end
