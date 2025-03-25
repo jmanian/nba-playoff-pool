@@ -1,0 +1,330 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://cdn.nba.com/static/json/staticData/brackets/2023/PlayoffBracket.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.8.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      x-amz-id-2:
+      - 5WdjkTMww769FhgYqtJios4UzGYmFWsL2+4MuiEISQqoKexjQrkupwr+GCA7ssf0+jxO7lw+4UM=
+      x-amz-request-id:
+      - EKDQGTKXPDPX34HY
+      last-modified:
+      - Thu, 27 Feb 2025 15:24:03 GMT
+      etag:
+      - '"a936b528048eac2194badc3b6695b3bc"'
+      x-amz-server-side-encryption:
+      - AES256
+      x-amz-version-id:
+      - f3BbgFgKdttbhgA60Z8AZ7rpOYEfI7jf
+      content-type:
+      - text/plain
+      server:
+      - AmazonS3
+      vary:
+      - Accept-Encoding
+      date:
+      - Tue, 25 Mar 2025 02:55:22 GMT
+      content-length:
+      - '20607'
+      connection:
+      - keep-alive
+      x-frame-options:
+      - sameorigin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=86400
+    body:
+      encoding: UTF-8
+      string: "{\r\n  \"meta\": {\r\n    \"version\": 1,\r\n    \"request\": \"http://nba.cloud/league/00/2023/2/playoffbracket?Format=json\",\r\n
+        \   \"time\": \"2025-02-27T10:24:02.242Z\"\r\n  },\r\n  \"bracket\": {\r\n
+        \   \"leagueId\": \"00\",\r\n    \"seasonYear\": \"2023\",\r\n    \"bracketType\":
+        \"Playoff Bracket\",\r\n    \"playoffPictureSeries\": [],\r\n    \"playInBracketSeries\":
+        [],\r\n    \"playoffBracketSeries\": [\r\n      {\r\n        \"seriesId\":
+        \"00_42023_1_0_1610612738_1610612748\",\r\n        \"roundNumber\": 1,\r\n
+        \       \"seriesNumber\": 0,\r\n        \"seriesConference\": \"East\",\r\n
+        \       \"seriesText\": \"BOS wins 4-1\",\r\n        \"seriesStatus\": 3,\r\n
+        \       \"seriesWinner\": 1610612738,\r\n        \"highSeedId\": 1610612738,\r\n
+        \       \"highSeedCity\": \"Boston\",\r\n        \"highSeedName\": \"Celtics\",\r\n
+        \       \"highSeedTricode\": \"BOS\",\r\n        \"highSeedRank\": 1,\r\n
+        \       \"highSeedSeriesWins\": 4,\r\n        \"highSeedRegSeasonWins\": 64,\r\n
+        \       \"highSeedRegSeasonLosses\": 18,\r\n        \"lowSeedId\": 1610612748,\r\n
+        \       \"lowSeedCity\": \"Miami\",\r\n        \"lowSeedName\": \"Heat\",\r\n
+        \       \"lowSeedTricode\": \"MIA\",\r\n        \"lowSeedRank\": 8,\r\n        \"lowSeedSeriesWins\":
+        1,\r\n        \"lowSeedRegSeasonWins\": 46,\r\n        \"lowSeedRegSeasonLosses\":
+        36,\r\n        \"displayOrderNumber\": 4,\r\n        \"displayTopTeam\": 1610612738,\r\n
+        \       \"displayBottomTeam\": 1610612748,\r\n        \"poRoundDesc\": \"First
+        Round\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\": \"\",\r\n
+        \       \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300105\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_1_1_1610612752_1610612755\",\r\n
+        \       \"roundNumber\": 1,\r\n        \"seriesNumber\": 1,\r\n        \"seriesConference\":
+        \"East\",\r\n        \"seriesText\": \"NYK wins 4-2\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612752,\r\n        \"highSeedId\": 1610612752,\r\n
+        \       \"highSeedCity\": \"New York\",\r\n        \"highSeedName\": \"Knicks\",\r\n
+        \       \"highSeedTricode\": \"NYK\",\r\n        \"highSeedRank\": 2,\r\n
+        \       \"highSeedSeriesWins\": 4,\r\n        \"highSeedRegSeasonWins\": 50,\r\n
+        \       \"highSeedRegSeasonLosses\": 32,\r\n        \"lowSeedId\": 1610612755,\r\n
+        \       \"lowSeedCity\": \"Philadelphia\",\r\n        \"lowSeedName\": \"76ers\",\r\n
+        \       \"lowSeedTricode\": \"PHI\",\r\n        \"lowSeedRank\": 7,\r\n        \"lowSeedSeriesWins\":
+        2,\r\n        \"lowSeedRegSeasonWins\": 47,\r\n        \"lowSeedRegSeasonLosses\":
+        35,\r\n        \"displayOrderNumber\": 7,\r\n        \"displayTopTeam\": 1610612752,\r\n
+        \       \"displayBottomTeam\": 1610612755,\r\n        \"poRoundDesc\": \"First
+        Round\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\": \"\",\r\n
+        \       \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300116\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_1_2_1610612749_1610612754\",\r\n
+        \       \"roundNumber\": 1,\r\n        \"seriesNumber\": 2,\r\n        \"seriesConference\":
+        \"East\",\r\n        \"seriesText\": \"IND wins 4-2\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612754,\r\n        \"highSeedId\": 1610612749,\r\n
+        \       \"highSeedCity\": \"Milwaukee\",\r\n        \"highSeedName\": \"Bucks\",\r\n
+        \       \"highSeedTricode\": \"MIL\",\r\n        \"highSeedRank\": 3,\r\n
+        \       \"highSeedSeriesWins\": 2,\r\n        \"highSeedRegSeasonWins\": 49,\r\n
+        \       \"highSeedRegSeasonLosses\": 33,\r\n        \"lowSeedId\": 1610612754,\r\n
+        \       \"lowSeedCity\": \"Indiana\",\r\n        \"lowSeedName\": \"Pacers\",\r\n
+        \       \"lowSeedTricode\": \"IND\",\r\n        \"lowSeedRank\": 6,\r\n        \"lowSeedSeriesWins\":
+        4,\r\n        \"lowSeedRegSeasonWins\": 47,\r\n        \"lowSeedRegSeasonLosses\":
+        35,\r\n        \"displayOrderNumber\": 6,\r\n        \"displayTopTeam\": 1610612749,\r\n
+        \       \"displayBottomTeam\": 1610612754,\r\n        \"poRoundDesc\": \"First
+        Round\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\": \"\",\r\n
+        \       \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300126\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_1_3_1610612739_1610612753\",\r\n
+        \       \"roundNumber\": 1,\r\n        \"seriesNumber\": 3,\r\n        \"seriesConference\":
+        \"East\",\r\n        \"seriesText\": \"CLE wins 4-3\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612739,\r\n        \"highSeedId\": 1610612739,\r\n
+        \       \"highSeedCity\": \"Cleveland\",\r\n        \"highSeedName\": \"Cavaliers\",\r\n
+        \       \"highSeedTricode\": \"CLE\",\r\n        \"highSeedRank\": 4,\r\n
+        \       \"highSeedSeriesWins\": 4,\r\n        \"highSeedRegSeasonWins\": 48,\r\n
+        \       \"highSeedRegSeasonLosses\": 34,\r\n        \"lowSeedId\": 1610612753,\r\n
+        \       \"lowSeedCity\": \"Orlando\",\r\n        \"lowSeedName\": \"Magic\",\r\n
+        \       \"lowSeedTricode\": \"ORL\",\r\n        \"lowSeedRank\": 5,\r\n        \"lowSeedSeriesWins\":
+        3,\r\n        \"lowSeedRegSeasonWins\": 47,\r\n        \"lowSeedRegSeasonLosses\":
+        35,\r\n        \"displayOrderNumber\": 5,\r\n        \"displayTopTeam\": 1610612739,\r\n
+        \       \"displayBottomTeam\": 1610612753,\r\n        \"poRoundDesc\": \"First
+        Round\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\": \"\",\r\n
+        \       \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300137\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_1_4_1610612760_1610612740\",\r\n
+        \       \"roundNumber\": 1,\r\n        \"seriesNumber\": 4,\r\n        \"seriesConference\":
+        \"West\",\r\n        \"seriesText\": \"OKC wins 4-0\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612760,\r\n        \"highSeedId\": 1610612760,\r\n
+        \       \"highSeedCity\": \"Oklahoma City\",\r\n        \"highSeedName\":
+        \"Thunder\",\r\n        \"highSeedTricode\": \"OKC\",\r\n        \"highSeedRank\":
+        1,\r\n        \"highSeedSeriesWins\": 4,\r\n        \"highSeedRegSeasonWins\":
+        57,\r\n        \"highSeedRegSeasonLosses\": 25,\r\n        \"lowSeedId\":
+        1610612740,\r\n        \"lowSeedCity\": \"New Orleans\",\r\n        \"lowSeedName\":
+        \"Pelicans\",\r\n        \"lowSeedTricode\": \"NOP\",\r\n        \"lowSeedRank\":
+        8,\r\n        \"lowSeedSeriesWins\": 0,\r\n        \"lowSeedRegSeasonWins\":
+        49,\r\n        \"lowSeedRegSeasonLosses\": 33,\r\n        \"displayOrderNumber\":
+        0,\r\n        \"displayTopTeam\": 1610612760,\r\n        \"displayBottomTeam\":
+        1610612740,\r\n        \"poRoundDesc\": \"First Round\",\r\n        \"nextGameId\":
+        \"\",\r\n        \"nextGameNumber\": \"\",\r\n        \"nextGameDateTimeEt\":
+        \"\",\r\n        \"nextGameDateTimeUTC\": \"\",\r\n        \"nextGameStatus\":
+        0,\r\n        \"nextGameStatusText\": \"\",\r\n        \"nextGameBroadcasterId\":
+        0,\r\n        \"nextGameBroadcasterDisplay\": \"\",\r\n        \"nextGameNeutralSite\":
+        false,\r\n        \"lastCompletedGameId\": \"0042300144\"\r\n      },\r\n
+        \     {\r\n        \"seriesId\": \"00_42023_1_5_1610612743_1610612747\",\r\n
+        \       \"roundNumber\": 1,\r\n        \"seriesNumber\": 5,\r\n        \"seriesConference\":
+        \"West\",\r\n        \"seriesText\": \"DEN wins 4-1\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612743,\r\n        \"highSeedId\": 1610612743,\r\n
+        \       \"highSeedCity\": \"Denver\",\r\n        \"highSeedName\": \"Nuggets\",\r\n
+        \       \"highSeedTricode\": \"DEN\",\r\n        \"highSeedRank\": 2,\r\n
+        \       \"highSeedSeriesWins\": 4,\r\n        \"highSeedRegSeasonWins\": 57,\r\n
+        \       \"highSeedRegSeasonLosses\": 25,\r\n        \"lowSeedId\": 1610612747,\r\n
+        \       \"lowSeedCity\": \"Los Angeles\",\r\n        \"lowSeedName\": \"Lakers\",\r\n
+        \       \"lowSeedTricode\": \"LAL\",\r\n        \"lowSeedRank\": 7,\r\n        \"lowSeedSeriesWins\":
+        1,\r\n        \"lowSeedRegSeasonWins\": 47,\r\n        \"lowSeedRegSeasonLosses\":
+        35,\r\n        \"displayOrderNumber\": 3,\r\n        \"displayTopTeam\": 1610612743,\r\n
+        \       \"displayBottomTeam\": 1610612747,\r\n        \"poRoundDesc\": \"First
+        Round\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\": \"\",\r\n
+        \       \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300155\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_1_6_1610612750_1610612756\",\r\n
+        \       \"roundNumber\": 1,\r\n        \"seriesNumber\": 6,\r\n        \"seriesConference\":
+        \"West\",\r\n        \"seriesText\": \"MIN wins 4-0\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612750,\r\n        \"highSeedId\": 1610612750,\r\n
+        \       \"highSeedCity\": \"Minnesota\",\r\n        \"highSeedName\": \"Timberwolves\",\r\n
+        \       \"highSeedTricode\": \"MIN\",\r\n        \"highSeedRank\": 3,\r\n
+        \       \"highSeedSeriesWins\": 4,\r\n        \"highSeedRegSeasonWins\": 56,\r\n
+        \       \"highSeedRegSeasonLosses\": 26,\r\n        \"lowSeedId\": 1610612756,\r\n
+        \       \"lowSeedCity\": \"Phoenix\",\r\n        \"lowSeedName\": \"Suns\",\r\n
+        \       \"lowSeedTricode\": \"PHX\",\r\n        \"lowSeedRank\": 6,\r\n        \"lowSeedSeriesWins\":
+        0,\r\n        \"lowSeedRegSeasonWins\": 49,\r\n        \"lowSeedRegSeasonLosses\":
+        33,\r\n        \"displayOrderNumber\": 2,\r\n        \"displayTopTeam\": 1610612750,\r\n
+        \       \"displayBottomTeam\": 1610612756,\r\n        \"poRoundDesc\": \"First
+        Round\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\": \"\",\r\n
+        \       \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300164\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_1_7_1610612746_1610612742\",\r\n
+        \       \"roundNumber\": 1,\r\n        \"seriesNumber\": 7,\r\n        \"seriesConference\":
+        \"West\",\r\n        \"seriesText\": \"DAL wins 4-2\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612742,\r\n        \"highSeedId\": 1610612746,\r\n
+        \       \"highSeedCity\": \"LA\",\r\n        \"highSeedName\": \"Clippers\",\r\n
+        \       \"highSeedTricode\": \"LAC\",\r\n        \"highSeedRank\": 4,\r\n
+        \       \"highSeedSeriesWins\": 2,\r\n        \"highSeedRegSeasonWins\": 51,\r\n
+        \       \"highSeedRegSeasonLosses\": 31,\r\n        \"lowSeedId\": 1610612742,\r\n
+        \       \"lowSeedCity\": \"Dallas\",\r\n        \"lowSeedName\": \"Mavericks\",\r\n
+        \       \"lowSeedTricode\": \"DAL\",\r\n        \"lowSeedRank\": 5,\r\n        \"lowSeedSeriesWins\":
+        4,\r\n        \"lowSeedRegSeasonWins\": 50,\r\n        \"lowSeedRegSeasonLosses\":
+        32,\r\n        \"displayOrderNumber\": 1,\r\n        \"displayTopTeam\": 1610612746,\r\n
+        \       \"displayBottomTeam\": 1610612742,\r\n        \"poRoundDesc\": \"First
+        Round\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\": \"\",\r\n
+        \       \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300176\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_2_0_1610612738_1610612739\",\r\n
+        \       \"roundNumber\": 2,\r\n        \"seriesNumber\": 0,\r\n        \"seriesConference\":
+        \"East\",\r\n        \"seriesText\": \"BOS wins 4-1\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612738,\r\n        \"highSeedId\": 1610612738,\r\n
+        \       \"highSeedCity\": \"Boston\",\r\n        \"highSeedName\": \"Celtics\",\r\n
+        \       \"highSeedTricode\": \"BOS\",\r\n        \"highSeedRank\": 1,\r\n
+        \       \"highSeedSeriesWins\": 4,\r\n        \"highSeedRegSeasonWins\": 64,\r\n
+        \       \"highSeedRegSeasonLosses\": 18,\r\n        \"lowSeedId\": 1610612739,\r\n
+        \       \"lowSeedCity\": \"Cleveland\",\r\n        \"lowSeedName\": \"Cavaliers\",\r\n
+        \       \"lowSeedTricode\": \"CLE\",\r\n        \"lowSeedRank\": 4,\r\n        \"lowSeedSeriesWins\":
+        1,\r\n        \"lowSeedRegSeasonWins\": 48,\r\n        \"lowSeedRegSeasonLosses\":
+        34,\r\n        \"displayOrderNumber\": 2,\r\n        \"displayTopTeam\": 1610612738,\r\n
+        \       \"displayBottomTeam\": 1610612739,\r\n        \"poRoundDesc\": \"Conf.
+        Semifinals\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\":
+        \"\",\r\n        \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300205\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_2_1_1610612752_1610612754\",\r\n
+        \       \"roundNumber\": 2,\r\n        \"seriesNumber\": 1,\r\n        \"seriesConference\":
+        \"East\",\r\n        \"seriesText\": \"IND wins 4-3\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612754,\r\n        \"highSeedId\": 1610612752,\r\n
+        \       \"highSeedCity\": \"New York\",\r\n        \"highSeedName\": \"Knicks\",\r\n
+        \       \"highSeedTricode\": \"NYK\",\r\n        \"highSeedRank\": 2,\r\n
+        \       \"highSeedSeriesWins\": 3,\r\n        \"highSeedRegSeasonWins\": 50,\r\n
+        \       \"highSeedRegSeasonLosses\": 32,\r\n        \"lowSeedId\": 1610612754,\r\n
+        \       \"lowSeedCity\": \"Indiana\",\r\n        \"lowSeedName\": \"Pacers\",\r\n
+        \       \"lowSeedTricode\": \"IND\",\r\n        \"lowSeedRank\": 6,\r\n        \"lowSeedSeriesWins\":
+        4,\r\n        \"lowSeedRegSeasonWins\": 47,\r\n        \"lowSeedRegSeasonLosses\":
+        35,\r\n        \"displayOrderNumber\": 3,\r\n        \"displayTopTeam\": 1610612754,\r\n
+        \       \"displayBottomTeam\": 1610612752,\r\n        \"poRoundDesc\": \"Conf.
+        Semifinals\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\":
+        \"\",\r\n        \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300217\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_2_2_1610612760_1610612742\",\r\n
+        \       \"roundNumber\": 2,\r\n        \"seriesNumber\": 2,\r\n        \"seriesConference\":
+        \"West\",\r\n        \"seriesText\": \"DAL wins 4-2\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612742,\r\n        \"highSeedId\": 1610612760,\r\n
+        \       \"highSeedCity\": \"Oklahoma City\",\r\n        \"highSeedName\":
+        \"Thunder\",\r\n        \"highSeedTricode\": \"OKC\",\r\n        \"highSeedRank\":
+        1,\r\n        \"highSeedSeriesWins\": 2,\r\n        \"highSeedRegSeasonWins\":
+        57,\r\n        \"highSeedRegSeasonLosses\": 25,\r\n        \"lowSeedId\":
+        1610612742,\r\n        \"lowSeedCity\": \"Dallas\",\r\n        \"lowSeedName\":
+        \"Mavericks\",\r\n        \"lowSeedTricode\": \"DAL\",\r\n        \"lowSeedRank\":
+        5,\r\n        \"lowSeedSeriesWins\": 4,\r\n        \"lowSeedRegSeasonWins\":
+        50,\r\n        \"lowSeedRegSeasonLosses\": 32,\r\n        \"displayOrderNumber\":
+        0,\r\n        \"displayTopTeam\": 1610612760,\r\n        \"displayBottomTeam\":
+        1610612742,\r\n        \"poRoundDesc\": \"Conf. Semifinals\",\r\n        \"nextGameId\":
+        \"\",\r\n        \"nextGameNumber\": \"\",\r\n        \"nextGameDateTimeEt\":
+        \"\",\r\n        \"nextGameDateTimeUTC\": \"\",\r\n        \"nextGameStatus\":
+        0,\r\n        \"nextGameStatusText\": \"\",\r\n        \"nextGameBroadcasterId\":
+        0,\r\n        \"nextGameBroadcasterDisplay\": \"\",\r\n        \"nextGameNeutralSite\":
+        false,\r\n        \"lastCompletedGameId\": \"0042300226\"\r\n      },\r\n
+        \     {\r\n        \"seriesId\": \"00_42023_2_3_1610612743_1610612750\",\r\n
+        \       \"roundNumber\": 2,\r\n        \"seriesNumber\": 3,\r\n        \"seriesConference\":
+        \"West\",\r\n        \"seriesText\": \"MIN wins 4-3\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612750,\r\n        \"highSeedId\": 1610612743,\r\n
+        \       \"highSeedCity\": \"Denver\",\r\n        \"highSeedName\": \"Nuggets\",\r\n
+        \       \"highSeedTricode\": \"DEN\",\r\n        \"highSeedRank\": 2,\r\n
+        \       \"highSeedSeriesWins\": 3,\r\n        \"highSeedRegSeasonWins\": 57,\r\n
+        \       \"highSeedRegSeasonLosses\": 25,\r\n        \"lowSeedId\": 1610612750,\r\n
+        \       \"lowSeedCity\": \"Minnesota\",\r\n        \"lowSeedName\": \"Timberwolves\",\r\n
+        \       \"lowSeedTricode\": \"MIN\",\r\n        \"lowSeedRank\": 3,\r\n        \"lowSeedSeriesWins\":
+        4,\r\n        \"lowSeedRegSeasonWins\": 56,\r\n        \"lowSeedRegSeasonLosses\":
+        26,\r\n        \"displayOrderNumber\": 1,\r\n        \"displayTopTeam\": 1610612750,\r\n
+        \       \"displayBottomTeam\": 1610612743,\r\n        \"poRoundDesc\": \"Conf.
+        Semifinals\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\":
+        \"\",\r\n        \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300237\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_3_0_1610612738_1610612754\",\r\n
+        \       \"roundNumber\": 3,\r\n        \"seriesNumber\": 0,\r\n        \"seriesConference\":
+        \"East\",\r\n        \"seriesText\": \"BOS wins 4-0\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612738,\r\n        \"highSeedId\": 1610612738,\r\n
+        \       \"highSeedCity\": \"Boston\",\r\n        \"highSeedName\": \"Celtics\",\r\n
+        \       \"highSeedTricode\": \"BOS\",\r\n        \"highSeedRank\": 1,\r\n
+        \       \"highSeedSeriesWins\": 4,\r\n        \"highSeedRegSeasonWins\": 64,\r\n
+        \       \"highSeedRegSeasonLosses\": 18,\r\n        \"lowSeedId\": 1610612754,\r\n
+        \       \"lowSeedCity\": \"Indiana\",\r\n        \"lowSeedName\": \"Pacers\",\r\n
+        \       \"lowSeedTricode\": \"IND\",\r\n        \"lowSeedRank\": 6,\r\n        \"lowSeedSeriesWins\":
+        0,\r\n        \"lowSeedRegSeasonWins\": 47,\r\n        \"lowSeedRegSeasonLosses\":
+        35,\r\n        \"displayOrderNumber\": 1,\r\n        \"displayTopTeam\": 1610612738,\r\n
+        \       \"displayBottomTeam\": 1610612754,\r\n        \"poRoundDesc\": \"Conf.
+        Finals\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\":
+        \"\",\r\n        \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300304\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_3_1_1610612750_1610612742\",\r\n
+        \       \"roundNumber\": 3,\r\n        \"seriesNumber\": 1,\r\n        \"seriesConference\":
+        \"West\",\r\n        \"seriesText\": \"DAL wins 4-1\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612742,\r\n        \"highSeedId\": 1610612750,\r\n
+        \       \"highSeedCity\": \"Minnesota\",\r\n        \"highSeedName\": \"Timberwolves\",\r\n
+        \       \"highSeedTricode\": \"MIN\",\r\n        \"highSeedRank\": 3,\r\n
+        \       \"highSeedSeriesWins\": 1,\r\n        \"highSeedRegSeasonWins\": 56,\r\n
+        \       \"highSeedRegSeasonLosses\": 26,\r\n        \"lowSeedId\": 1610612742,\r\n
+        \       \"lowSeedCity\": \"Dallas\",\r\n        \"lowSeedName\": \"Mavericks\",\r\n
+        \       \"lowSeedTricode\": \"DAL\",\r\n        \"lowSeedRank\": 5,\r\n        \"lowSeedSeriesWins\":
+        4,\r\n        \"lowSeedRegSeasonWins\": 50,\r\n        \"lowSeedRegSeasonLosses\":
+        32,\r\n        \"displayOrderNumber\": 0,\r\n        \"displayTopTeam\": 1610612742,\r\n
+        \       \"displayBottomTeam\": 1610612750,\r\n        \"poRoundDesc\": \"Conf.
+        Finals\",\r\n        \"nextGameId\": \"\",\r\n        \"nextGameNumber\":
+        \"\",\r\n        \"nextGameDateTimeEt\": \"\",\r\n        \"nextGameDateTimeUTC\":
+        \"\",\r\n        \"nextGameStatus\": 0,\r\n        \"nextGameStatusText\":
+        \"\",\r\n        \"nextGameBroadcasterId\": 0,\r\n        \"nextGameBroadcasterDisplay\":
+        \"\",\r\n        \"nextGameNeutralSite\": false,\r\n        \"lastCompletedGameId\":
+        \"0042300315\"\r\n      },\r\n      {\r\n        \"seriesId\": \"00_42023_4_0_1610612738_1610612742\",\r\n
+        \       \"roundNumber\": 4,\r\n        \"seriesNumber\": 0,\r\n        \"seriesConference\":
+        \"NBA Finals\",\r\n        \"seriesText\": \"BOS wins 4-1\",\r\n        \"seriesStatus\":
+        3,\r\n        \"seriesWinner\": 1610612738,\r\n        \"highSeedId\": 1610612738,\r\n
+        \       \"highSeedCity\": \"Boston\",\r\n        \"highSeedName\": \"Celtics\",\r\n
+        \       \"highSeedTricode\": \"BOS\",\r\n        \"highSeedRank\": 1,\r\n
+        \       \"highSeedSeriesWins\": 4,\r\n        \"highSeedRegSeasonWins\": 64,\r\n
+        \       \"highSeedRegSeasonLosses\": 18,\r\n        \"lowSeedId\": 1610612742,\r\n
+        \       \"lowSeedCity\": \"Dallas\",\r\n        \"lowSeedName\": \"Mavericks\",\r\n
+        \       \"lowSeedTricode\": \"DAL\",\r\n        \"lowSeedRank\": 5,\r\n        \"lowSeedSeriesWins\":
+        1,\r\n        \"lowSeedRegSeasonWins\": 50,\r\n        \"lowSeedRegSeasonLosses\":
+        32,\r\n        \"displayOrderNumber\": 0,\r\n        \"displayTopTeam\": 1610612742,\r\n
+        \       \"displayBottomTeam\": 1610612738,\r\n        \"poRoundDesc\": \"\",\r\n
+        \       \"nextGameId\": \"\",\r\n        \"nextGameNumber\": \"\",\r\n        \"nextGameDateTimeEt\":
+        \"\",\r\n        \"nextGameDateTimeUTC\": \"\",\r\n        \"nextGameStatus\":
+        0,\r\n        \"nextGameStatusText\": \"\",\r\n        \"nextGameBroadcasterId\":
+        0,\r\n        \"nextGameBroadcasterDisplay\": \"\",\r\n        \"nextGameNeutralSite\":
+        false,\r\n        \"lastCompletedGameId\": \"0042300405\"\r\n      }\r\n    ],\r\n
+        \   \"istBracketSeries\": [],\r\n    \"currentRound\": 0\r\n  }\r\n}"
+  recorded_at: Tue, 25 Mar 2025 02:55:22 GMT
+recorded_with: VCR 6.3.1
