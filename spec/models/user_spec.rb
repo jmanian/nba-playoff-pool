@@ -1,5 +1,11 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#title" do
+    subject { user.title }
+
+    let(:user) { create :user }
+
+    it { should eql user.email }
+  end
 end
