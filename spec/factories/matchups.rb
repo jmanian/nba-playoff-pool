@@ -32,6 +32,13 @@ FactoryBot.define do
 
     trait :five_games do
       mlb
+      year { 2021 }
+      round { 1 }
+    end
+
+    trait :three_games do
+      mlb
+      year { 2022 }
       round { 1 }
     end
   end
