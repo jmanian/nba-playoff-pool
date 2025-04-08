@@ -108,6 +108,8 @@ class Matchup < ApplicationRecord
     favorite_wins + underdog_wins
   end
 
+  # The possible results that users can choose from for their picks,
+  # with the name and form value.
   def possible_results
     games_range = (games_needed_to_win..max_games).to_a
     [
@@ -128,6 +130,7 @@ class Matchup < ApplicationRecord
     "#{underdog.name} (#{underdog_wins})"
   end
 
+  # The overall structure of the playoffs for the sport and year
   def playoff_structure
     @playoff_structure ||= PlayoffStructure[self] || []
   end
@@ -163,6 +166,7 @@ class Matchup < ApplicationRecord
     round == num_rounds
   end
 
+  # The entire scoring grid scaled for the round
   def all_scores
     @all_scores ||= ScoringGrid[self].map do |row|
       row.map do |s|
@@ -175,6 +179,9 @@ class Matchup < ApplicationRecord
     possible_scores.flatten.max
   end
 
+  # The sub-matrix of the scoring grid for the remaining
+  # possible outcomes, based on the series score so far.
+  # When the series is over it collapses down to a single column.
   def possible_scores
     return @possible_scores if @possible_scores
 
