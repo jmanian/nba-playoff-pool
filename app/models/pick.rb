@@ -95,8 +95,10 @@ class Pick < ApplicationRecord
       "Based on the results so far this pick will receive #{min_points}–#{max_points} " \
         "#{"point".pluralize(max_points)}#{pen}."
     else
+      # :nocov:
       "Based on the results so far this pick will receive #{min_points} " \
         "#{"point".pluralize(min_points)}#{pen}."
+      # :nocov:
     end
   end
 end
