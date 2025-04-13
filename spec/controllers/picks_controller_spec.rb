@@ -144,14 +144,75 @@ describe PicksController, type: :controller do
       end
     end
 
-    it "includes the matchups and picksfor the current season that are accepting entries" do
+    it "includes the matchups and picks for the current season that are accepting entries" do
       get :new
       expect(assigns(:matchups)).to match_array(matchups)
       expect(assigns(:picks).keys).to match_array(matchups.map(&:id))
       expect(assigns(:picks).values.map(&:matchup)).to match_array(matchups)
       expect(assigns(:picks).values.map(&:user)).to all eql(user)
     end
+  end
 
-    # it "includes the picks for the current user" do
+  describe "#create" do
+    let!(:matchups) { (1..2).map { |n| create :matchup, :nba, :accepting_entries, year: 2022, number: n } }
+    let!(:started_matchups) { (3..4).map { |n| create :matchup, :nba, :started, year: 2022, number: n } }
+    let!(:wrong_sport_matchups) { (1..2).map { |n| create :matchup, :mlb, :accepting_entries, year: 2022, number: n } }
+    let(:params) do
+      {
+        pick: {
+          matchup: {
+            matchups.first.id => {
+              result: "f-5"
+            },
+            matchups.last.id => {
+              result: "u-6"
+            },
+            started_matchups.first.id => {
+              result: "f-4"
+            },
+            started_matchups.last.id => {
+              result: "u-4"
+            },
+            wrong_sport_matchups.first.id => {
+              result: "f-3"
+            },
+            wrong_sport_matchups.last.id => {
+              result: "u-3"
+            }
+          }
+        }
+      }
+    end
+    context "with no existing picks" do
+      it "creates the picks" do
+        post :create, params: params
+        expect(user.picks.count).to eql(2)
+        expect(user.picks.map(&:matchup)).to match_array(matchups)
+        expect(user.picks.to_a.pluck(:matchup_id, :winner_is_favorite, :num_games)).to contain_exactly(
+          [matchups.first.id, true, 5],
+          [matchups.last.id, false, 6]
+        )
+      end
+
+    end
+
+    context "with existing picks" do
+      let!(:editable_pick) { create :pick, user: user, matchup: matchups.first, winner_is_favorite: false, num_games: 6 }
+      let!(:started_matchup_pick) { create :pick, user: user, matchup: started_matchups.first, winner_is_favorite: false, num_games: 7 }
+      let!(:wrong_sport_pick) { create :pick, user: user, matchup: wrong_sport_matchups.first, winner_is_favorite: false, num_games: 2 }
+
+      it "updates the editable picks and creates new ones" do
+        expect(user.picks.count).to eql(3)
+        post :create, params: params
+        expect(user.picks.count).to eql(4)
+        expect(user.picks.map(&:matchup)).to contain_exactly(*matchups, started_matchups.first, wrong_sport_matchups.first)
+        expect(user.picks.to_a.pluck(:matchup_id, :winner_is_favorite, :num_games)).to contain_exactly(
+          [matchups.first.id, true, 5],
+          [matchups.last.id, false, 6],
+          [started_matchups.first.id, false, 7],
+          [wrong_sport_matchups.first.id, false, 2]
+        )
+      end
+    end
   end
 end
