@@ -193,7 +193,6 @@ describe PicksController, type: :controller do
           [matchups.last.id, false, 6]
         )
       end
-
     end
 
     context "with existing picks" do
