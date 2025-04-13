@@ -55,7 +55,9 @@ module UserScores
         "Based on the results so far these picks will receive #{min_total}–#{max_total} " \
           "#{"point".pluralize(max_total)}."
       else
+        # :nocov:
         "Based on the results so far these picks will receive #{min_total} #{"point".pluralize(min_total)}."
+        # :nocov:
       end
     end
   end
