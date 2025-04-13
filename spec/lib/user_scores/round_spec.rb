@@ -25,7 +25,6 @@ describe UserScores::Round do
   end
 
   describe "points methods" do
-
     context "when the round is not finished" do
       it "gets the various points for the user's round" do
         round_scores.each do |round_score|
@@ -57,7 +56,4 @@ describe UserScores::Round do
       end
     end
   end
-
-
-
 end
