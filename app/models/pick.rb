@@ -50,14 +50,23 @@ class Pick < ApplicationRecord
     end
   end
 
+  # An array of the possible points the pick can receive, based
+  # on the series score so far. When the series is over the array
+  # has only one number left in it, which is the pick's points.
   def possible_points
     matchup.possible_scores[scoring_index]
   end
 
+  # The smallest number of points the pick can receive, based
+  # on the series score so far. When the series is over this
+  # is always the same as max_points.
   def min_points
     [possible_points.min - penalty, 0].max
   end
 
+  # The largest number of points the pick can receive, based
+  # on the series score so far. When the series is over this
+  # is always the same as min_points.
   def max_points
     [possible_points.max - penalty, 0].max
   end
