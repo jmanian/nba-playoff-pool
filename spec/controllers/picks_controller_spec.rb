@@ -4,13 +4,14 @@ require "controller_helper"
 describe PicksController, type: :controller do
   let(:user) { create :user }
 
-  before { sign_in user }
+  before do
+    sign_in user
+    stub_const("CurrentSeason::SPORT", :nba)
+    stub_const("CurrentSeason::YEAR", 2022)
+  end
 
   describe "#index" do
     before do
-      stub_const("CurrentSeason::SPORT", :nba)
-      stub_const("CurrentSeason::YEAR", 2022)
-
       matchup = create :matchup, :mlb, :started
       create :pick, user: user, matchup: matchup
     end
@@ -129,5 +130,28 @@ describe PicksController, type: :controller do
         end
       end
     end
+  end
+
+  describe "#new" do
+    let!(:matchups) { (1..2).map { |n| create :matchup, :nba, :accepting_entries, year: 2022, number: n } }
+    let!(:started_matchups) { (3..4).map { |n| create :matchup, :nba, :started, year: 2022, number: n } }
+    let!(:wrong_sport_matchups) { (1..2).map { |n| create :matchup, :mlb, :accepting_entries, year: 2022, number: n } }
+
+    let(:other_users) { create_list :user, 5 }
+    let!(:picks) do
+      ([user] + other_users).product(matchups + started_matchups + wrong_sport_matchups).map do |user, matchup|
+        create :pick, user: user, matchup: matchup
+      end
+    end
+
+    it "includes the matchups and picksfor the current season that are accepting entries" do
+      get :new
+      expect(assigns(:matchups)).to match_array(matchups)
+      expect(assigns(:picks).keys).to match_array(matchups.map(&:id))
+      expect(assigns(:picks).values.map(&:matchup)).to match_array(matchups)
+      expect(assigns(:picks).values.map(&:user)).to all eql(user)
+    end
+
+    # it "includes the picks for the current user" do
   end
 end
