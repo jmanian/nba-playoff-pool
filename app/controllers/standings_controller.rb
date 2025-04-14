@@ -5,6 +5,11 @@ class StandingsController < ApplicationController
 
     picks = Pick.joins(:matchup).merge(matchups).includes(:matchup, :user)
 
+    if picks.empty?
+      render "empty"
+      return
+    end
+
     @data = UserScores::Total.build(picks)
 
     @biggest_max_total = @data.first&.max_total
