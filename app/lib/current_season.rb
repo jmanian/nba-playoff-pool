@@ -1,6 +1,6 @@
 module CurrentSeason
-  SPORT = :mlb
-  YEAR = 2024
+  SPORT = :nba
+  YEAR = 2025
 
   class << self
     def sport
