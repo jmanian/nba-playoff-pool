@@ -3,7 +3,7 @@ class StandingsController < ApplicationController
     matchups = Matchup.started
       .where(params.permit(:sport, :year))
 
-    picks = Pick.joins(:matchup).merge(matchups).includes(:matchup, :user)
+    picks = Pick.joins(:matchup).merge(matchups).includes(:matchup, :user).load
 
     if picks.empty?
       render "empty"
