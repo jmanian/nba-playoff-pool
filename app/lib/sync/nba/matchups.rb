@@ -50,7 +50,7 @@ module Sync
       def sync_starts_at
         matchup = existing_matchup
 
-        if matchup.starts_at.nil? && starts_at
+        if !matchup.started? && starts_at
           matchup.update!(starts_at: starts_at)
         end
 
