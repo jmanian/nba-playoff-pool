@@ -180,6 +180,19 @@ RSpec.describe Sync::Nba::Matchups do
             end
           end
 
+          context "when there's an initial starts_at and the next game is the same" do
+            let(:initial_starts_at) { next_game_at + 10.minutes }
+            let(:next_game_at) { 1.day.from_now.beginning_of_hour }
+            let(:starts_at) { initial_starts_at }
+            it "does not update starts_at" do
+              expect(Matchup.count).to eql(2)
+              subject
+              expect(Matchup.count).to eql(2)
+              expect(matchup.reload).to have_attributes(expected_attributes)
+              expect(matchup.starts_at).to be_present
+            end
+          end
+
           context "when the matchup has already started and the next game is different" do
             let(:initial_starts_at) { 1.day.ago.beginning_of_hour }
             let(:next_game_at) { 2.days.from_now.beginning_of_hour }
