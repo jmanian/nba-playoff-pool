@@ -89,16 +89,8 @@ RailsAdmin.config do |config|
           bindings[:object].persisted?
         end
       end
-      field :winner_is_favorite do
-        read_only do
-          bindings[:object].persisted?
-        end
-      end
-      field :num_games do
-        read_only do
-          bindings[:object].persisted?
-        end
-      end
+      field :winner_is_favorite
+      field :num_games
       field :penalty
     end
   end
