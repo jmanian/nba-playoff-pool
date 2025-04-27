@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+th:nth-child(2), td:nth-child(2) {
+  position: sticky;
+  left: 0px;
+}
+
+/* Table column width classes */
+.table-rank-col {
+  max-width: 5vw;
+}
+
+.table-name-col {
+  max-width: 20vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table.table-white {
+  --bs-table-bg: #fff;
+  background-color: #fff !important;
+}
