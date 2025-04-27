@@ -5,5 +5,6 @@
     <td></td>
     <%= render partial: 'shared/empty_cell' %>
   <% end %>
-  <%= render partial: 'round/matchup_summary_entry', collection: round_data[:matchups], as: :matchup, locals: {outcome: outcome}, spacer_template: 'shared/empty_cell' %>
+  <% current_user_round = round_data[:user_data].find { |u| u.user == current_user } %>
+  <%= render partial: 'round/matchup_summary_entry', collection: round_data[:matchups], as: :matchup, locals: {outcome: outcome, current_user_round: current_user_round}, spacer_template: 'shared/empty_cell' %>
 </tr>
