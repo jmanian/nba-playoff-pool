@@ -1,7 +1,10 @@
 <td class="table-name-col"
+  data-bs-toggle="tooltip"
   <% if current_user %>
-    data-bs-toggle="tooltip"
-    title="<%= user.email %>"
+    data-bs-html="true"
+    title="<%= user.username %><br><small><%= user.email %></small>"
+  <% else %>
+    title="<%= user.username %>"
   <% end %>
 >
   <%= user.username %>
