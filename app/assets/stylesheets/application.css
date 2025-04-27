@@ -21,7 +21,7 @@ th:nth-child(2), td:nth-child(2) {
 
 /* Table column width classes */
 .table-rank-col {
-  max-width: 5vw;
+  max-width: 10vw;
 }
 
 .table-name-col {
