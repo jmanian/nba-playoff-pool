@@ -7,6 +7,20 @@ describe Team do
     it { should be_present }
   end
 
+  describe "#short_name" do
+    subject { team.short_name }
+
+    context "when the team has a nickname" do
+      let(:team) { described_class.nba(:cle) }
+      it { should eql "Cavs" }
+    end
+
+    context "when the team does not have a nickname" do
+      let(:team) { described_class.nba(:atl) }
+      it { should eql "Hawks" }
+    end
+  end
+
   describe "::NBA_TEAMS" do
     subject { described_class::NBA_TEAMS }
 

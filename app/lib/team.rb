@@ -1,14 +1,19 @@
 class Team
-  attr_reader :tricode, :city, :name
+  attr_reader :tricode, :city, :name, :nickname
 
-  def initialize(tricode, city, name)
+  def initialize(tricode, city, name, nickname)
     @tricode = tricode
     @city = city
     @name = name
+    @nickname = nickname
   end
 
   def full_name
     [city, name].join(" ")
+  end
+
+  def short_name
+    nickname || name
   end
 
   NBA_TEAMS = [
@@ -17,8 +22,8 @@ class Team
     [:bos, "Boston", "Celtics"],
     [:cha, "Charlotte", "Hornets"],
     [:chi, "Chicago", "Bulls"],
-    [:cle, "Cleveland", "Cavaliers"],
-    [:dal, "Dallas", "Mavericks"],
+    [:cle, "Cleveland", "Cavaliers", "Cavs"],
+    [:dal, "Dallas", "Mavericks", "Mavs"],
     [:den, "Denver", "Nuggets"],
     [:det, "Detroit", "Pistons"],
     [:gsw, "Golden State", "Warriors"],
@@ -29,21 +34,21 @@ class Team
     [:mem, "Memphis", "Grizzlies"],
     [:mia, "Miami", "Heat"],
     [:mil, "Milwaukee", "Bucks"],
-    [:min, "Minnesota", "Timberwolves"],
+    [:min, "Minnesota", "Timberwolves", "T'wolves"],
     [:nop, "New Orleans", "Pelicans"],
     [:nyk, "New York", "Knicks"],
     [:okc, "Oklahoma City", "Thunder"],
     [:orl, "Orlando", "Magic"],
     [:phi, "Philadelphia", "76ers"],
     [:phx, "Phoenix", "Suns"],
-    [:por, "Portland", "Trail Blazers"],
+    [:por, "Portland", "Trail Blazers", "Blazers"],
     [:sac, "Sacramento", "Kings"],
     [:sas, "San Antonio", "Spurs"],
     [:tor, "Toronto", "Raptors"],
     [:uta, "Utah", "Jazz"],
     [:was, "Washington", "Wizards"]
-  ].map { |tc, c, n| [tc, Team.new(tc, c, n)] }
-    .to_h.with_indifferent_access
+  ].to_h { |tc, c, n, nn| [tc, Team.new(tc, c, n, nn)] }
+    .with_indifferent_access
 
   MLB_TEAMS = [
     [:ari, "Arizona", "Diamondbacks"],
@@ -76,7 +81,7 @@ class Team
     [:tex, "Texas", "Rangers"],
     [:tor, "Toronto", "Blue Jays"],
     [:wsh, "Washington", "Nationals"]
-  ].to_h { |tc, c, n| [tc, Team.new(tc, c, n)] }
+  ].to_h { |tc, c, n, nn| [tc, Team.new(tc, c, n, nn)] }
     .with_indifferent_access
 
   class << self
