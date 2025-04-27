@@ -123,11 +123,11 @@ class Matchup < ApplicationRecord
   end
 
   def favorite_name_and_wins
-    "#{favorite.name} (#{favorite_wins})"
+    "#{favorite.short_name} (#{favorite_wins})"
   end
 
   def underdog_name_and_wins
-    "#{underdog.name} (#{underdog_wins})"
+    "#{underdog.short_name} (#{underdog_wins})"
   end
 
   # The overall structure of the playoffs for the sport and year
