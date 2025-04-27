@@ -31,6 +31,10 @@ th:nth-child(2), td:nth-child(2) {
   white-space: nowrap;
 }
 
+.table-score-col {
+  min-width: 50vw;
+}
+
 .table.table-white {
   --bs-table-bg: #fff;
   background-color: #fff !important;
