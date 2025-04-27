@@ -1,9 +1,9 @@
 <div class="table-responsive">
-  <table class="table table-hover table-sm">
+  <table class="table table-hover table-sm table-white">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
+        <th scope="col" class="table-rank-col">#</th>
+        <th scope="col" class="table-name-col">Name</th>
         <% if round_data[:show_totals] %>
           <th scope="col" class="text-center">Total</th>
           <%= render partial: 'shared/empty_cell' %>
