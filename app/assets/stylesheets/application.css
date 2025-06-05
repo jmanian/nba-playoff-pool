@@ -32,6 +32,10 @@ th:nth-child(2), td:nth-child(2) {
 }
 
 .table-score-col {
+  text-align: center;
+}
+
+.table-breakdown-col {
   min-width: 50vw;
 }
 

@@ -2,6 +2,9 @@
   <td class="table-rank-col"><%= user_totals.rank %></td>
   <%= render partial: 'shared/user_cell', locals: {user: user_totals.user} %>
   <td class="table-score-col align-middle">
+    <%= user_totals.score_summary %>
+  </td>
+  <td class="table-breakdown-col align-middle">
     <div class="progress bg-secondary" style="--bs-bg-opacity: .15;">
       <% @rounds.each do |round| %>
         <% min, potential, max = user_totals.rounds[round].totals %>
