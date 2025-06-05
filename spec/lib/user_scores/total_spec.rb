@@ -22,4 +22,28 @@ describe UserScores::Total do
       expect(total_scores.map(&:user)).to match_array(users)
     end
   end
+
+  describe "#score_summary" do
+    let(:total_score) { total_scores.first }
+
+    context "when the min and max totals are the same" do
+      before do
+        allow(total_score).to receive(:min_total).and_return(total_score.max_total)
+      end
+
+      it "returns the max total" do
+        expect(total_score.score_summary).to eq(total_score.max_total.to_s)
+      end
+    end
+
+    context "when the min and max totals are different" do
+      before do
+        allow(total_score).to receive(:min_total).and_return(total_score.max_total - 1)
+      end
+
+      it "returns the min and max totals" do
+        expect(total_score.score_summary).to eq("#{total_score.min_total}–#{total_score.max_total}")
+      end
+    end
+  end
 end

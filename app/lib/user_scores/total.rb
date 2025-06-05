@@ -20,5 +20,13 @@ module UserScores
     def max_total
       @max_total ||= @rounds.values.sum(&:max_total)
     end
+
+    def score_summary
+      if min_total == max_total
+        max_total.to_s
+      else
+        "#{min_total}–#{max_total}"
+      end
+    end
   end
 end
