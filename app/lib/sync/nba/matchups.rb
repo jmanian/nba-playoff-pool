@@ -68,7 +68,7 @@ module Sync
         return if existing_matchup || find_existing_reversed_matchup
 
         matchup = Matchup.create!(
-          sport: :nba,
+          sport: sport,
           year: year,
           round: round,
           conference: conference,
@@ -94,7 +94,7 @@ module Sync
       end
 
       def matchup_base
-        Matchup.where(sport: :nba, year: year, round: round, conference: conference)
+        Matchup.where(sport: sport, year: year, round: round, conference: conference)
       end
 
       def series_started?
@@ -103,6 +103,10 @@ module Sync
 
       def teams_known?
         favorite_tricode && underdog_tricode
+      end
+
+      def sport
+        :nba
       end
 
       def round
