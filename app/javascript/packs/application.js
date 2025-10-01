@@ -28,4 +28,50 @@ document.addEventListener("turbolinks:load", () => {
     var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
         return new Popover(popoverTriggerEl)
     })
+
+    // Sortable round table functionality
+    document.querySelectorAll('.sortable-header').forEach(header => {
+        header.addEventListener('click', function() {
+            const table = this.closest('table')
+            const tbody = table.querySelector('tbody')
+            const rows = Array.from(tbody.querySelectorAll('tr'))
+            const columnIndex = this.dataset.columnIndex
+            const isTotal = this.dataset.sortType === 'total'
+            const currentDirection = this.dataset.sortDirection || 'desc'
+            const newDirection = currentDirection === 'desc' ? 'asc' : 'desc'
+
+            // Remove sort indicators from all headers
+            table.querySelectorAll('.sortable-header').forEach(h => {
+                h.classList.remove('sorted-asc', 'sorted-desc')
+                delete h.dataset.sortDirection
+            })
+
+            // Add sort indicator to current header
+            this.classList.add(newDirection === 'asc' ? 'sorted-asc' : 'sorted-desc')
+            this.dataset.sortDirection = newDirection
+
+            // Sort rows
+            rows.sort((a, b) => {
+                let aVal, bVal
+
+                if (isTotal) {
+                    // For total column, use original rank
+                    aVal = parseInt(a.cells[0].textContent)
+                    bVal = parseInt(b.cells[0].textContent)
+                    return aVal - bVal // Always ascending for default rank
+                } else {
+                    // For matchup columns, get the sort value
+                    const aCell = a.querySelector(`[data-column-index="${columnIndex}"]`)
+                    const bCell = b.querySelector(`[data-column-index="${columnIndex}"]`)
+                    aVal = aCell ? parseFloat(aCell.dataset.sortValue || '0') : 0
+                    bVal = bCell ? parseFloat(bCell.dataset.sortValue || '0') : 0
+
+                    return newDirection === 'desc' ? bVal - aVal : aVal - bVal
+                }
+            })
+
+            // Re-append rows in sorted order
+            rows.forEach(row => tbody.appendChild(row))
+        })
+    })
 })

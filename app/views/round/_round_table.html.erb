@@ -5,7 +5,7 @@
         <th scope="col" class="table-rank-col">#</th>
         <th scope="col" class="table-name-col">Name</th>
         <% if round_data[:show_totals] %>
-          <th scope="col" class="text-center">Total</th>
+          <th scope="col" class="text-center sortable-header" data-sort-type="total">Total</th>
           <%= render partial: 'shared/empty_cell' %>
         <% end %>
         <%= render partial: 'round/matchup_title', collection: round_data[:matchups], as: :matchup, spacer_template: 'shared/empty_cell' %>
