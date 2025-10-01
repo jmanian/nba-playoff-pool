@@ -8,10 +8,7 @@
           <th scope="col" class="text-center sortable-header" data-sort-type="total">Total</th>
           <%= render partial: 'shared/empty_cell' %>
         <% end %>
-        <% round_data[:matchups].each_with_index do |matchup, index| %>
-          <%= render partial: 'round/matchup_title', locals: {matchup: matchup, matchup_index: index} %>
-          <%= render partial: 'shared/empty_cell' %>
-        <% end %>
+        <%= render partial: 'round/matchup_title', collection: round_data[:matchups], as: :matchup, spacer_template: 'shared/empty_cell' %>
       </tr>
     </thead>
     <tbody>
