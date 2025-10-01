@@ -11,10 +11,17 @@
     background-color: rgba(0, 0, 0, 0.05);
   }
 
-  &::after {
-    content: '';
+  .sortable-header-content {
     display: inline-block;
-    margin-left: 0.5em;
+    position: relative;
+  }
+
+  .sortable-header-content::after {
+    content: '';
+    position: absolute;
+    left: calc(100% + 0.5em);
+    top: 50%;
+    transform: translateY(-50%);
     width: 0;
     height: 0;
     border-left: 4px solid transparent;
@@ -22,12 +29,12 @@
     opacity: 0.3;
   }
 
-  &.sorted-desc::after {
+  &.sorted-desc .sortable-header-content::after {
     border-top: 6px solid currentColor;
     opacity: 1;
   }
 
-  &.sorted-asc::after {
+  &.sorted-asc .sortable-header-content::after {
     border-bottom: 6px solid currentColor;
     opacity: 1;
   }
