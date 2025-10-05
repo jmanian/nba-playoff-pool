@@ -53,8 +53,6 @@ document.addEventListener("turbolinks:load", () => {
                 }
             }
 
-            console.log('Current sort:', currentSort, '-> New sort:', newSort)
-
             // Remove sort indicators from all headers
             table.querySelectorAll('.sortable-header').forEach(h => {
                 h.classList.remove('sorted-asc', 'sorted-desc', 'sorted-both')
