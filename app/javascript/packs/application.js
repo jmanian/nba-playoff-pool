@@ -43,13 +43,13 @@ document.addEventListener("turbolinks:load", () => {
             if (isTotal) {
                 newSort = 'total'
             } else {
-                // Cycle through: none -> scoring_index -> max_points_asc -> max_points_desc -> scoring_index
-                if (currentSort === 'none' || currentSort === 'max_points_desc') {
+                // Cycle through: none -> scoring_index -> max_points_desc -> max_points_asc -> scoring_index
+                if (currentSort === 'none' || currentSort === 'max_points_asc') {
                     newSort = 'scoring_index'
                 } else if (currentSort === 'scoring_index') {
-                    newSort = 'max_points_asc'
-                } else {
                     newSort = 'max_points_desc'
+                } else {
+                    newSort = 'max_points_asc'
                 }
             }
 
