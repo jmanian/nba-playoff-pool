@@ -33,11 +33,39 @@
   &.sorted-desc .sortable-header-content::after {
     border-top: 6px solid currentColor;
     opacity: 1;
+    top: 55%;
+    transform: translateY(0%);
   }
 
   &.sorted-asc .sortable-header-content::after {
     border-bottom: 6px solid currentColor;
     opacity: 1;
+    top: 45%;
+    transform: translateY(-100%);
+  }
+
+  &.sorted-both .sortable-header-content::before,
+  &.sorted-both .sortable-header-content::after {
+    content: '';
+    position: absolute;
+    left: calc(100% + 0.5em);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    opacity: 1;
+  }
+
+  &.sorted-both .sortable-header-content::before {
+    top: 45%;
+    transform: translateY(-100%);
+    border-bottom: 6px solid currentColor;
+  }
+
+  &.sorted-both .sortable-header-content::after {
+    top: 55%;
+    transform: translateY(0%);
+    border-top: 6px solid currentColor;
   }
 }
 
