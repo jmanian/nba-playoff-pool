@@ -4,7 +4,7 @@
   <td class="text-end text-nowrap <%= class_names('table-secondary': !pick.winner_is_favorite) %>" style="width: 1%; padding-inline: 8px;">
     <%= pick.winner.short_name %> in <%= pick.num_games %>
   </td>
-  <td class="align-middle" style="min-width: 75px;" data-column-index="<%= matchup_index %>" data-sort-value="<%= pick.max_points %>">
+  <td class="align-middle" style="min-width: 75px;" data-column-index="<%= matchup_index %>" data-sort-value="<%= pick.max_points %>" data-scoring-index="<%= pick.scoring_index %>">
     <% width = (matchup.max_possible_points * 100.0 / user_round.biggest_matchup_max_possible).round(4) %>
     <div class="progress bg-secondary" style="--bs-bg-opacity: .15; width: <%= width %>%" data-bs-toggle="tooltip" data-bs-html="true" title="<%= pick.points_tooltip %>">
       <% if pick.min_points.positive? %>
@@ -23,5 +23,5 @@
   </td>
 <% else %>
   <td></td>
-  <td data-column-index="<%= matchup_index %>" data-sort-value="0"></td>
+  <td data-column-index="<%= matchup_index %>" data-sort-value="0" data-scoring-index="999"></td>
 <% end %>
