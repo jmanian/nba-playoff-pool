@@ -43,13 +43,13 @@ document.addEventListener("turbolinks:load", () => {
             if (isTotal) {
                 newSort = 'total'
             } else {
-                // Cycle through: none -> scoring_index -> max_points_asc -> max_points_desc -> scoring_index
-                if (currentSort === 'none' || currentSort === 'max_points_desc') {
+                // Cycle through: none -> scoring_index -> max_points_desc -> max_points_asc -> scoring_index
+                if (currentSort === 'none' || currentSort === 'max_points_asc') {
                     newSort = 'scoring_index'
                 } else if (currentSort === 'scoring_index') {
-                    newSort = 'max_points_asc'
-                } else {
                     newSort = 'max_points_desc'
+                } else {
+                    newSort = 'max_points_asc'
                 }
             }
 
@@ -86,13 +86,19 @@ document.addEventListener("turbolinks:load", () => {
                     bVal = bCell ? parseFloat(bCell.dataset.scoringIndex || '999') : 999
                     return aVal - bVal
                 } else {
-                    // For matchup columns, sort by max_points
+                    // For matchup columns, sort by max_points with min_points as tiebreaker
                     const aCell = a.querySelector(`[data-column-index="${columnIndex}"]`)
                     const bCell = b.querySelector(`[data-column-index="${columnIndex}"]`)
-                    aVal = aCell ? parseFloat(aCell.dataset.sortValue || '0') : 0
-                    bVal = bCell ? parseFloat(bCell.dataset.sortValue || '0') : 0
+                    const aMax = aCell ? parseFloat(aCell.dataset.sortValue || '0') : 0
+                    const bMax = bCell ? parseFloat(bCell.dataset.sortValue || '0') : 0
+                    const aMin = aCell ? parseFloat(aCell.dataset.minPoints || '0') : 0
+                    const bMin = bCell ? parseFloat(bCell.dataset.minPoints || '0') : 0
 
-                    return newSort === 'max_points_desc' ? bVal - aVal : aVal - bVal
+                    const maxDiff = newSort === 'max_points_desc' ? bMax - aMax : aMax - bMax
+                    if (maxDiff !== 0) return maxDiff
+
+                    // Tiebreaker: use min_points in same direction
+                    return newSort === 'max_points_desc' ? bMin - aMin : aMin - bMin
                 }
             })
 
