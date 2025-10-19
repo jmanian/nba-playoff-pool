@@ -1,6 +1,6 @@
 <% overall_user = @data.find { |d| d.user == user_round.user } %>
 <% if overall_user %>
-  <td class="align-middle" style="min-width: 90px;">
+  <td class="align-middle overall-total-cell" style="min-width: 90px;" data-max-total="<%= overall_user.max_total %>" data-min-total="<%= overall_user.min_total %>">
     <div class="progress bg-secondary" style="--bs-bg-opacity: .15;">
       <% if overall_user.min_total.positive? %>
         <% pct = (overall_user.min_total.to_f / @biggest_max_total * 100).round(4) %>
@@ -18,5 +18,5 @@
     </div>
   </td>
 <% else %>
-  <td class="align-middle" style="min-width: 90px;"></td>
+  <td class="align-middle overall-total-cell" style="min-width: 90px;" data-max-total="0" data-min-total="0"></td>
 <% end %>
