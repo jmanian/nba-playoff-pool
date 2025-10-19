@@ -22,6 +22,8 @@ class StandingsController < ApplicationController
 
     @bg_colors = BG_COLORS
 
+    @show_overall_total = @rounds.length > 1
+
     @rounds_data = @rounds.map do |n|
       build_round_data(n, picks)
     end

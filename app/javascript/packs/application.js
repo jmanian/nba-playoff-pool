@@ -37,12 +37,13 @@ document.addEventListener("turbolinks:load", () => {
             const rows = Array.from(tbody.querySelectorAll('tr'))
             const columnIndex = this.dataset.columnIndex
             const isTotal = this.dataset.sortType === 'total'
+            const isOverallTotal = this.dataset.sortType === 'overall-total'
             const currentSort = this.dataset.sortState || 'none'
 
             let newSort
-            if (isTotal) {
+            if (isTotal || isOverallTotal) {
                 newSort = 'total'
-            } else {
+            } else if (columnIndex) {
                 // Cycle through: none -> scoring_index -> max_points_desc -> max_points_asc -> scoring_index
                 if (currentSort === 'none' || currentSort === 'max_points_asc') {
                     newSort = 'scoring_index'
@@ -73,8 +74,21 @@ document.addEventListener("turbolinks:load", () => {
             rows.sort((a, b) => {
                 let aVal, bVal
 
-                if (isTotal) {
-                    // For total column, use original rank
+                if (isOverallTotal) {
+                    // For overall total column, sort by max_total with min_total as tiebreaker
+                    const aCell = a.querySelector('.overall-total-cell')
+                    const bCell = b.querySelector('.overall-total-cell')
+                    const aMax = aCell ? parseFloat(aCell.dataset.maxTotal || '0') : 0
+                    const bMax = bCell ? parseFloat(bCell.dataset.maxTotal || '0') : 0
+                    const aMin = aCell ? parseFloat(aCell.dataset.minTotal || '0') : 0
+                    const bMin = bCell ? parseFloat(bCell.dataset.minTotal || '0') : 0
+
+                    const maxDiff = bMax - aMax // Descending by max
+                    if (maxDiff !== 0) return maxDiff
+
+                    return bMin - aMin // Tiebreaker: descending by min
+                } else if (isTotal) {
+                    // For round total column, use original rank
                     aVal = parseInt(a.cells[0].textContent)
                     bVal = parseInt(b.cells[0].textContent)
                     return aVal - bVal // Always ascending for default rank

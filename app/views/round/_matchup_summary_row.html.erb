@@ -1,6 +1,10 @@
 <tr>
   <td class="table-rank-col"></td>
   <td class="table-name-col"></td>
+  <% if @show_overall_total %>
+    <td></td>
+    <%= render partial: 'shared/empty_cell' %>
+  <% end %>
   <% if round_data[:show_totals] %>
     <td></td>
     <%= render partial: 'shared/empty_cell' %>
