@@ -120,6 +120,22 @@ class Matchup < ApplicationRecord
     ]
   end
 
+  # The possible results that are still achievable given the current series score
+  def possible_remaining_results
+    all_results = possible_results
+
+    # Use original (non-simulated) values if this matchup has been simulated
+    fav_wins = favorite_wins_changed? ? favorite_wins_was : favorite_wins
+    und_wins = underdog_wins_changed? ? underdog_wins_was : underdog_wins
+
+    # Use the same logic as possible_scores to determine the range
+    min_index = und_wins
+    max_index = max_games - fav_wins
+
+    # Return the slice of results that are still possible
+    all_results[min_index..max_index]
+  end
+
   def title
     "#{round_name}: #{favorite_tricode.upcase} v #{underdog_tricode.upcase}" unless new_record?
   end
