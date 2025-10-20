@@ -104,6 +104,9 @@ class StandingsController < ApplicationController
     max_games = matchup.max_games
     return unless num_games >= games_needed && num_games <= max_games
 
+    # Store the simulated outcome on the matchup
+    matchup.simulated_outcome = outcome
+
     # Set the wins to simulate the outcome
     if winner_is_favorite
       matchup.favorite_wins = games_needed

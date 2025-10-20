@@ -3,5 +3,16 @@
     <%= matchup.favorite_name_and_wins %>
     <br>
     <%= matchup.underdog_name_and_wins %>
+    <% if !matchup.finished? || matchup.simulated_outcome %>
+      <br>
+      <select class="form-select form-select-sm mt-1 simulation-select" data-matchup-id="<%= matchup.id %>" data-round="<%= matchup.round %>" style="font-size: 0.75rem;">
+        <option value=""><%= matchup.simulated_outcome ? 'Clear simulation' : 'Simulate...' %></option>
+        <% matchup.possible_results.each do |name, code| %>
+          <option value="<%= code %>" <%= 'selected' if matchup.simulated_outcome == code %>>
+            <%= name %>
+          </option>
+        <% end %>
+      </select>
+    <% end %>
   </span>
 </th>

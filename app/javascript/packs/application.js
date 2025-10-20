@@ -29,6 +29,41 @@ document.addEventListener("turbolinks:load", () => {
         return new Popover(popoverTriggerEl)
     })
 
+    // Simulation select functionality
+    document.querySelectorAll('.simulation-select').forEach(select => {
+        select.addEventListener('change', function(e) {
+            e.stopPropagation() // Prevent triggering sortable header
+            const matchupId = this.dataset.matchupId
+            const round = this.dataset.round
+            const outcome = this.value
+            const url = new URL(window.location)
+            const params = new URLSearchParams(url.search)
+
+            // Get existing sim params
+            const existingSims = params.getAll('sim[]')
+
+            // Remove any existing simulation for this matchup
+            const prefix = `${matchupId}:`
+            const filteredSims = existingSims.filter(s => !s.startsWith(prefix))
+
+            // Add new simulation if an outcome was selected
+            if (outcome) {
+                filteredSims.push(`${matchupId}:${outcome}`)
+            }
+
+            // Update URL params
+            params.delete('sim[]')
+            filteredSims.forEach(sim => params.append('sim[]', sim))
+
+            // Set the round param to stay on the current round
+            params.set('round', round)
+
+            // Reload page with new params
+            url.search = params.toString()
+            Turbolinks.visit(url.toString())
+        })
+    })
+
     // Sortable round table functionality
     document.querySelectorAll('.sortable-header').forEach(header => {
         header.addEventListener('click', function() {
