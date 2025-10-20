@@ -63,8 +63,8 @@ document.addEventListener("turbolinks:load", () => {
             // Set the round param to stay on the current round
             params.set('round', round)
 
-            // Reload page with new params
-            url.search = params.toString()
+            // Reload page with new params (decode to avoid ugly URL encoding)
+            url.search = decodeURIComponent(params.toString())
             Turbolinks.visit(url.toString())
         })
     })
