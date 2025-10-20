@@ -56,16 +56,22 @@ document.addEventListener("turbolinks:load", () => {
                 filteredSims.push(`${matchupId}:${outcome}`)
             }
 
+            // Build new URL with round as path param
+            const pathParts = url.pathname.split('/').filter(p => p)
+            // Path is /:sport/:year or /:sport/:year/:round
+            const sport = pathParts[0]
+            const year = pathParts[1]
+            const newPath = `/${sport}/${year}/${round}`
+
             // Update URL params
             params.delete('sim[]')
+            params.delete('round')
             filteredSims.forEach(sim => params.append('sim[]', sim))
 
-            // Set the round param to stay on the current round
-            params.set('round', round)
-
-            // Reload page with new params (decode to avoid ugly URL encoding)
-            url.search = decodeURIComponent(params.toString())
-            Turbolinks.visit(url.toString())
+            // Build final URL (decode to avoid ugly URL encoding)
+            const queryString = decodeURIComponent(params.toString())
+            const newUrl = queryString ? `${newPath}?${queryString}` : newPath
+            Turbolinks.visit(newUrl)
         })
     })
 

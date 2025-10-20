@@ -3,7 +3,7 @@
     <div>
       <strong>Simulation Mode:</strong> <%= pluralize(@simulations.size, 'matchup') %> simulated. Results shown are hypothetical.
     </div>
-    <a href="<%= url_for(params.permit(:sport, :year)) %>" class="btn btn-sm btn-outline-danger">Clear All Simulations</a>
+    <a href="/<%=params[:sport]%>/<%=params[:year]%>" class="btn btn-sm btn-outline-danger">Clear All Simulations</a>
   </div>
 <% end %>
 
