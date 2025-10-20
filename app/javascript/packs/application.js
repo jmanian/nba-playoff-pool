@@ -31,8 +31,13 @@ document.addEventListener("turbolinks:load", () => {
 
     // Simulation select functionality
     document.querySelectorAll('.simulation-select').forEach(select => {
+        // Prevent click from triggering sortable header
+        select.addEventListener('click', function(e) {
+            e.stopPropagation()
+        })
+
         select.addEventListener('change', function(e) {
-            e.stopPropagation() // Prevent triggering sortable header
+            e.stopPropagation()
             const matchupId = this.dataset.matchupId
             const round = this.dataset.round
             const outcome = this.value
