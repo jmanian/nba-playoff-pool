@@ -3,7 +3,7 @@
     <% if !matchup.finished? || matchup.simulated_outcome %>
       <select class="form-select form-select-sm mb-1 simulation-select" data-matchup-id="<%= matchup.id %>" data-round="<%= matchup.round %>" style="font-size: 0.75rem;">
         <option value=""><%= matchup.simulated_outcome ? 'Clear simulation' : 'Simulate...' %></option>
-        <% matchup.possible_results.each do |name, code| %>
+        <% matchup.possible_remaining_results.each do |name, code| %>
           <option value="<%= code %>" <%= 'selected' if matchup.simulated_outcome == code %>>
             <%= name %>
           </option>

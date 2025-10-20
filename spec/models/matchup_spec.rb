@@ -682,6 +682,77 @@ RSpec.describe Matchup, type: :model do
     end
   end
 
+  describe "#possible_remaining_results" do
+    context "with a seven-game series" do
+      let(:matchup) { create :matchup, :seven_games, favorite_wins: favorite_wins, underdog_wins: underdog_wins }
+
+      context "at 0-0" do
+        let(:favorite_wins) { 0 }
+        let(:underdog_wins) { 0 }
+
+        it "returns all possible results" do
+          expect(matchup.possible_remaining_results).to eq([
+            ["#{matchup.favorite.name} in 4", "f-4"],
+            ["#{matchup.favorite.name} in 5", "f-5"],
+            ["#{matchup.favorite.name} in 6", "f-6"],
+            ["#{matchup.favorite.name} in 7", "f-7"],
+            ["#{matchup.underdog.name} in 7", "u-7"],
+            ["#{matchup.underdog.name} in 6", "u-6"],
+            ["#{matchup.underdog.name} in 5", "u-5"],
+            ["#{matchup.underdog.name} in 4", "u-4"]
+          ])
+        end
+      end
+
+      context "at 2-1" do
+        let(:favorite_wins) { 2 }
+        let(:underdog_wins) { 1 }
+
+        it "returns only results still possible given the current score" do
+          expect(matchup.possible_remaining_results).to eq([
+            ["#{matchup.favorite.name} in 5", "f-5"],
+            ["#{matchup.favorite.name} in 6", "f-6"],
+            ["#{matchup.favorite.name} in 7", "f-7"],
+            ["#{matchup.underdog.name} in 7", "u-7"],
+            ["#{matchup.underdog.name} in 6", "u-6"]
+          ])
+        end
+      end
+
+      context "at 3-3" do
+        let(:favorite_wins) { 3 }
+        let(:underdog_wins) { 3 }
+
+        it "returns only game 7 results" do
+          expect(matchup.possible_remaining_results).to eq([
+            ["#{matchup.favorite.name} in 7", "f-7"],
+            ["#{matchup.underdog.name} in 7", "u-7"]
+          ])
+        end
+      end
+
+      context "when simulated" do
+        let(:favorite_wins) { 2 }
+        let(:underdog_wins) { 1 }
+
+        it "uses original values before simulation" do
+          # Simulate the matchup finishing
+          matchup.favorite_wins = 4
+          matchup.underdog_wins = 1
+
+          # Should still show results based on original 2-1 score
+          expect(matchup.possible_remaining_results).to eq([
+            ["#{matchup.favorite.name} in 5", "f-5"],
+            ["#{matchup.favorite.name} in 6", "f-6"],
+            ["#{matchup.favorite.name} in 7", "f-7"],
+            ["#{matchup.underdog.name} in 7", "u-7"],
+            ["#{matchup.underdog.name} in 6", "u-6"]
+          ])
+        end
+      end
+    end
+  end
+
   describe "#outcome_by_index" do
     context "with a five-game series" do
       subject { (0..5).map { |i| matchup.outcome_by_index(i) } }
