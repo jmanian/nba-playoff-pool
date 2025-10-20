@@ -17,6 +17,7 @@ class StandingsController < ApplicationController
     # The earliest unfinished round
     @initial_round ||= picks.map(&:matchup).reject(&:finished?).map(&:round).min
 
+    @simulations = parse_simulations
     apply_simulations(picks)
 
     @data = UserScores::Total.build(picks)
@@ -66,12 +67,11 @@ class StandingsController < ApplicationController
   private
 
   def apply_simulations(picks)
-    simulations = parse_simulations
-    return if simulations.empty?
+    return if @simulations.empty?
 
     matchups_by_id = picks.map(&:matchup).index_by(&:id)
 
-    simulations.each do |matchup_id, outcome|
+    @simulations.each do |matchup_id, outcome|
       matchup = matchups_by_id[matchup_id]
       next unless matchup
       next if matchup.finished?

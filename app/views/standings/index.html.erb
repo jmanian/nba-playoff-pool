@@ -1,3 +1,12 @@
+<% if @simulations.present? %>
+  <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
+    <div>
+      <strong>Simulation Mode:</strong> <%= pluralize(@simulations.size, 'matchup') %> simulated. Results shown are hypothetical.
+    </div>
+    <a href="<%= url_for(params.permit(:sport, :year)) %>" class="btn btn-sm btn-outline-danger">Clear All Simulations</a>
+  </div>
+<% end %>
+
 <ul class="nav nav-pills mb-3" id="standingsTabs" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link <%= class_names(active: @initial_round.nil?) %>" id="overall-tab" data-bs-toggle="tab" data-bs-target="#overall" type="button" role="tab" aria-controls="overall" aria-selected="true">Overall</button>
