@@ -64,6 +64,51 @@ describe StandingsController, type: :controller do
           expect(assigns(:data).flat_map(&:picks)).to match_array(picks)
           expect(assigns(:rounds_data).map { |r| r[:number] }).to eq([1, 2])
         end
+
+        context "with simulation params" do
+          let(:unfinished_matchup) { matchups.first }
+          let(:simulation_outcome) { "f-#{unfinished_matchup.games_needed_to_win}" }
+
+          it "applies simulated outcomes to unfinished matchups" do
+            expect(unfinished_matchup.finished?).to be false
+
+            get :index, params: {sport: "nba", year: 2025, sim: ["#{unfinished_matchup.id}:#{simulation_outcome}"]}
+
+            expect(response).to render_template(:index)
+
+            # The matchup should be modified in memory to reflect the simulation
+            simulated_matchup = assigns(:data).flat_map(&:picks).find { |p| p.matchup_id == unfinished_matchup.id }.matchup
+            expect(simulated_matchup.finished?).to be true
+            expect(simulated_matchup.favorite_won?).to be true
+          end
+
+          it "ignores already finished matchups" do
+            finished_matchup = matchups.first
+            finished_matchup.update!(
+              favorite_wins: finished_matchup.games_needed_to_win,
+              underdog_wins: 0
+            )
+
+            original_favorite_wins = finished_matchup.favorite_wins
+            original_underdog_wins = finished_matchup.underdog_wins
+
+            get :index, params: {sport: "nba", year: 2025, sim: ["#{finished_matchup.id}:u-7"]}
+
+            simulated_matchup = assigns(:data).flat_map(&:picks).find { |p| p.matchup_id == finished_matchup.id }.matchup
+            expect(simulated_matchup.favorite_wins).to eq(original_favorite_wins)
+            expect(simulated_matchup.underdog_wins).to eq(original_underdog_wins)
+          end
+
+          it "ignores invalid outcome formats" do
+            get :index, params: {sport: "nba", year: 2025, sim: ["#{unfinished_matchup.id}:invalid"]}
+            expect(response).to render_template(:index)
+          end
+
+          it "ignores simulations for non-existent matchups" do
+            get :index, params: {sport: "nba", year: 2025, sim: ["99999:f-4"]}
+            expect(response).to render_template(:index)
+          end
+        end
       end
     end
   end

@@ -17,6 +17,8 @@
 #  updated_at       :datetime         not null
 #
 class Matchup < ApplicationRecord
+  attr_accessor :simulated_outcome
+
   validates :sport, :year, :round, :conference, :number, :favorite_tricode, :underdog_tricode,
     :favorite_wins, :underdog_wins, presence: true
 

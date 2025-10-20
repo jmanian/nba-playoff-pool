@@ -29,6 +29,52 @@ document.addEventListener("turbolinks:load", () => {
         return new Popover(popoverTriggerEl)
     })
 
+    // Simulation select functionality
+    document.querySelectorAll('.simulation-select').forEach(select => {
+        // Prevent click from triggering sortable header
+        select.addEventListener('click', function(e) {
+            e.stopPropagation()
+        })
+
+        select.addEventListener('change', function(e) {
+            e.stopPropagation()
+            const matchupId = this.dataset.matchupId
+            const round = this.dataset.round
+            const outcome = this.value
+            const url = new URL(window.location)
+            const params = new URLSearchParams(url.search)
+
+            // Get existing sim params
+            const existingSims = params.getAll('sim[]')
+
+            // Remove any existing simulation for this matchup
+            const prefix = `${matchupId}:`
+            const filteredSims = existingSims.filter(s => !s.startsWith(prefix))
+
+            // Add new simulation if an outcome was selected
+            if (outcome) {
+                filteredSims.push(`${matchupId}:${outcome}`)
+            }
+
+            // Build new URL with round as path param
+            const pathParts = url.pathname.split('/').filter(p => p)
+            // Path is /:sport/:year or /:sport/:year/:round
+            const sport = pathParts[0]
+            const year = pathParts[1]
+            const newPath = `/${sport}/${year}/${round}`
+
+            // Update URL params
+            params.delete('sim[]')
+            params.delete('round')
+            filteredSims.forEach(sim => params.append('sim[]', sim))
+
+            // Build final URL (decode to avoid ugly URL encoding)
+            const queryString = decodeURIComponent(params.toString())
+            const newUrl = queryString ? `${newPath}?${queryString}` : newPath
+            Turbolinks.visit(newUrl)
+        })
+    })
+
     // Sortable round table functionality
     document.querySelectorAll('.sortable-header').forEach(header => {
         header.addEventListener('click', function() {
