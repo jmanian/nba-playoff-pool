@@ -19,13 +19,6 @@ module NbaPlayoffPool
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      address: "smtp.resend.com",
-      port: 465,
-      user_name: "resend",
-      password: ENV["RESEND_API_KEY"],
-      tls: true
-    }
+    config.action_mailer.delivery_method = :resend
   end
 end
