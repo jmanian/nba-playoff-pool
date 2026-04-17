@@ -31,7 +31,7 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "devise"
 gem "rails_admin", "~> 2.0"
 
-gem "postmark-rails"
+gem "resend"
 
 gem "faraday", "~> 2.8"
 
