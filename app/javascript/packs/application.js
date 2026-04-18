@@ -18,6 +18,18 @@ Turbolinks.start()
 ActiveStorage.start()
 
 document.addEventListener("turbolinks:load", () => {
+    const toggle = document.getElementById('dark-mode-toggle');
+    if (toggle) {
+        const isDark = () => document.documentElement.classList.contains('dark-mode');
+        toggle.textContent = isDark() ? '☀️' : '🌙';
+        toggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark-mode');
+            const dark = isDark();
+            toggle.textContent = dark ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', dark);
+        });
+    }
+
     // Both of these are from the Bootstrap 5 docs
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
