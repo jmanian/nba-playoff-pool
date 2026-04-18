@@ -1,15 +1,3 @@
-.dark-mode-toggle {
-  font-size: 1.1rem;
-  line-height: 1;
-  padding: 0.2rem 0.4rem;
-  border: none;
-  background: none;
-
-  &:hover {
-    opacity: 0.75;
-  }
-}
-
 html.dark-mode {
   body {
     background-color: #212529;
@@ -34,6 +22,15 @@ html.dark-mode {
 
     .navbar-toggler {
       border-color: #6c757d;
+    }
+
+    #dark-mode-toggle {
+      color: #adb5bd;
+
+      &:hover {
+        color: #fff;
+        background-color: #495057;
+      }
     }
 
     .dropdown-menu {

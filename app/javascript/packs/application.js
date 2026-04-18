@@ -20,13 +20,18 @@ ActiveStorage.start()
 document.addEventListener("turbolinks:load", () => {
     const toggle = document.getElementById('dark-mode-toggle');
     if (toggle) {
+        const sun = document.getElementById('dark-mode-sun');
+        const moon = document.getElementById('dark-mode-moon');
         const isDark = () => document.documentElement.classList.contains('dark-mode');
-        toggle.textContent = isDark() ? '☀️' : '🌙';
+        const updateIcons = () => {
+            sun.style.display = isDark() ? 'block' : 'none';
+            moon.style.display = isDark() ? 'none' : 'block';
+        };
+        updateIcons();
         toggle.addEventListener('click', () => {
             document.documentElement.classList.toggle('dark-mode');
-            const dark = isDark();
-            toggle.textContent = dark ? '☀️' : '🌙';
-            localStorage.setItem('darkMode', dark);
+            localStorage.setItem('darkMode', isDark());
+            updateIcons();
         });
     }
 
