@@ -86,4 +86,12 @@ html.dark-mode {
   .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
   }
+
+  .table-name-col span {
+    color: #dee2e6;
+
+    &:hover {
+      color: #fff;
+    }
+  }
 }
