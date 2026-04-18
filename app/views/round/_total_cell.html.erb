@@ -1,14 +1,17 @@
 <td class="align-middle" style="min-width: 90px;">
+  <% total_users = round_data[:user_data].length %>
+  <% hue = total_users == 1 ? 120 : (120.0 * (1.0 - (user_round.rank - 1.0) / (total_users - 1))).round %>
+  <% rank_color = "hsl(#{hue}, 70%, 42%)" %>
   <div class="progress bg-secondary" style="--bs-bg-opacity: .15;" data-bs-toggle="tooltip" data-bs-html="true" title="<%= user_round.points_tooltip %>">
     <% if user_round.min_total.positive? %>
       <% pct = (user_round.min_total_percentage * 100).round(4) %>
-      <div class="progress-bar <%= round_data[:bg_color] %>" role="progressbar" style="width: <%= pct %>%">
+      <div class="progress-bar" role="progressbar" style="width: <%= pct %>%; background-color: <%= rank_color %>;">
         <%= user_round.min_total %>
       </div>
     <% end %>
     <% if user_round.potential_total.positive? %>
       <% pct = (user_round.potential_total_percentage * 100).round(4) %>
-      <div class="progress-bar progress-bar-striped <%= round_data[:bg_color] %>" role="progressbar" style="--bs-bg-opacity: .5; width: <%= pct %>%">
+      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= pct %>%; background-color: <%= rank_color %>; --bs-bg-opacity: .5;">
         <%= user_round.potential_total %>
       </div>
     <% end %>

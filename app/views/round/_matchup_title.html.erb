@@ -1,7 +1,7 @@
-<th scope="col" colspan="2" class="text-center text-nowrap sortable-header" data-column-index="<%= matchup_counter %>">
+<th scope="col" colspan="2" class="text-center sortable-header" data-column-index="<%= matchup_counter %>" style="width: 10rem; min-width: 10rem; max-width: 10rem;">
   <span class="sortable-header-content">
     <% if !matchup.finished? || matchup.simulated_outcome %>
-      <select class="form-select form-select-sm mb-1 simulation-select" data-matchup-id="<%= matchup.id %>" data-round="<%= matchup.round %>" style="font-size: 0.75rem;">
+      <select class="form-select form-select-sm mb-1 simulation-select" data-matchup-id="<%= matchup.id %>" data-round="<%= matchup.round %>">
         <option value=""><%= matchup.simulated_outcome ? 'Clear simulation' : 'Simulate...' %></option>
         <% matchup.possible_remaining_results.each do |name, code| %>
           <option value="<%= code %>" <%= 'selected' if matchup.simulated_outcome == code %>>
@@ -10,8 +10,10 @@
         <% end %>
       </select>
     <% end %>
-    <%= matchup.favorite_name_and_wins %>
+    <% fav_colors = Team.nba_colors(matchup.favorite.tricode) %>
+    <% und_colors = Team.nba_colors(matchup.underdog.tricode) %>
+    <span style="color: <%= fav_colors&.dig(:primary) %>"><%= matchup.favorite_name_and_wins %></span>
     <br>
-    <%= matchup.underdog_name_and_wins %>
+    <span style="color: <%= und_colors&.dig(:primary) %>"><%= matchup.underdog_name_and_wins %></span>
   </span>
 </th>

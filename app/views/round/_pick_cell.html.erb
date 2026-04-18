@@ -1,7 +1,8 @@
 <% pick = user_round.picks_by_matchup_id[matchup.id] %>
 <% matchup_index = round_data[:matchups].index(matchup) %>
 <% if pick %>
-  <td class="text-end text-nowrap <%= class_names('table-secondary': !pick.winner_is_favorite) %>" style="width: 1%; padding-inline: 8px;">
+  <% colors = Team.nba_colors(pick.winner.tricode) %>
+  <td class="text-end text-nowrap" style="width: 1%; padding-inline: 8px; color: <%= colors&.dig(:primary) %>;">
     <%= pick.winner.short_name %> in <%= pick.num_games %>
   </td>
   <td class="align-middle" style="min-width: 75px;" data-column-index="<%= matchup_index %>" data-sort-value="<%= pick.max_points %>" data-min-points="<%= pick.min_points %>" data-scoring-index="<%= pick.scoring_index %>">
@@ -9,13 +10,13 @@
     <div class="progress bg-secondary" style="--bs-bg-opacity: .15; width: <%= width %>%" data-bs-toggle="tooltip" data-bs-html="true" title="<%= pick.points_tooltip %>">
       <% if pick.min_points.positive? %>
         <% pct = (pick.min_points_percentage * 100).round(4) %>
-        <div class="progress-bar <%= round_data[:bg_color] %>" role="progressbar" style="width: <%= pct %>%">
+        <div class="progress-bar" role="progressbar" style="width: <%= pct %>%; background-color: <%= colors&.dig(:secondary) %>;">
           <%= pick.min_points %>
         </div>
       <% end %>
       <% if pick.potential_points.positive? %>
         <% pct = (pick.potential_points_percentage * 100).round(4) %>
-        <div class="progress-bar progress-bar-striped <%= round_data[:bg_color] %>" role="progressbar" style="--bs-bg-opacity: .5; width: <%= pct %>%">
+        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= pct %>%; background-color: <%= colors&.dig(:primary) %>; --bs-bg-opacity: .5;">
           <%= pick.potential_points %>
         </div>
       <% end %>
