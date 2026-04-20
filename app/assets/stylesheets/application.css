@@ -43,3 +43,8 @@ th:nth-child(2), td:nth-child(2) {
   --bs-table-bg: #fff;
   background-color: #fff !important;
 }
+
+.table.table-white tbody td,
+.table.table-white tbody th {
+  border-bottom-width: 0;
+}
