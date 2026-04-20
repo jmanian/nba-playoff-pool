@@ -12,8 +12,8 @@
     <% end %>
     <% fav_colors = Team.nba_colors(matchup.favorite.tricode) %>
     <% und_colors = Team.nba_colors(matchup.underdog.tricode) %>
-    <span style="color: <%= fav_colors&.dig(:primary) %>"><%= matchup.favorite_name_and_wins %></span>
+    <span data-tricode="<%= matchup.favorite.tricode %>" style="color: <%= fav_colors&.dig(:primary) %>"><%= matchup.favorite_name_and_wins %></span>
     <br>
-    <span style="color: <%= und_colors&.dig(:primary) %>"><%= matchup.underdog_name_and_wins %></span>
+    <span data-tricode="<%= matchup.underdog.tricode %>" style="color: <%= und_colors&.dig(:primary) %>"><%= matchup.underdog_name_and_wins %></span>
   </span>
 </th>

@@ -58,6 +58,7 @@ html.dark-mode {
     --bs-table-border-color: #495057;
     --bs-table-striped-bg: #323840;
     --bs-table-hover-bg: #373e46;
+    --bs-table-hover-color: #dee2e6;
     --bs-table-striped-color: #dee2e6;
   }
 
@@ -85,6 +86,30 @@ html.dark-mode {
 
   .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
+  }
+
+  // Teams with dark primary colors need inverted treatment in dark mode
+  td[data-tricode="lal"],
+  span[data-tricode="lal"] {
+    color: #FDB927 !important;
+  }
+
+  .progress[data-tricode="lal"] {
+    .progress-bar {
+      background-color: #552583 !important;
+    }
+  }
+
+  td[data-tricode="sas"],
+  span[data-tricode="sas"] {
+    color: #DEDEDE !important;
+  }
+
+  .progress[data-tricode="sas"] {
+    .progress-bar {
+      background-color: #DEDEDE !important;
+      color: #000 !important;
+    }
   }
 
   .table-name-col span {
