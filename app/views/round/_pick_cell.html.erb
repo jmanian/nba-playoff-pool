@@ -2,7 +2,7 @@
 <% matchup_index = round_data[:matchups].index(matchup) %>
 <% if pick %>
   <% colors = Team.nba_colors(pick.winner.tricode) %>
-  <td class="text-end text-nowrap" data-tricode="<%= pick.winner.tricode %>" style="width: 1%; padding-inline: 8px; color: <%= colors&.dig(:primary) %>;">
+  <td class="text-end text-nowrap" style="width: 1%; padding-inline: 8px;">
     <%= pick.winner.short_name %> in <%= pick.num_games %>
   </td>
   <td class="align-middle" style="min-width: 75px;" data-column-index="<%= matchup_index %>" data-sort-value="<%= pick.max_points %>" data-min-points="<%= pick.min_points %>" data-scoring-index="<%= pick.scoring_index %>">

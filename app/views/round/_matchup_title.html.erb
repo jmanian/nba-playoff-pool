@@ -10,10 +10,8 @@
         <% end %>
       </select>
     <% end %>
-    <% fav_colors = Team.nba_colors(matchup.favorite.tricode) %>
-    <% und_colors = Team.nba_colors(matchup.underdog.tricode) %>
-    <span data-tricode="<%= matchup.favorite.tricode %>" style="color: <%= fav_colors&.dig(:primary) %>"><%= matchup.favorite_name_and_wins %></span>
+    <%= matchup.favorite_name_and_wins %>
     <br>
-    <span data-tricode="<%= matchup.underdog.tricode %>" style="color: <%= und_colors&.dig(:primary) %>"><%= matchup.underdog_name_and_wins %></span>
+    <%= matchup.underdog_name_and_wins %>
   </span>
 </th>

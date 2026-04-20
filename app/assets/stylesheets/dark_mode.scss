@@ -89,20 +89,10 @@ html.dark-mode {
   }
 
   // Teams with dark primary colors need inverted treatment in dark mode
-  td[data-tricode="lal"],
-  span[data-tricode="lal"] {
-    color: #FDB927 !important;
-  }
-
   .progress[data-tricode="lal"] {
     .progress-bar {
       background-color: #552583 !important;
     }
-  }
-
-  td[data-tricode="sas"],
-  span[data-tricode="sas"] {
-    color: #DEDEDE !important;
   }
 
   .progress[data-tricode="sas"] {
