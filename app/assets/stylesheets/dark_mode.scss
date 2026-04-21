@@ -1,65 +1,10 @@
-html.dark-mode {
+// Bootstrap 5.3 handles most dark mode styles via data-bs-theme="dark".
+// This file contains only app-specific overrides.
+
+[data-bs-theme="dark"] {
+  // Match body bg to table bg so tables don't look like floating boxes
   body {
     background-color: #2b3035;
-    color: #dee2e6;
-  }
-
-  .navbar {
-    background-color: #343a40 !important;
-    border-bottom: 1px solid #495057;
-
-    .navbar-brand {
-      color: #dee2e6 !important;
-    }
-
-    .nav-link {
-      color: #adb5bd !important;
-
-      &:hover, &.active {
-        color: #fff !important;
-      }
-    }
-
-    .navbar-toggler {
-      border-color: #6c757d;
-    }
-
-    #dark-mode-toggle {
-      color: #adb5bd;
-
-      &:hover {
-        color: #fff;
-        background-color: #495057;
-      }
-    }
-
-    .dropdown-menu {
-      background-color: #343a40;
-      border-color: #495057;
-
-      .dropdown-item {
-        color: #dee2e6;
-
-        &:hover {
-          background-color: #495057;
-          color: #fff;
-        }
-      }
-
-      .dropdown-divider {
-        border-color: #495057;
-      }
-    }
-  }
-
-  .table {
-    --bs-table-color: #dee2e6;
-    --bs-table-bg: #2b3035;
-    --bs-table-border-color: #495057;
-    --bs-table-striped-bg: #323840;
-    --bs-table-hover-bg: #373e46;
-    --bs-table-hover-color: #dee2e6;
-    --bs-table-striped-color: #dee2e6;
   }
 
   .table.table-white {
@@ -68,27 +13,20 @@ html.dark-mode {
   }
 
   // Sticky column needs explicit bg to avoid bleed-through
-  th:nth-child(2), td:nth-child(2) {
+  .table-name-col {
     background-color: #2b3035;
   }
 
-  .alert-success {
-    background-color: #0f5132;
-    border-color: #0a3622;
-    color: #75b798;
+  // Keep name text visible on row hover
+  .table-name-col span {
+    color: var(--bs-body-color);
+
+    &:hover {
+      color: #fff;
+    }
   }
 
-  .alert-danger {
-    background-color: #842029;
-    border-color: #6a1a21;
-    color: #ea868f;
-  }
-
-  .btn-close {
-    filter: invert(1) grayscale(100%) brightness(200%);
-  }
-
-  // Teams with dark primary colors need inverted treatment in dark mode
+  // Team-specific progress bar overrides for teams with problematic dark colors
   .progress[data-tricode="lal"] {
     .progress-bar {
       background-color: #552583 !important;
@@ -99,14 +37,6 @@ html.dark-mode {
     .progress-bar {
       background-color: #DEDEDE !important;
       color: #000 !important;
-    }
-  }
-
-  .table-name-col span {
-    color: #dee2e6;
-
-    &:hover {
-      color: #fff;
     }
   }
 }

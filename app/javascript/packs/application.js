@@ -22,15 +22,16 @@ document.addEventListener("turbolinks:load", () => {
     if (toggle) {
         const sun = document.getElementById('dark-mode-sun');
         const moon = document.getElementById('dark-mode-moon');
-        const isDark = () => document.documentElement.classList.contains('dark-mode');
+        const isDark = () => document.documentElement.getAttribute('data-bs-theme') === 'dark';
         const updateIcons = () => {
             sun.style.display = isDark() ? 'block' : 'none';
             moon.style.display = isDark() ? 'none' : 'block';
         };
         updateIcons();
         toggle.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', isDark());
+            const theme = isDark() ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
             updateIcons();
         });
     }
