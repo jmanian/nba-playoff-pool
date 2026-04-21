@@ -1,7 +1,7 @@
 <% pick = user_round.picks_by_matchup_id[matchup.id] %>
 <% matchup_index = round_data[:matchups].index(matchup) %>
 <% if pick %>
-  <% colors = Team.nba_colors(pick.winner.tricode) %>
+  <% colors = pick.winner.colors %>
   <td class="text-end text-nowrap" style="width: 1%; padding-inline: 8px;">
     <%= pick.winner.short_name %> in <%= pick.num_games %>
   </td>
