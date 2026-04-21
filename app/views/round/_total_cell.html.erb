@@ -11,7 +11,7 @@
     <% end %>
     <% if user_round.potential_total.positive? %>
       <% pct = (user_round.potential_total_percentage * 100).round(4) %>
-      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= pct %>%; background-color: <%= rank_color %>; --bs-bg-opacity: .5;">
+      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= pct %>%; background-color: <%= rank_color %>; opacity: 0.4;">
         <%= user_round.potential_total %>
       </div>
     <% end %>
