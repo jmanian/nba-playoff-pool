@@ -30,17 +30,4 @@
     }
   }
 
-  // Team-specific progress bar overrides for teams with problematic dark colors
-  .progress[data-tricode="lal"] {
-    .progress-bar {
-      background-color: #552583 !important;
-    }
-  }
-
-  .progress[data-tricode="sas"] {
-    .progress-bar {
-      background-color: #DEDEDE !important;
-      color: #000 !important;
-    }
-  }
 }

@@ -17,6 +17,40 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+function getColorLuminance(hex) {
+    if (!hex) return 128;
+    const h = hex.replace('#', '');
+    if (h.length < 6) return 128;
+    const r = parseInt(h.substring(0, 2), 16);
+    const g = parseInt(h.substring(2, 4), 16);
+    const b = parseInt(h.substring(4, 6), 16);
+    return 0.299 * r + 0.587 * g + 0.114 * b;
+}
+
+function pickTeamColor(primary, secondary, isDark) {
+    if (!secondary) return primary;
+    const lumP = getColorLuminance(primary);
+    if (isDark && lumP < 80) {
+        const lumS = getColorLuminance(secondary);
+        return lumS > lumP ? secondary : primary;
+    }
+    if (!isDark && lumP > 200) {
+        const lumS = getColorLuminance(secondary);
+        return lumS < lumP ? secondary : primary;
+    }
+    return primary;
+}
+
+function applyTeamColors() {
+    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+    document.querySelectorAll('.progress[data-primary-color]').forEach(bar => {
+        const color = pickTeamColor(bar.dataset.primaryColor, bar.dataset.secondaryColor, isDark);
+        bar.querySelectorAll('.progress-bar').forEach(segment => {
+            segment.style.backgroundColor = color;
+        });
+    });
+}
+
 document.addEventListener("turbolinks:load", () => {
     const toggle = document.getElementById('dark-mode-toggle');
     if (toggle) {
@@ -33,8 +67,11 @@ document.addEventListener("turbolinks:load", () => {
             document.documentElement.setAttribute('data-bs-theme', theme);
             localStorage.setItem('theme', theme);
             updateIcons();
+            applyTeamColors();
         });
     }
+
+    applyTeamColors();
 
     // Both of these are from the Bootstrap 5 docs
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
