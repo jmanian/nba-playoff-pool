@@ -64,9 +64,9 @@ Users can simulate unfinished series outcomes via URL params (`sim[]=<matchup_id
 
 ### Frontend
 
-- Bootstrap 5.2 + Webpacker (webpack 4). JS entry: `app/javascript/packs/application.js`.
+- Bootstrap 5.3 + Webpacker (webpack 4). JS entry: `app/javascript/packs/application.js`.
 - Custom stylesheets in `app/assets/stylesheets/` (Sprockets pipeline).
-- Dark mode is toggled via `html.dark-mode` CSS class, persisted in localStorage.
+- Dark mode uses Bootstrap 5.3's `data-bs-theme="dark"` attribute on `<html>`, persisted in localStorage under key `theme`.
 - Sortable table columns and simulation dropdowns are wired in `application.js` via `turbolinks:load`.
 
 ### PlayoffStructure / ScoringGrid
