@@ -1,17 +1,20 @@
 <% overall_user = @data.find { |d| d.user == user_round.user } %>
 <% if overall_user %>
+  <% total_users = @data.length %>
+  <% hue = total_users == 1 ? 120 : (120.0 * (1.0 - (overall_user.rank - 1.0) / (total_users - 1))).round %>
+  <% rank_color = "hsl(#{hue}, 70%, 42%)" %>
   <td class="align-middle overall-total-cell" style="min-width: 90px;" data-max-total="<%= overall_user.max_total %>" data-min-total="<%= overall_user.min_total %>">
     <div class="progress bg-secondary" style="--bs-bg-opacity: .15;">
       <% if overall_user.min_total.positive? %>
         <% pct = (overall_user.min_total.to_f / @biggest_max_total * 100).round(4) %>
-        <div class="progress-bar <%= round_data[:bg_color] %>" role="progressbar" style="width: <%= pct %>%">
+        <div class="progress-bar" role="progressbar" style="width: <%= pct %>%; background-color: <%= rank_color %>;">
           <%= overall_user.min_total %>
         </div>
       <% end %>
       <% potential = overall_user.max_total - overall_user.min_total %>
       <% if potential.positive? %>
         <% pct = (potential.to_f / @biggest_max_total * 100).round(4) %>
-        <div class="progress-bar progress-bar-striped <%= round_data[:bg_color] %>" role="progressbar" style="--bs-bg-opacity: .5; width: <%= pct %>%">
+        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= pct %>%; background-color: <%= rank_color %>; --bs-bg-opacity: .5;">
           <%= potential %>
         </div>
       <% end %>

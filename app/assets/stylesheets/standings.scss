@@ -72,3 +72,13 @@
 .table-name-col {
   z-index: 1;
 }
+
+.table.table-white th,
+.table.table-white td {
+  padding-inline: 0.5rem;
+}
+
+.table.table-white tfoot td,
+.table.table-white tfoot th {
+  border-bottom-width: 0;
+}
