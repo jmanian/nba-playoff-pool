@@ -83,6 +83,14 @@
   border-bottom-width: 0;
 }
 
+// The table is read, not edited or quoted — drop the text I-beam in
+// favor of a default arrow. Cells with their own cursor (sortable
+// headers, simulate dropdown) keep their pointer via more specific
+// rules.
+.table {
+  cursor: default;
+}
+
 // Modern data-table header treatment: small uppercase muted-gray labels
 // instead of bold black headings.
 .table > thead > tr > th {
