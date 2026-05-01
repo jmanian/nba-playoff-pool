@@ -73,19 +73,19 @@
   z-index: 1;
 }
 
-.table.table-white th,
-.table.table-white td {
+.table th,
+.table td {
   padding-inline: 0.5rem;
 }
 
-.table.table-white tfoot td,
-.table.table-white tfoot th {
+.table tfoot td,
+.table tfoot th {
   border-bottom-width: 0;
 }
 
 // Modern data-table header treatment: small uppercase muted-gray labels
 // instead of bold black headings.
-.table.table-white > thead > tr > th {
+.table > thead > tr > th {
   font-weight: 500;
   font-size: 0.75rem;
   letter-spacing: 0.06em;

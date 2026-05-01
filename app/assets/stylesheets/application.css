@@ -39,12 +39,7 @@ th:nth-child(2), td:nth-child(2) {
   min-width: 50vw;
 }
 
-.table.table-white {
-  --bs-table-bg: #fff;
-  background-color: #fff !important;
-}
-
-.table.table-white tbody td,
-.table.table-white tbody th {
+.table tbody td,
+.table tbody th {
   border-bottom-width: 0;
 }
