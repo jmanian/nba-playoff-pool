@@ -82,3 +82,13 @@
 .table.table-white tfoot th {
   border-bottom-width: 0;
 }
+
+// Modern data-table header treatment: small uppercase muted-gray labels
+// instead of bold black headings.
+.table.table-white > thead > tr > th {
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bs-secondary-color);
+}
