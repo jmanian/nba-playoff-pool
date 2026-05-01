@@ -73,12 +73,30 @@
   z-index: 1;
 }
 
-.table.table-white th,
-.table.table-white td {
+.table th,
+.table td {
   padding-inline: 0.5rem;
 }
 
-.table.table-white tfoot td,
-.table.table-white tfoot th {
+.table tfoot td,
+.table tfoot th {
   border-bottom-width: 0;
+}
+
+// The table is read, not edited or quoted — drop the text I-beam in
+// favor of a default arrow. Cells with their own cursor (sortable
+// headers, simulate dropdown) keep their pointer via more specific
+// rules.
+.table {
+  cursor: default;
+}
+
+// Modern data-table header treatment: small uppercase muted-gray labels
+// instead of bold black headings.
+.table > thead > tr > th {
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bs-secondary-color);
 }

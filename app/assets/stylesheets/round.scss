@@ -39,3 +39,15 @@
     }
   }
 }
+
+// Indicator placed before the current user's pick in matchup summary
+// cells, replacing the previous bold-text treatment.
+.user-pick-dot {
+  display: inline-block;
+  width: 0.45em;
+  height: 0.45em;
+  border-radius: 50%;
+  background-color: var(--bs-primary);
+  margin-right: 0.4em;
+  vertical-align: middle;
+}

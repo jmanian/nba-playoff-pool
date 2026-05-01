@@ -2,23 +2,10 @@
 // This file contains only app-specific overrides.
 
 [data-bs-theme="dark"] {
-  // Match body bg to table bg so tables don't look like floating boxes
-  body {
-    background-color: #2b3035;
-    color: #dee2e6;
-  }
-
-  .table.table-white {
-    --bs-table-bg: #2b3035 !important;
-    --bs-table-color: #dee2e6 !important;
-    --bs-table-hover-color: #dee2e6 !important;
-    background-color: #2b3035 !important;
-    color: #dee2e6 !important;
-  }
-
-  // Sticky column needs explicit bg to avoid bleed-through
+  // Sticky column needs an explicit bg (matching body) to avoid
+  // bleed-through when the table scrolls horizontally.
   .table-name-col {
-    background-color: #2b3035;
+    background-color: var(--bs-body-bg);
   }
 
   // Keep name text visible on row hover
@@ -29,5 +16,4 @@
       color: #fff;
     }
   }
-
 }
