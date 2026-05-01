@@ -51,23 +51,50 @@ function applyTeamColors() {
     });
 }
 
+function getStoredTheme() {
+    const v = localStorage.getItem('theme');
+    return (v === 'light' || v === 'dark') ? v : 'auto';
+}
+
+function systemTheme() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function resolvedTheme() {
+    const s = getStoredTheme();
+    return s === 'auto' ? systemTheme() : s;
+}
+
+function updateThemeIcons() {
+    const stored = getStoredTheme();
+    const sun = document.getElementById('dark-mode-sun');
+    const moon = document.getElementById('dark-mode-moon');
+    const monitor = document.getElementById('dark-mode-monitor');
+    if (!sun || !moon || !monitor) return;
+    sun.style.display = stored === 'light' ? 'block' : 'none';
+    moon.style.display = stored === 'dark' ? 'block' : 'none';
+    monitor.style.display = stored === 'auto' ? 'block' : 'none';
+}
+
+function applyTheme() {
+    document.documentElement.setAttribute('data-bs-theme', resolvedTheme());
+    updateThemeIcons();
+    applyTeamColors();
+}
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (getStoredTheme() === 'auto') applyTheme();
+});
+
 document.addEventListener("turbolinks:load", () => {
     const toggle = document.getElementById('dark-mode-toggle');
     if (toggle) {
-        const sun = document.getElementById('dark-mode-sun');
-        const moon = document.getElementById('dark-mode-moon');
-        const isDark = () => document.documentElement.getAttribute('data-bs-theme') === 'dark';
-        const updateIcons = () => {
-            sun.style.display = isDark() ? 'block' : 'none';
-            moon.style.display = isDark() ? 'none' : 'block';
-        };
-        updateIcons();
+        updateThemeIcons();
         toggle.addEventListener('click', () => {
-            const theme = isDark() ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-bs-theme', theme);
-            localStorage.setItem('theme', theme);
-            updateIcons();
-            applyTeamColors();
+            const next = { auto: 'light', light: 'dark', dark: 'auto' }[getStoredTheme()];
+            if (next === 'auto') localStorage.removeItem('theme');
+            else localStorage.setItem('theme', next);
+            applyTheme();
         });
     }
 
