@@ -4,7 +4,7 @@
   <% colors = pick.winner.colors %>
   <td class="text-end text-nowrap" style="width: 1%; padding-inline: 8px;">
     <%= team_logo_tag(pick.winner, size: 28) || pick.winner.short_name %>
-    <span class="text-body-tertiary" style="font-size: 0.75em;">in</span> <%= pick.num_games %>
+    <%= pick.num_games %>
   </td>
   <td class="align-middle" style="min-width: 75px;" data-column-index="<%= matchup_index %>" data-sort-value="<%= pick.max_points %>" data-min-points="<%= pick.min_points %>" data-scoring-index="<%= pick.scoring_index %>">
     <% width = (matchup.max_possible_points * 100.0 / user_round.biggest_matchup_max_possible).round(4) %>
