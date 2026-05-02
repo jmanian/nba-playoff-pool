@@ -21,6 +21,56 @@ describe Team do
     end
   end
 
+  describe "#colors" do
+    subject { team.colors }
+
+    context "for an NBA team" do
+      let(:team) { described_class.nba(:lal) }
+      it { should eql({primary: "#552583", secondary: "#FDB927"}) }
+    end
+
+    context "for an MLB team (no colors defined)" do
+      let(:team) { described_class.mlb(:nyy) }
+      it { should eql({}) }
+    end
+  end
+
+  describe "#external_id" do
+    context "for an NBA team" do
+      subject { described_class.nba(:nyk).external_id }
+      it { should eql 1610612752 }
+    end
+
+    context "for an MLB team" do
+      subject { described_class.mlb(:nyy).external_id }
+      it { should be_nil }
+    end
+  end
+
+  describe "#logo_url" do
+    context "for an NBA team" do
+      let(:team) { described_class.nba(:nyk) }
+
+      it "defaults to the light variant" do
+        expect(team.logo_url).to eql "https://cdn.nba.com/logos/nba/1610612752/primary/L/logo.svg"
+      end
+
+      it "returns the dark variant when requested" do
+        expect(team.logo_url(theme: :dark)).to eql "https://cdn.nba.com/logos/nba/1610612752/primary/D/logo.svg"
+      end
+
+      it "accepts string themes" do
+        expect(team.logo_url(theme: "dark")).to include "/D/"
+      end
+    end
+
+    context "for an MLB team without an external_id" do
+      it "returns nil" do
+        expect(described_class.mlb(:nyy).logo_url).to be_nil
+      end
+    end
+  end
+
   describe "::NBA_TEAMS" do
     subject { described_class::NBA_TEAMS }
 
