@@ -1,13 +1,21 @@
 class Team
-  attr_reader :tricode, :city, :name, :nickname, :primary_color, :secondary_color
+  attr_reader :tricode, :city, :name, :nickname, :primary_color, :secondary_color, :external_id
 
-  def initialize(tricode, city, name, nickname = nil, primary_color: nil, secondary_color: nil)
+  def initialize(tricode, city, name, nickname = nil, primary_color: nil, secondary_color: nil, external_id: nil)
     @tricode = tricode
     @city = city
     @name = name
     @nickname = nickname
     @primary_color = primary_color
     @secondary_color = secondary_color
+    @external_id = external_id
+  end
+
+  def logo_url(theme: :light)
+    return nil unless external_id
+
+    variant = (theme.to_sym == :dark) ? "D" : "L"
+    "https://cdn.nba.com/logos/nba/#{external_id}/primary/#{variant}/logo.svg"
   end
 
   def full_name
@@ -55,6 +63,39 @@ class Team
     was: {primary: "#002B5C", secondary: "#E31837"}
   }.freeze
 
+  NBA_EXTERNAL_IDS = {
+    atl: 1610612737,
+    bkn: 1610612751,
+    bos: 1610612738,
+    cha: 1610612766,
+    chi: 1610612741,
+    cle: 1610612739,
+    dal: 1610612742,
+    den: 1610612743,
+    det: 1610612765,
+    gsw: 1610612744,
+    hou: 1610612745,
+    ind: 1610612754,
+    lac: 1610612746,
+    lal: 1610612747,
+    mem: 1610612763,
+    mia: 1610612748,
+    mil: 1610612749,
+    min: 1610612750,
+    nop: 1610612740,
+    nyk: 1610612752,
+    okc: 1610612760,
+    orl: 1610612753,
+    phi: 1610612755,
+    phx: 1610612756,
+    por: 1610612757,
+    sac: 1610612758,
+    sas: 1610612759,
+    tor: 1610612761,
+    uta: 1610612762,
+    was: 1610612764
+  }.freeze
+
   NBA_TEAMS = [
     [:atl, "Atlanta", "Hawks"],
     [:bkn, "Brooklyn", "Nets"],
@@ -88,7 +129,7 @@ class Team
     [:was, "Washington", "Wizards"]
   ].to_h do |tc, c, n, nn|
     colors = NBA_COLORS[tc] || {}
-    [tc, Team.new(tc, c, n, nn, primary_color: colors[:primary], secondary_color: colors[:secondary])]
+    [tc, Team.new(tc, c, n, nn, primary_color: colors[:primary], secondary_color: colors[:secondary], external_id: NBA_EXTERNAL_IDS[tc])]
   end.with_indifferent_access
 
   MLB_TEAMS = [
