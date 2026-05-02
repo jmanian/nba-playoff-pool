@@ -17,3 +17,14 @@
     }
   }
 }
+
+// Team logos: render both variants, show the one matching the active theme.
+.team-logo {
+  display: inline-block;
+  vertical-align: middle;
+}
+.team-logo--dark { display: none; }
+[data-bs-theme="dark"] {
+  .team-logo--light { display: none; }
+  .team-logo--dark { display: inline-block; }
+}
