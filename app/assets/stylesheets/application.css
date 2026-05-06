@@ -33,6 +33,7 @@ th:nth-child(2), td:nth-child(2) {
 
 .table-score-col {
   text-align: center;
+  white-space: nowrap;
 }
 
 .table-breakdown-col {
