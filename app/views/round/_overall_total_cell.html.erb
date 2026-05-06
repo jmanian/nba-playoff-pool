@@ -14,7 +14,7 @@
       <% potential = overall_user.max_total - overall_user.min_total %>
       <% if potential.positive? %>
         <% pct = (potential.to_f / @biggest_max_total * 100).round(4) %>
-        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= pct %>%; background-color: <%= rank_color %>; --bs-bg-opacity: .5;">
+        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= pct %>%; background-color: <%= rank_color %>; opacity: 0.4;">
           <%= potential %>
         </div>
       <% end %>
