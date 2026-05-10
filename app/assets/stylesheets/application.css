@@ -24,7 +24,8 @@ th:nth-child(2), td:nth-child(2) {
   max-width: 10vw;
 }
 
-.table-name-col {
+.table-name-col span {
+  display: inline-block;
   max-width: 20vw;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -37,7 +38,7 @@ th:nth-child(2), td:nth-child(2) {
 }
 
 .table-breakdown-col {
-  min-width: 50vw;
+  width: 100%;
 }
 
 .table tbody td,
