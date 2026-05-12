@@ -18,7 +18,8 @@ module Sync
       attr_reader :year
 
       def connection
-        @connection ||= Faraday.new(url: url) do |f|
+        # The CDN started returning 403 to requests without a Referer header in 2026.
+        @connection ||= Faraday.new(url: url, headers: {"Referer" => "https://www.nba.com/"}) do |f|
           f.response :json, content_type: content_types, parser_options: {symbolize_names: true}
           f.response :raise_error
         end
