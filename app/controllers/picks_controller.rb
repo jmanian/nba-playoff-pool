@@ -3,6 +3,9 @@ class PicksController < ApplicationController
 
   def index
     matchups = Matchup.current_season
+    if(params[:sport])
+      matchups = Matchup.where({sport: params[:sport], year: Time.now.year})
+    end
 
     @picks = current_user.picks.includes(:matchup).joins(:matchup).merge(matchups)
     @other_matchups = matchups.accepting_entries
