@@ -121,3 +121,44 @@
   --bs-bg-opacity: 0.85;
   background-color: rgba(0, 97, 100, var(--bs-bg-opacity)) !important;
 }
+
+// Round tab labels share the bar palette so the tab visually maps to
+// its round's bar color. The active state uses a theme-aware neutral
+// background instead of Bootstrap's bg-primary so it reads in both
+// light and dark mode.
+#standingsTabs .nav-link {
+  &.round-tab-1,
+  &.round-tab-1.active { color: #DB4325; }
+  &.round-tab-2,
+  &.round-tab-2.active { color: #EDA247; }
+  &.round-tab-3,
+  &.round-tab-3.active { color: #57C4AD; }
+  &.round-tab-4,
+  &.round-tab-4.active { color: #006164; }
+
+  &.active {
+    background-color: var(--bs-tertiary-bg);
+    color: var(--bs-body-color);
+  }
+
+  // Subtle hover hint on inactive tabs — lighter than the active bg
+  // so the selected tab still reads as the most prominent.
+  &:not(.active):hover {
+    background-color: rgba(var(--bs-emphasis-color-rgb), 0.04);
+  }
+}
+
+// Overall tab is the only non-round tab, so it doesn't get a palette
+// color — keep it a theme-aware gray (never Bootstrap's default link
+// blue) in both active and inactive states.
+#standingsTabs #overall-tab {
+  color: var(--bs-body-color);
+}
+
+// In dark mode the round-4 dark teal becomes illegible on the dark
+// tertiary background — swap it for a lighter teal that's still
+// distinct from round 3.
+[data-bs-theme="dark"] #standingsTabs .nav-link {
+  &.round-tab-4,
+  &.round-tab-4.active { color: #4FB6A3; }
+}
