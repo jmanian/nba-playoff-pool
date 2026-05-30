@@ -4,10 +4,10 @@ class ApplicationController < ActionController::Base
 
   BG_COLORS = %w[
     not-used
-    bg-primary
-    bg-danger
-    bg-success
-    bg-warning
+    bg-round-1
+    bg-round-2
+    bg-round-3
+    bg-round-4
   ].freeze
 
   protected

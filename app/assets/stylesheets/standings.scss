@@ -100,3 +100,44 @@
   text-transform: uppercase;
   color: var(--bs-secondary-color);
 }
+
+// Round bar palette: colorblind-friendly diverging scheme from
+// Andy Kirk's "Red-green variation #1" (visualisingdata.com). The
+// neutral cream midpoint (#E6E1BC) is omitted since it's invisible on
+// a light background.
+.bg-round-1 {
+  --bs-bg-opacity: 0.85;
+  background-color: rgba(219, 67, 37, var(--bs-bg-opacity)) !important;
+}
+.bg-round-2 {
+  --bs-bg-opacity: 0.85;
+  background-color: rgba(237, 162, 71, var(--bs-bg-opacity)) !important;
+}
+.bg-round-3 {
+  --bs-bg-opacity: 0.85;
+  background-color: rgba(87, 196, 173, var(--bs-bg-opacity)) !important;
+}
+.bg-round-4 {
+  --bs-bg-opacity: 0.85;
+  background-color: rgba(0, 97, 100, var(--bs-bg-opacity)) !important;
+}
+
+// Modern selected/hover treatment for the standings tabs: a soft
+// indigo tint instead of Bootstrap's default solid blue pill, with a
+// lighter shade of the same hue on hover. Low opacity keeps the fill
+// readable on both light and dark backgrounds without per-theme
+// overrides. Active text falls back to the body color so it's legible
+// on the new tint (Bootstrap's default white would disappear).
+#standingsTabs .nav-link {
+  color: var(--bs-secondary-color);
+
+  &.active {
+    background-color: rgba(99, 102, 241, 0.15);
+    color: var(--bs-body-color);
+  }
+
+  &:not(.active):hover {
+    background-color: rgba(99, 102, 241, 0.08);
+    color: var(--bs-body-color);
+  }
+}
