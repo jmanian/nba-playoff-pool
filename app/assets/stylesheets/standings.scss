@@ -128,16 +128,17 @@
 // readable on both light and dark backgrounds without per-theme
 // overrides. Active text falls back to the body color so it's legible
 // on the new tint (Bootstrap's default white would disappear).
-#standingsTabs .nav-link {
-  color: var(--bs-secondary-color);
+//
+// Driven through Bootstrap's documented nav CSS variables where they
+// exist; see https://getbootstrap.com/docs/5.3/components/navs-tabs/#css.
+#standingsTabs {
+  --bs-nav-link-color: var(--bs-secondary-color);
+  --bs-nav-link-hover-color: var(--bs-body-color);
+  --bs-nav-pills-link-active-color: var(--bs-body-color);
+  --bs-nav-pills-link-active-bg: rgba(99, 102, 241, 0.15);
+}
 
-  &.active {
-    background-color: rgba(99, 102, 241, 0.15);
-    color: var(--bs-body-color);
-  }
-
-  &:not(.active):hover {
-    background-color: rgba(99, 102, 241, 0.08);
-    color: var(--bs-body-color);
-  }
+// Bootstrap has no nav-link hover-bg variable, so this stays a direct rule.
+#standingsTabs .nav-link:not(.active):hover {
+  background-color: rgba(99, 102, 241, 0.08);
 }
