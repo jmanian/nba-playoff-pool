@@ -59,8 +59,7 @@ class StandingsController < ApplicationController
       matchups: matchups,
       user_data: user_data,
       show_totals: matchups.length > 1,
-      num_outcomes: matchups.first.games_needed_to_win * 2,
-      bg_color: BG_COLORS[n]
+      num_outcomes: matchups.first.games_needed_to_win * 2
     }
   end
 

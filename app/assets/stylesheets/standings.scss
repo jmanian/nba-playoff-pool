@@ -122,22 +122,30 @@
   background-color: rgba(0, 97, 100, var(--bs-bg-opacity)) !important;
 }
 
-// Modern selected/hover treatment for the standings tabs: a soft
-// indigo tint instead of Bootstrap's default solid blue pill, with a
-// lighter shade of the same hue on hover. Low opacity keeps the fill
-// readable on both light and dark backgrounds without per-theme
-// overrides. Active text falls back to the body color so it's legible
-// on the new tint (Bootstrap's default white would disappear).
-#standingsTabs .nav-link {
-  color: var(--bs-secondary-color);
+// Modern selected/hover treatment for the standings tabs: a soft indigo
+// tint instead of Bootstrap's default solid blue pill, with a lighter
+// shade of the same hue on hover. Active text falls back to the body
+// color so it's legible on the tint (Bootstrap's default white would
+// disappear).
+//
+// Driven through Bootstrap's documented nav CSS variables where they
+// exist; see https://getbootstrap.com/docs/5.3/components/navs-tabs/#css.
+//
+// Deliberately indigo-500, one shade lighter than the indigo-600 $primary
+// used for buttons. The button needs the darker shade to keep white text
+// above Bootstrap's 4.5 contrast threshold, but the pill is a low-opacity
+// tint where the lighter shade reads better and works at a single opacity
+// in both light and dark modes.
+$nav-pill-accent: #6366F1;
 
-  &.active {
-    background-color: rgba(99, 102, 241, 0.15);
-    color: var(--bs-body-color);
-  }
+#standingsTabs {
+  --bs-nav-link-color: var(--bs-secondary-color);
+  --bs-nav-link-hover-color: var(--bs-body-color);
+  --bs-nav-pills-link-active-color: var(--bs-body-color);
+  --bs-nav-pills-link-active-bg: #{rgba($nav-pill-accent, 0.15)};
+}
 
-  &:not(.active):hover {
-    background-color: rgba(99, 102, 241, 0.08);
-    color: var(--bs-body-color);
-  }
+// Bootstrap has no nav-link hover-bg variable, so this stays a direct rule.
+#standingsTabs .nav-link:not(.active):hover {
+  background-color: rgba($nav-pill-accent, 0.08);
 }

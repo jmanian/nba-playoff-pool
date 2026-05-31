@@ -1,3 +1,12 @@
+// Brand color. Overriding $primary before the Bootstrap import propagates
+// indigo to btn-primary, links, focus rings, and the standings nav pills
+// (which reference --bs-primary-rgb), so the accent is defined in one place.
+// indigo-600 (not the lighter indigo-500 #6366F1): #6366F1 sits at 4.47:1
+// against white, just under Bootstrap's 4.5 contrast threshold, so buttons
+// would flip to dark text. #4F46E5 keeps white button text and reads better
+// as link text on light backgrounds.
+$primary: #4F46E5;
+
 @import "~bootstrap/scss/bootstrap";
 
 // Flip Bootstrap's default inverted tooltips so they match the active theme:
