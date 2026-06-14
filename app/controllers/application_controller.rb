@@ -10,6 +10,15 @@ class ApplicationController < ActionController::Base
     bg-round-4
   ].freeze
 
+  # Knicks team colors, used only for the active season's overall standings.
+  KNICKS_BG_COLORS = %w[
+    not-used
+    bg-round-knicks-1
+    bg-round-knicks-2
+    bg-round-knicks-3
+    bg-round-knicks-4
+  ].freeze
+
   protected
 
   # :nocov:
