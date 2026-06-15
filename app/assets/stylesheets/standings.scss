@@ -104,7 +104,7 @@
 // Round bar palette: colorblind-friendly diverging scheme from
 // Andy Kirk's "Red-green variation #1" (visualisingdata.com). The
 // neutral cream midpoint (#E6E1BC) is omitted since it's invisible on
-// a light background.
+// a light background. Used for all past-season standings.
 .bg-round-1 {
   --bs-bg-opacity: 0.85;
   background-color: rgba(219, 67, 37, var(--bs-bg-opacity)) !important;
@@ -120,6 +120,30 @@
 .bg-round-4 {
   --bs-bg-opacity: 0.85;
   background-color: rgba(0, 97, 100, var(--bs-bg-opacity)) !important;
+}
+
+// New York Knicks team colors, used only for the active season's overall
+// standings (see StandingsController). Ramped light-to-dark toward the
+// Finals (round 4). The two light bars (silver, orange) get dark text so
+// the points number stays legible; the dark bars (blue, black) keep the
+// progress bar's default white text.
+.bg-round-knicks-1 {
+  --bs-bg-opacity: 0.85;
+  background-color: rgba(190, 192, 194, var(--bs-bg-opacity)) !important; // Silver #BEC0C2
+  color: #000;
+}
+.bg-round-knicks-2 {
+  --bs-bg-opacity: 0.85;
+  background-color: rgba(245, 132, 38, var(--bs-bg-opacity)) !important; // Knicks Orange #F58426
+  color: #000;
+}
+.bg-round-knicks-3 {
+  --bs-bg-opacity: 0.85;
+  background-color: rgba(0, 107, 182, var(--bs-bg-opacity)) !important; // Knicks Blue #006BB6
+}
+.bg-round-knicks-4 {
+  --bs-bg-opacity: 0.85;
+  background-color: rgba(0, 0, 0, var(--bs-bg-opacity)) !important; // Black #000000
 }
 
 // Modern selected/hover treatment for the standings tabs: a soft indigo

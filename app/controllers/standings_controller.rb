@@ -30,7 +30,8 @@ class StandingsController < ApplicationController
     # Hash of round numbers to names
     @round_names = picks.map(&:matchup).uniq(&:round).to_h { |m| [m.round, m.round_name] }
 
-    @bg_colors = BG_COLORS
+    current_season = CurrentSeason.sport_year == [params[:sport]&.to_sym, params[:year]&.to_i]
+    @bg_colors = current_season ? KNICKS_BG_COLORS : BG_COLORS
 
     @show_overall_total = @rounds.length > 1
 
