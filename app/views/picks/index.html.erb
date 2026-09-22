@@ -22,7 +22,9 @@
   </p>
 <% end %>
 
-<h2>Picked Series</h2>
+<% unless @picks.empty? && @other_matchups.empty? %>
+  <h2>Picked Series</h2>
+<% end %>
 <% @picks.each do |round, picks| %>
   <p class="lead"><%= picks.first.matchup.round_name %></p>
   <ul class="list-unstyled">
@@ -40,7 +42,9 @@
     <% end %>
   </ul>
 <% end %>
-<% if @picks.empty? %>
+<% if @picks.empty? && @other_matchups.empty? %>
+  <p>Picks not yet available. Check back here once seedings are set.</p>
+<% elsif @picks.empty? %>
   <p>You haven't made any picks.</p>
 <% end %>
 <% if @can_change_picks %>
