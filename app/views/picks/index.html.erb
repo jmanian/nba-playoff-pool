@@ -22,9 +22,6 @@
   </p>
 <% end %>
 
-<% unless @picks.empty? && @other_matchups.empty? %>
-  <h2>Picked Series</h2>
-<% end %>
 <% @picks.each do |round, picks| %>
   <p class="lead"><%= picks.first.matchup.round_name %></p>
   <ul class="list-unstyled">
