@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {registrations: "users/registrations"}
 
   authenticate :user, lambda { |u| u.admin? } do
     mount RailsAdmin::Engine => "/admin", :as => "rails_admin"
@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   root to: "home#index"
+  resource :profile, only: %i[edit update]
   resources :picks, only: %i[index new create]
   # TODO: Add constraint on :sport values
   get "/:sport/:year", to: "standings#index"
