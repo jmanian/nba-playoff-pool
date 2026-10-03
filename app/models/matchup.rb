@@ -106,6 +106,14 @@ class Matchup < ApplicationRecord
     favorite_won? || underdog_won?
   end
 
+  def winner
+    if favorite_won?
+      favorite
+    elsif underdog_won?
+      underdog
+    end
+  end
+
   def games_played
     favorite_wins + underdog_wins
   end

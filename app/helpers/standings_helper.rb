@@ -8,6 +8,21 @@ module StandingsHelper
   RANK_NEUTRAL_COLOR = "#E6E1BC".freeze
   RANK_BEST_COLOR = "#4E9150".freeze
 
+  # Round bar palette for the overall standings until a champion is
+  # decided: colorblind-friendly diverging scheme from Andy Kirk's
+  # "Red-green variation #1" (visualisingdata.com). The neutral cream
+  # midpoint (#E6E1BC) is omitted since it's invisible on a light
+  # background.
+  DEFAULT_ROUND_COLORS = %w[#DB4325 #EDA247 #57C4AD #006164].freeze
+
+  # Inline style for one round's segment of an overall standings bar,
+  # colored from @round_colors with legible text on top.
+  def round_bar_style(round, opacity: 0.85)
+    hex = @round_colors[round - 1]
+    r, g, b = ColorMath.rgb(hex)
+    "--bs-bg-opacity: #{opacity}; background-color: rgba(#{r}, #{g}, #{b}, var(--bs-bg-opacity)); color: #{ColorMath.text_color_for(hex)};"
+  end
+
   def rank_color(rank:, total_users:)
     return RANK_BEST_COLOR if total_users <= 1
 

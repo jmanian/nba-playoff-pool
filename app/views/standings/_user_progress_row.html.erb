@@ -8,17 +8,16 @@
     <div class="progress bg-secondary" style="--bs-bg-opacity: .15;">
       <% @rounds.each do |round| %>
         <% min, potential, max = user_totals.rounds[round].totals %>
-        <% bg = @bg_colors[round] %>
         <% round_name = @round_names[round] %>
         <% if min.positive? %>
           <% tip = potential.positive? ? "#{round_name} Definite" : round_name %>
           <% pct = (min.to_f / @biggest_max_total * 100).round(4) %>
-          <div class="progress-bar <%= bg %>" role="progressbar" style="width: <%= pct %>%" data-bs-toggle="tooltip" title="<%= tip %>"><%= min %></div>
+          <div class="progress-bar" role="progressbar" style="width: <%= pct %>%; <%= round_bar_style(round) %>" data-bs-toggle="tooltip" title="<%= tip %>"><%= min %></div>
         <% end %>
         <% if potential.positive? %>
           <% tip = "#{round_name} Potential" %>
           <% pct = (potential.to_f / @biggest_max_total * 100).round(4) %>
-          <div class="progress-bar progress-bar-striped <%= bg %>" role="progressbar" style="--bs-bg-opacity: .5; width: <%= pct %>%" data-bs-toggle="tooltip" title="<%= tip %>"><%= potential %></div>
+          <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= pct %>%; <%= round_bar_style(round, opacity: 0.5) %>" data-bs-toggle="tooltip" title="<%= tip %>"><%= potential %></div>
         <% end %>
       <% end %>
     </div>

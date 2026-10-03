@@ -127,6 +127,25 @@ RSpec.describe Matchup, type: :model do
     end
   end
 
+  describe "#winner" do
+    subject { matchup.winner }
+
+    context "when the favorite won" do
+      let(:matchup) { build :matchup, favorite_wins: 4, underdog_wins: 2 }
+      it { is_expected.to eql(matchup.favorite) }
+    end
+
+    context "when the underdog won" do
+      let(:matchup) { build :matchup, favorite_wins: 3, underdog_wins: 4 }
+      it { is_expected.to eql(matchup.underdog) }
+    end
+
+    context "when the series is unfinished" do
+      let(:matchup) { build :matchup, favorite_wins: 3, underdog_wins: 3 }
+      it { is_expected.to be_nil }
+    end
+  end
+
   describe "#possible_results" do
     subject { matchup.possible_results }
     context "with a seven-game series" do
