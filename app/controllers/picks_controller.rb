@@ -12,6 +12,18 @@ class PicksController < ApplicationController
 
     @can_change_picks = @picks.any? { |pick| pick.matchup.accepting_entries? }
     @accepting_picks = @can_change_picks || @other_matchups.any?
+    @next_lock_at = matchups.accepting_entries.minimum(:starts_at) if @accepting_picks
+
+    picks_by_matchup = @picks.index_by(&:matchup)
+    unpicked = @other_matchups.values.flatten
+    @rounds = (picks_by_matchup.keys + unpicked)
+      .group_by(&:round)
+      .sort_by { |round, _| -round }
+      .map do |_, round_matchups|
+        round_matchups.sort_by { |m| [m.starts_at || Time.utc(9999), m] }
+          .map { |m| [m, picks_by_matchup[m]] }
+      end
+
     @picks = @picks.group_by { |pick| pick.matchup.round }
   end
 
