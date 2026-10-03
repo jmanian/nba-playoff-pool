@@ -1,28 +1,42 @@
 <div class="alert alert-primary" role="alert">
   You can submit and change your picks up until the start of each series.
+  Pick a team and how many games the series will go.
 </div>
 
 <%= form_with model: Pick.new do |form| %>
-  <div class="row">
-    <% @matchups.each do |matchup| %>
-      <% pick = @picks[matchup.id] %>
-      <div class='col-lg-6' style='padding-bottom: 20px'>
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"><%= "#{matchup.favorite.full_name} vs. #{matchup.underdog.full_name}" %></h5>
-            <h6 class="card-subtitle mb-2 text-muted">Starts <%= matchup.starts_at_pretty %></h6>
-            <p class="card-text">
-              <%= form.fields_for :matchup, index: matchup.id do |matchup_form| %>
-                <%= matchup_form.select :result, matchup.possible_results, {selected: pick&.code, prompt: 'Select a result'}, {class: 'form-select'} %>
+  <% @matchups.group_by(&:round).sort.each do |_, matchups| %>
+    <h2 class="h5 mb-2"><%= matchups.first.round_name %></h2>
+    <div class="row">
+      <% matchups.each do |matchup| %>
+        <% pick = @picks[matchup.id] %>
+        <div class="col-lg-6 mb-4">
+          <div class="card h-100">
+            <div class="card-header small text-body-secondary">
+              Starts <%= matchup.starts_at_pretty %>
+            </div>
+            <ul class="list-group list-group-flush">
+              <% [[matchup.favorite, "f"], [matchup.underdog, "u"]].each do |team, side| %>
+                <li class="list-group-item d-flex align-items-center gap-2">
+                  <%= team_logo_tag(team, size: 32) %>
+                  <span class="fs-5 me-auto"><%= team.name %></span>
+                  <span class="text-body-secondary">in</span>
+                  <div class="btn-group" role="group" aria-label="<%= team.name %> wins in">
+                    <% (matchup.games_needed_to_win..matchup.max_games).each do |num_games| %>
+                      <% code = "#{side}-#{num_games}" %>
+                      <% id = "pick_#{matchup.id}_#{code}" %>
+                      <%= radio_button_tag "pick[matchup][#{matchup.id}][result]", code, pick&.code == code, id: id, class: "btn-check", autocomplete: "off" %>
+                      <label class="btn btn-outline-primary" for="<%= id %>" aria-label="<%= team.name %> in <%= num_games %>"><%= num_games %></label>
+                    <% end %>
+                  </div>
+                </li>
               <% end %>
-            </p>
+            </ul>
           </div>
         </div>
-      </div>
-    <% end %>
-    <br>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
   <div class="mb-5">
-    <%= form.submit "Save Picks", class: "btn btn-primary" %>
+    <%= form.submit "Save picks", class: "btn btn-primary" %>
   </div>
 <% end %>
