@@ -1,51 +1,55 @@
 <% if @accepting_picks %>
-  <div class="alert alert-primary" role="alert">
-    You can submit and change your picks up until the start of each series.
+  <div class="alert alert-primary d-flex flex-wrap justify-content-between align-items-center gap-3" role="alert">
+    <div>
+      You can submit and change your picks up until the start of each series.
+      <% if @next_lock_at %>
+        The next series starts in <strong><%= distance_of_time_in_words_to_now(@next_lock_at) %></strong>.
+      <% end %>
+    </div>
+    <%= link_to (@other_matchups.any? ? "Make picks" : "Change picks"), new_pick_path, class: "btn btn-primary text-nowrap" %>
   </div>
 <% end %>
 
-<% if @other_matchups.any? %>
-  <h2>Unpicked Series</h2>
-  <% @other_matchups.each do |round, matchups| %>
-    <p class="lead"><%= matchups.first.round_name %></p>
-    <ul class="list-unstyled">
-      <% matchups.each do |matchup| %>
-        <li>
-          <%= matchup.favorite.name %> v. <%= matchup.underdog.name %>
-          — Starts <%= matchup.starts_at_pretty %>
+<% @rounds.each do |rows| %>
+  <div class="d-flex justify-content-between align-items-baseline mt-4 mb-2">
+    <h2 class="h5 mb-0"><%= rows.first.first.round_name %></h2>
+    <small class="text-body-secondary"><%= round_status(rows) %></small>
+  </div>
+  <div class="card mb-3">
+    <ul class="list-group list-group-flush">
+      <% rows.each do |matchup, pick| %>
+        <li class="list-group-item d-flex flex-wrap align-items-center column-gap-3 row-gap-1 py-2">
+          <div class="d-flex align-items-center gap-2 me-auto">
+            <% if pick %>
+              <%= team_logo_tag(pick.winner, size: 32) %>
+              <div>
+                <div>
+                  <strong><%= pick.winner.name %></strong>
+                  <span class="text-body-secondary">over</span>
+                  <%= pick.loser.name %>
+                  <span class="text-body-secondary">in</span>
+                  <strong><%= pick.num_games %></strong>
+                </div>
+                <% if matchup.started? %>
+                  <div class="small text-body-secondary"><%= series_status(matchup) %></div>
+                <% end %>
+              </div>
+            <% else %>
+              <div>
+                <div class="text-body-secondary"><%= matchup.favorite.name %> v. <%= matchup.underdog.name %></div>
+                <% if matchup.accepting_entries? %>
+                  <%= link_to "Make a pick", new_pick_path, class: "small" %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <%= pick_status_badge(matchup, pick) %>
         </li>
       <% end %>
     </ul>
-  <% end %>
-  <p>
-    <%= button_to 'Add Picks', {action: :new}, method: :get, class: "btn btn-primary" %>
-  </p>
+  </div>
 <% end %>
 
-<% @picks.each do |round, picks| %>
-  <p class="lead"><%= picks.first.matchup.round_name %></p>
-  <ul class="list-unstyled">
-    <% picks.each do |pick| %>
-      <li>
-        <strong><%= pick.winner.name %></strong>
-        beat
-        <em><%= pick.loser.name %></em>
-        in
-        <strong><%= pick.num_games %></strong>
-        <% unless pick.matchup.started? %>
-          — Starts <%= pick.matchup.starts_at_pretty %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
 <% if @picks.empty? && @other_matchups.empty? %>
   <p>Picks not yet available. Check back here once seedings are set.</p>
-<% elsif @picks.empty? %>
-  <p>You haven't made any picks.</p>
-<% end %>
-<% if @can_change_picks %>
-  <p>
-    <%= button_to 'Change Picks', {action: :new}, method: :get, class: "btn btn-primary" %>
-  </p>
 <% end %>
