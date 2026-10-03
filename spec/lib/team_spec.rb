@@ -29,9 +29,15 @@ describe Team do
       it { should eql({primary: "#552583", secondary: "#FDB927"}) }
     end
 
-    context "for an MLB team (no colors defined)" do
+    context "for an MLB team" do
       let(:team) { described_class.mlb(:nyy) }
-      it { should eql({}) }
+      it { should eql({primary: "#0C2340", secondary: "#C4CED3"}) }
+    end
+
+    it "is defined for every team" do
+      (described_class::NBA_TEAMS.values + described_class::MLB_TEAMS.values).each do |team|
+        expect(team.colors.keys).to eql([:primary, :secondary]), "#{team.sport} #{team.tricode}"
+      end
     end
   end
 
@@ -43,7 +49,7 @@ describe Team do
 
     context "for an MLB team" do
       subject { described_class.mlb(:nyy).external_id }
-      it { should be_nil }
+      it { should eql 147 }
     end
   end
 
@@ -64,9 +70,22 @@ describe Team do
       end
     end
 
-    context "for an MLB team without an external_id" do
+    context "for an MLB team" do
+      let(:team) { described_class.mlb(:nyy) }
+
+      it "defaults to the light variant" do
+        expect(team.logo_url).to eql "https://www.mlbstatic.com/team-logos/team-cap-on-light/147.svg"
+      end
+
+      it "returns the dark variant when requested" do
+        expect(team.logo_url(theme: :dark)).to eql "https://www.mlbstatic.com/team-logos/team-cap-on-dark/147.svg"
+      end
+    end
+
+    context "for a team without an external_id" do
       it "returns nil" do
-        expect(described_class.mlb(:nyy).logo_url).to be_nil
+        team = described_class.new(:mlb, :xyz, city: "Nowhere", name: "Nobodies")
+        expect(team.logo_url).to be_nil
       end
     end
   end
