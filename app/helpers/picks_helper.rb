@@ -20,16 +20,14 @@ module PicksHelper
     elsif pick.nil?
       text, color = "No pick", "secondary"
     elsif matchup.finished?
-      correct_winner = pick.winner == matchup.winner
-      label = if correct_winner && pick.num_games == matchup.games_played
-        "Exact"
-      elsif correct_winner
-        "Right team"
+      points = "+#{pick.min_points}"
+      if pick.winner_is_favorite == matchup.favorite_won? && pick.num_games == matchup.games_played
+        text, color = "Exact · #{points}", "success"
+      elsif pick.min_points.positive?
+        text, color = points, "secondary"
       else
-        "Miss"
+        text, color = points, "danger"
       end
-      text = "#{label} · +#{pick.min_points}"
-      color = correct_winner ? "success" : "danger"
     else
       text = (pick.min_points == pick.max_points) ? "#{pick.min_points} pts" : "#{pick.min_points}–#{pick.max_points} pts"
       color = "secondary"
