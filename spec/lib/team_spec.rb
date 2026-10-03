@@ -41,6 +41,29 @@ describe Team do
     end
   end
 
+  describe "#round_colors" do
+    it "pads the Knicks out to silver, orange, blue, black" do
+      expect(described_class.nba(:nyk).round_colors).to eql(%w[#BEC0C2 #F58426 #006BB6 #000000])
+    end
+
+    it "uses a grey rather than a second black for a red-and-black team" do
+      expect(described_class.nba(:chi).round_colors).to eql(%w[#BEC0C2 #6C757D #CE1141 #000000])
+    end
+
+    it "returns four distinct colors, light to dark, including both team colors, for every team" do
+      (described_class::NBA_TEAMS.values + described_class::MLB_TEAMS.values).each do |team|
+        ramp = team.round_colors
+        expect(ramp.uniq.length).to eql(4), "#{team.sport} #{team.tricode}"
+        expect(ramp).to include(*team.colors.values)
+        expect(ramp).to eql(ramp.sort_by { |hex| -ColorMath.luminance(hex) })
+      end
+    end
+
+    it "is nil for a team without colors" do
+      expect(described_class.new(:mlb, :xyz, city: "Nowhere", name: "Nobodies").round_colors).to be_nil
+    end
+  end
+
   describe "#external_id" do
     context "for an NBA team" do
       subject { described_class.nba(:nyk).external_id }

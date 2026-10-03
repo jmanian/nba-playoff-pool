@@ -26,6 +26,24 @@ class Team
     end
   end
 
+  # Neutrals that pad a team's two colors out to a four-color ramp.
+  ROUND_COLOR_NEUTRALS = %w[#BEC0C2 #6C757D #343A40 #000000].freeze
+
+  # Four colors, light to dark, for the champion's overall standings bars
+  # (one per round). Combines the team's two colors with whichever pair of
+  # neutrals keeps all four most distinguishable, so e.g. the Knicks get
+  # silver, orange, blue, black, and a red-and-black team gets a grey
+  # instead of a second black.
+  def round_colors
+    return nil if colors.empty?
+
+    team_colors = colors.values_at(:primary, :secondary)
+    neutrals = ROUND_COLOR_NEUTRALS.combination(2).max_by do |pair|
+      (team_colors + pair).combination(2).map { |a, b| ColorMath.distance(a, b) }.min
+    end
+    (team_colors + neutrals).sort_by { |hex| -ColorMath.luminance(hex) }
+  end
+
   def full_name
     [city, name].join(" ")
   end

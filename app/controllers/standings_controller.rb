@@ -30,8 +30,10 @@ class StandingsController < ApplicationController
     # Hash of round numbers to names
     @round_names = picks.map(&:matchup).uniq(&:round).to_h { |m| [m.round, m.round_name] }
 
-    current_season = CurrentSeason.sport_year == [params[:sport]&.to_sym, params[:year]&.to_i]
-    @bg_colors = current_season ? KNICKS_BG_COLORS : BG_COLORS
+    # Once the final series is decided (including by simulation), the
+    # overall standings bars take on the champion's colors.
+    champion = picks.map(&:matchup).find(&:final_round?)&.winner
+    @round_colors = champion&.round_colors || StandingsHelper::DEFAULT_ROUND_COLORS
 
     @show_overall_total = @rounds.length > 1
 

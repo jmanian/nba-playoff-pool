@@ -65,6 +65,43 @@ describe StandingsController, type: :controller do
           expect(assigns(:rounds_data).map { |r| r[:number] }).to eq([1, 2])
         end
 
+        it "uses the default round colors while the final series is undecided" do
+          get :index, params: {sport: "nba", year: 2025}
+          expect(assigns(:round_colors)).to eql(StandingsHelper::DEFAULT_ROUND_COLORS)
+        end
+
+        context "with a finals matchup" do
+          let!(:finals) do
+            create(:matchup, :nba, :started, year: 2025, conference: "finals", round: 4, number: 1,
+              favorite_tricode: :okc, underdog_tricode: :nyk, favorite_wins: finals_wins.first, underdog_wins: finals_wins.last)
+          end
+
+          before { users.each { |user| create(:pick, user: user, matchup: finals) } }
+
+          context "that is finished" do
+            let(:finals_wins) { [2, 4] }
+
+            it "uses the champion's round colors" do
+              get :index, params: {sport: "nba", year: 2025}
+              expect(assigns(:round_colors)).to eql(Team.nba(:nyk).round_colors)
+            end
+          end
+
+          context "that is unfinished" do
+            let(:finals_wins) { [2, 3] }
+
+            it "uses the default round colors" do
+              get :index, params: {sport: "nba", year: 2025}
+              expect(assigns(:round_colors)).to eql(StandingsHelper::DEFAULT_ROUND_COLORS)
+            end
+
+            it "uses the simulated champion's round colors" do
+              get :index, params: {sport: "nba", year: 2025, sim: ["#{finals.id}:f-7"]}
+              expect(assigns(:round_colors)).to eql(Team.nba(:okc).round_colors)
+            end
+          end
+        end
+
         context "with simulation params" do
           let(:unfinished_matchup) { matchups.first }
           let(:simulation_outcome) { "f-#{unfinished_matchup.games_needed_to_win}" }
